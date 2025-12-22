@@ -21,18 +21,24 @@ export default function Footer() {
     setMessage(null);
 
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("newsletter_subscriptions")
-        .insert([{ email: email.toLowerCase().trim(), created_at: new Date().toISOString() }]);
+        .insert([{ email: email.toLowerCase().trim() }]);
 
       if (error) {
         // Check if it's a duplicate email error
         if (error.code === "23505") {
           setMessage({ type: "error", text: "This email is already subscribed" });
         } else {
-          setMessage({ type: "error", text: "Something went wrong. Please try again." });
+          // Log full error details for debugging
+          console.error("Subscription error details:", {
+            code: error.code,
+            message: error.message,
+            details: error.details,
+            hint: error.hint
+          });
+          setMessage({ type: "error", text: `Error: ${error.message || "Something went wrong. Please try again."}` });
         }
-        console.error("Subscription error:", error);
       } else {
         setMessage({ type: "success", text: "Successfully subscribed!" });
         setEmail("");
@@ -40,8 +46,8 @@ export default function Footer() {
         setTimeout(() => setMessage(null), 3000);
       }
     } catch (error) {
-      setMessage({ type: "error", text: "Something went wrong. Please try again." });
-      console.error("Subscription error:", error);
+      console.error("Subscription catch error:", error);
+      setMessage({ type: "error", text: error instanceof Error ? error.message : "Something went wrong. Please try again." });
     } finally {
       setIsLoading(false);
     }
