@@ -10,7 +10,7 @@ export default function Partners() {
       <div className="relative max-w-6xl mx-auto px-8 lg:px-12">
         <ScrollAnimation>
           <div className="text-center mb-8 lg:mb-12">
-            <p className="text-xs text-[#A1A1A1] mb-4 uppercase tracking-wider font-medium">
+            <p className="text-xs text-white/90 mb-4 uppercase tracking-wider font-medium">
               Technology Partner
             </p>
           </div>
