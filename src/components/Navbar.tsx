@@ -27,14 +27,28 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Left: Logo */}
           <div className="flex items-center flex-shrink-0">
-            <Image
-              src="/logos/elsheph-full.png"
-              alt="Elsheph"
-              width={140}
-              height={40}
-              className="h-[135px] w-auto"
-              priority
-            />
+            <a
+              href="#hero"
+              onClick={(e) => {
+                e.preventDefault();
+                const heroSection = document.getElementById("hero");
+                if (heroSection) {
+                  heroSection.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
+              className="cursor-pointer"
+            >
+              <Image
+                src="/logos/elsheph-full.png"
+                alt="Elsheph"
+                width={140}
+                height={40}
+                className="h-[135px] w-auto"
+                priority
+              />
+            </a>
           </div>
 
           {/* Center: Links */}

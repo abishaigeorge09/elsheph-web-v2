@@ -11,7 +11,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Background Image - dominates the screen */}
       <div className="absolute inset-0 z-0">
         <Image

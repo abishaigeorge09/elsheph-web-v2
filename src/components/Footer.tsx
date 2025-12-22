@@ -2,15 +2,49 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle newsletter subscription
-    console.log("Newsletter subscription:", email);
-    setEmail("");
+    
+    if (!email || !email.includes("@")) {
+      setMessage({ type: "error", text: "Please enter a valid email address" });
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage(null);
+
+    try {
+      const { error } = await supabase
+        .from("newsletter_subscriptions")
+        .insert([{ email: email.toLowerCase().trim(), created_at: new Date().toISOString() }]);
+
+      if (error) {
+        // Check if it's a duplicate email error
+        if (error.code === "23505") {
+          setMessage({ type: "error", text: "This email is already subscribed" });
+        } else {
+          setMessage({ type: "error", text: "Something went wrong. Please try again." });
+        }
+        console.error("Subscription error:", error);
+      } else {
+        setMessage({ type: "success", text: "Successfully subscribed!" });
+        setEmail("");
+        // Clear success message after 3 seconds
+        setTimeout(() => setMessage(null), 3000);
+      }
+    } catch (error) {
+      setMessage({ type: "error", text: "Something went wrong. Please try again." });
+      console.error("Subscription error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -42,20 +76,39 @@ export default function Footer() {
               <h4 className="text-xs font-medium mb-3 text-black/70 uppercase tracking-wider">
                 Stay Updated
               </h4>
-              <form onSubmit={handleSubmit} className="flex gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-2.5 text-sm bg-white border border-black/10 rounded-lg focus:outline-none focus:border-[#8B6F47] focus:ring-1 focus:ring-[#8B6F47] transition-all duration-200 placeholder:text-black/30"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-2.5 bg-[#8B6F47] text-white text-sm font-medium rounded-lg hover:bg-[#6B5230] transition-colors duration-200"
-                >
-                  Subscribe
-                </button>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setMessage(null);
+                    }}
+                    placeholder="Enter your email"
+                    disabled={isLoading}
+                    className="flex-1 px-4 py-2.5 text-sm bg-white border border-black/10 rounded-lg focus:outline-none focus:border-[#8B6F47] focus:ring-1 focus:ring-[#8B6F47] transition-all duration-200 placeholder:text-black/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="px-6 py-2.5 bg-[#8B6F47] text-white text-sm font-medium rounded-lg hover:bg-[#6B5230] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                  >
+                    {isLoading ? "..." : "Subscribe"}
+                  </button>
+                </div>
+                {message && (
+                  <p
+                    className={`text-xs mt-1 ${
+                      message.type === "success"
+                        ? "text-green-600"
+                        : "text-red-600"
+                    }`}
+                  >
+                    {message.text}
+                  </p>
+                )}
               </form>
             </div>
           </div>
