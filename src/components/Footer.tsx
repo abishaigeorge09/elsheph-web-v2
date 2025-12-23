@@ -132,6 +132,14 @@ export default function Footer() {
                     href="#services"
                     className="text-sm text-black/60 hover:text-[#8B6F47] transition-colors duration-200 inline-block"
                   >
+                    Product Development
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#services"
+                    className="text-sm text-black/60 hover:text-[#8B6F47] transition-colors duration-200 inline-block"
+                  >
                     IT Services
                   </a>
                 </li>
@@ -141,14 +149,6 @@ export default function Footer() {
                     className="text-sm text-black/60 hover:text-[#8B6F47] transition-colors duration-200 inline-block"
                   >
                     IT Staffing
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#services"
-                    className="text-sm text-black/60 hover:text-[#8B6F47] transition-colors duration-200 inline-block"
-                  >
-                    Product Development
                   </a>
                 </li>
               </ul>
