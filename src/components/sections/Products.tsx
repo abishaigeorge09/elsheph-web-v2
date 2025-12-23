@@ -83,10 +83,9 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
 export default function Products() {
   const [expandedProduct, setExpandedProduct] = useState<string | null>(null);
 
-  // Calculate target dates
+  // Calculate target dates - Job Sudarshan launches in exactly 25 hours
   const jobSudarshanDate = new Date();
-  jobSudarshanDate.setDate(jobSudarshanDate.getDate() + 2);
-  jobSudarshanDate.setHours(0, 0, 0, 0);
+  jobSudarshanDate.setTime(jobSudarshanDate.getTime() + (25 * 60 * 60 * 1000));
 
   const atlitosDate = new Date();
   atlitosDate.setDate(atlitosDate.getDate() + 4);
@@ -96,7 +95,7 @@ export default function Products() {
     {
       id: "job-sudarshan",
       name: "Job Sudarshan",
-      description: "A new platform focused on simplifying job discovery and connecting job seekers with opportunities.",
+      description: "Job Sudarshan is an online Telugu Christian bookstore featuring books written by Job Sudarshan himself, a renowned Telugu Christian author. The platform is dedicated to serving Telugu readers with faith-centered literature for spiritual growth.",
       status: "Launching Soon",
       launchDate: jobSudarshanDate,
       icon: (
