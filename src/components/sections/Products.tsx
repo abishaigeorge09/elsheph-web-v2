@@ -83,9 +83,9 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
 export default function Products() {
   const [expandedProduct, setExpandedProduct] = useState<string | null>(null);
 
-  // Calculate target dates - Job Sudarshan launches in exactly 25 hours
-  const jobSudarshanDate = new Date();
-  jobSudarshanDate.setTime(jobSudarshanDate.getTime() + (25 * 60 * 60 * 1000));
+  // Fixed target date - Job Sudarshan launch date (set to a specific date/time)
+  // Update this to the exact launch date/time
+  const jobSudarshanDate = new Date("2025-12-24T06:00:00.000Z");
 
   const atlitosDate = new Date();
   atlitosDate.setDate(atlitosDate.getDate() + 4);
