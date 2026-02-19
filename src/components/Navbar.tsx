@@ -166,13 +166,16 @@ export default function Navbar() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                    className={`relative px-5 py-2.5 text-sm font-medium transition-all duration-200 ${
                       active
-                        ? "text-white bg-[#8B6F47]/60"
-                        : "text-white/90 hover:text-white hover:bg-white/5"
+                        ? "text-white"
+                        : "text-white/60 hover:text-white/90"
                     }`}
                   >
                     {link.label}
+                    {active && (
+                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#C4A882]" />
+                    )}
                   </a>
                 );
               })}
@@ -181,8 +184,14 @@ export default function Navbar() {
             {/* Right: Contact Us (desktop) + Mobile Menu Button */}
             <div className="flex items-center gap-4">
               <a
-                href="#contact"
-                className="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold bg-[#A07850] text-white hover:bg-[#8B6F47] transition-all duration-200 shadow-lg shadow-[#8B6F47]/30"
+                href={pathname === "/" ? "#contact" : "/#contact"}
+                onClick={(e) => {
+                  if (pathname === "/") {
+                    e.preventDefault();
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium border border-white/20 text-white/90 hover:border-white/40 hover:text-white transition-all duration-200"
               >
                 Contact Us
               </a>
@@ -238,8 +247,8 @@ export default function Navbar() {
                     onClick={closeMobileMenu}
                     className={`flex items-center py-5 px-5 rounded-2xl text-lg font-medium transition-all duration-200 border-l-2 ${
                       active
-                        ? "bg-[#8B6F47]/50 text-white border-[#8B6F47]"
-                        : "border-transparent text-white/90 hover:text-white hover:bg-white/5"
+                        ? "bg-white/5 text-white border-[#C4A882]"
+                        : "border-transparent text-white/60 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     {link.label}
@@ -253,8 +262,14 @@ export default function Navbar() {
             {/* CTA */}
             <div>
               <a
-                href="#contact"
-                onClick={closeMobileMenu}
+                href={pathname === "/" ? "#contact" : "/#contact"}
+                onClick={(e) => {
+                  closeMobileMenu();
+                  if (pathname === "/") {
+                    e.preventDefault();
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
                 className="block w-full py-4 text-center rounded-2xl text-base font-semibold bg-[#A07850] text-white hover:bg-[#8B6F47] transition-colors duration-200"
               >
                 Contact Us
@@ -297,12 +312,12 @@ export default function Navbar() {
               <p className="text-xs font-medium text-white/50 uppercase tracking-wider mb-4">
                 Follow Us
               </p>
-              <div className="flex gap-6">
+              <div className="flex gap-4">
                 <a
                   href="https://linkedin.com/company/elshephsystem"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 text-white/80 hover:text-white hover:bg-[#8B6F47]/20 transition-all duration-200"
+                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-white/5 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
                   aria-label="LinkedIn"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -310,21 +325,10 @@ export default function Navbar() {
                   </svg>
                 </a>
                 <a
-                  href="https://twitter.com/elsheph"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 text-white/80 hover:text-white hover:bg-[#8B6F47]/20 transition-all duration-200"
-                  aria-label="Twitter"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                </a>
-                <a
                   href="https://instagram.com/elshephsystem"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 text-white/80 hover:text-white hover:bg-[#8B6F47]/20 transition-all duration-200"
+                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-white/5 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
                   aria-label="Instagram"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

@@ -35,7 +35,7 @@ export default function InvestorPositioning() {
                   contactSection.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#8B6F47] text-white text-sm font-medium hover:bg-[#6B5230] focus:outline-none focus:ring-2 focus:ring-[#8B6F47]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8B6F47]/30"
+              className="group inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#8B6F47] text-white text-sm font-medium hover:bg-[#6B5230] focus:outline-none focus:ring-2 focus:ring-[#8B6F47]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8B6F47]/30"
             >
               Connect With Us
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
