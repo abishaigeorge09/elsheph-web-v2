@@ -15,7 +15,7 @@ export default function Hero() {
       {/* Background Image - dominates the screen */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero.png"
+          src="/hero.jpg"
           alt="Hero background"
           fill
           priority
@@ -34,40 +34,19 @@ export default function Hero() {
 
       {/* Content - overlays lightly on image */}
       <div className="relative z-10 max-w-6xl mx-auto px-8 lg:px-12 text-center">
-        {/* Product Launch Banner */}
+        {/* Subtle product launch pill */}
         <a
-          href="#announcement-strip"
+          href="#products"
           onClick={(e) => {
             e.preventDefault();
-            const announcementStrip = document.getElementById("announcement-strip");
-            if (announcementStrip) {
-              announcementStrip.scrollIntoView({ behavior: "smooth" });
-            }
+            const el = document.getElementById("products");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
           }}
-          className={`group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-800/40 backdrop-blur-sm hover:bg-gray-800/60 transition-all duration-300 mb-6 cursor-pointer ${
-            isLoaded
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
+          className={`inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white/80 text-xs font-medium tracking-wider uppercase mb-8 hover:bg-white/15 hover:text-white/90 transition-colors duration-300 transition-all duration-1000 delay-200 ${
+            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
-          style={{ fontFamily: 'var(--font-body), Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
-          <span className="text-xs text-white font-medium uppercase tracking-wide">
-            Product Launch — December 24
-          </span>
-          <svg
-            className="w-3 h-3 text-white transition-transform duration-300 group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
+          • Product Launch — March 31{" "}&gt;
         </a>
 
         {/* Headline - Large serif, editorial style (Playfair Display) - restrained sizing */}
@@ -85,7 +64,7 @@ export default function Hero() {
 
         {/* Subtext - Light weight, restrained (Inter) - smaller */}
         <p
-          className={`text-base sm:text-lg lg:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed font-light transition-all duration-1000 delay-500 ${
+          className={`text-base sm:text-lg lg:text-xl text-white/90 mb-6 lg:mb-10 max-w-2xl mx-auto leading-relaxed font-light transition-all duration-1000 delay-500 ${
             isLoaded
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"
@@ -95,29 +74,19 @@ export default function Hero() {
           Product development, IT services, and staffing
         </p>
 
-        {/* Single primary CTA */}
+        {/* Contact Us button - mobile only, below promise */}
         <a
           href="#contact"
-          className={`group inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#8B6F47] text-white text-sm font-medium hover:bg-[#6B5230] focus:outline-none focus:ring-2 focus:ring-[#8B6F47]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#8B6F47]/30 transition-all duration-1000 delay-700 ${
-            isLoaded
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
+          onClick={(e) => {
+            e.preventDefault();
+            const contactSection = document.getElementById("contact");
+            if (contactSection) contactSection.scrollIntoView({ behavior: "smooth" });
+          }}
+          className={`md:hidden inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold bg-[#8B6F47] text-white hover:bg-[#6B5230] transition-all duration-200 shadow-lg shadow-[#8B6F47]/20 transition-all duration-1000 delay-700 ${
+            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           Contact Us
-          <svg
-            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
         </a>
       </div>
 

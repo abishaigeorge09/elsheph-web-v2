@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Elsheph Systems - IT Services & Staffing",
+  title: "Elsheph Systems - Build your Ideas now.",
   description: "Engineering digital products that matter. We build, scale, and strengthen technology products for modern organizations.",
   icons: {
     icon: [

@@ -83,21 +83,25 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
 export default function Products() {
   const [expandedProduct, setExpandedProduct] = useState<string | null>(null);
 
-  // Fixed target date - Job Sudarshan launch date (set to a specific date/time)
-  // Update this to the exact launch date/time
-  const jobSudarshanDate = new Date("2025-12-24T06:00:00.000Z");
-
+  // Atlitos launch date - 30 days from now
   const atlitosDate = new Date();
-  atlitosDate.setDate(atlitosDate.getDate() + 4);
+  atlitosDate.setDate(atlitosDate.getDate() + 30);
   atlitosDate.setHours(0, 0, 0, 0);
+
+  // International Hymn Book launch date - March 31, 2026
+  const hymnBookDate = new Date("2026-03-31T00:00:00.000Z");
 
   const products = [
     {
-      id: "job-sudarshan",
-      name: "Job Sudarshan",
-      description: "Job Sudarshan is an online Telugu Christian bookstore featuring books written by Job Sudarshan himself, a renowned Telugu Christian author. The platform is dedicated to serving Telugu readers with faith-centered literature for spiritual growth.",
-      status: "Launching Soon",
-      launchDate: jobSudarshanDate,
+      id: "jobsudarshan",
+      name: "Jobsudarshan",
+      description: "Simplifying job discovery for Telugu-speaking professionals. A platform that connects talent with opportunities, making career growth more accessible.",
+      status: "Now Live",
+      launchDate: null,
+      cta: {
+        text: "Explore Platform",
+        url: "https://jobsudarshan.com/",
+      },
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -117,10 +121,29 @@ export default function Products() {
       ),
     },
     {
+      id: "international-hymn-book",
+      name: "International Hymn Book",
+      description: "A trilingual Christian song platform connecting Netherlands and India. This platform translates Christian hymn books across regions and languages to make worship more accessible globally.",
+      status: "Launching March 31",
+      launchDate: hymnBookDate,
+      features: [
+        "Telugu songs translated into English with pronunciation and meaning",
+        "Dutch songs translated into English with pronunciation and meaning",
+        "Trilingual format for global understanding",
+        "Meaning and context displayed below each song",
+        "International worship accessibility",
+      ],
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+      ),
+    },
+    {
       id: "follow-me",
       name: "Follow Me",
       description: "A tourist app that helps travelers discover places, plan itineraries, and connect with local guides.",
-      status: "Coming Soon",
+      status: "Releasing Soon",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -177,16 +200,7 @@ export default function Products() {
                             <div className="flex items-start justify-between gap-3">
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-3 flex-wrap">
-                                  {product.id === "atlitos" ? (
-                                    <a
-                                      href="https://www.atlitos.com/"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="font-heading text-xl lg:text-2xl font-normal text-white group-hover:text-[#8B6F47] transition-colors duration-300 cursor-pointer"
-                                    >
-                                      {product.name}
-                                    </a>
-                                  ) : product.id === "job-sudarshan" ? (
+                                  {product.id === "jobsudarshan" ? (
                                     <a
                                       href="https://jobsudarshan.com/"
                                       target="_blank"
@@ -201,7 +215,11 @@ export default function Products() {
                                     </h3>
                                   )}
                                   {product.status && (
-                                    <span className="text-xs font-medium text-[#8B6F47] px-3 py-1 rounded-full bg-[#8B6F47]/10 border border-[#8B6F47]/30 animate-pulse">
+                                    <span className={`text-xs font-medium px-3 py-1 rounded-full border ${
+                                      product.status === "Now Live" 
+                                        ? "text-green-500 bg-green-500/10 border-green-500/30" 
+                                        : "text-[#8B6F47] bg-[#8B6F47]/10 border-[#8B6F47]/30"
+                                    }`}>
                                       {product.status}
                                     </span>
                                   )}
@@ -241,6 +259,23 @@ export default function Products() {
                                   {product.description}
                                 </p>
                                 
+                                {/* Features for International Hymn Book */}
+                                {product.id === "international-hymn-book" && product.features && (
+                                  <div className="pt-2 space-y-2">
+                                    <p className="text-xs font-medium text-[#8B6F47] uppercase tracking-wider mb-2">
+                                      Features:
+                                    </p>
+                                    <ul className="space-y-1.5">
+                                      {product.features.map((feature, idx) => (
+                                        <li key={idx} className="text-xs text-[#A1A1A1] flex items-start gap-2">
+                                          <span className="text-[#8B6F47] mt-1">•</span>
+                                          <span>{feature}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
+                                
                                 {/* Countdown Timer for products with launch dates */}
                                 {product.launchDate && (
                                   <div className="pt-2 space-y-3">
@@ -251,6 +286,23 @@ export default function Products() {
                                       </span>
                                     </div>
                                     <CountdownTimer targetDate={product.launchDate} />
+                                  </div>
+                                )}
+                                
+                                {/* CTA for Jobsudarshan */}
+                                {product.id === "jobsudarshan" && product.cta && (
+                                  <div className="pt-3">
+                                    <a
+                                      href={product.cta.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#8B6F47] text-white text-sm font-medium hover:bg-[#6B5230] transition-colors duration-200"
+                                    >
+                                      {product.cta.text}
+                                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                      </svg>
+                                    </a>
                                   </div>
                                 )}
                               </div>

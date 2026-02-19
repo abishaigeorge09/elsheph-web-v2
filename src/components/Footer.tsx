@@ -63,7 +63,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-8 lg:mb-10">
           {/* Logo & Description - Takes 4 columns */}
           <div className="lg:col-span-4">
-            <div className="mb-6">
+            <div className="mb-6 relative inline-block">
+              <span className="absolute -inset-2 rounded-lg bg-black/8 backdrop-blur-sm -z-10" />
               <Image
                 src="/logos/elsheph-full.png"
                 alt="Elsheph"
@@ -151,6 +152,14 @@ export default function Footer() {
                     IT Staffing
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="#services"
+                    className="text-sm text-black/60 hover:text-[#8B6F47] transition-colors duration-200 inline-block"
+                  >
+                    Corporate L&D
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -178,17 +187,10 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#how-we-work"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const howWeWorkSection = document.getElementById("how-we-work");
-                      if (howWeWorkSection) {
-                        howWeWorkSection.scrollIntoView({ behavior: "smooth" });
-                      }
-                    }}
+                    href="/university"
                     className="text-sm text-black/60 hover:text-[#8B6F47] transition-colors duration-200 inline-block"
                   >
-                    How We Work
+                    University Collaboration
                   </a>
                 </li>
               </ul>
@@ -221,17 +223,12 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <div className="flex items-center gap-2">
-                    <a
-                      href="#products"
-                      className="text-sm text-black/60 hover:text-[#8B6F47] transition-colors duration-200 inline-block"
-                    >
-                      Follow Me
-                    </a>
-                    <span className="text-xs text-black/40 bg-black/5 px-2 py-0.5 rounded">
-                      Soon
-                    </span>
-                  </div>
+                  <a
+                    href="#products"
+                    className="text-sm text-black/60 hover:text-[#8B6F47] transition-colors duration-200 inline-block"
+                  >
+                    International Hymn Book
+                  </a>
                 </li>
               </ul>
             </div>

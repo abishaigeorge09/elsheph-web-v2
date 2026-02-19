@@ -1,7 +1,7 @@
 "use client";
 
 export default function AnnouncementStrip() {
-  const message = "Jobsudarshan.com launching December 24";
+  const message = "Jobsudarshan.com — Now Live";
   
   // Create message item component
   const MessageItem = ({ index }: { index: number }) => (

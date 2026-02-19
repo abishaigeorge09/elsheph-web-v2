@@ -5,6 +5,7 @@ import HowWeWork from "@/components/sections/HowWeWork";
 import Products from "@/components/sections/Products";
 import VisionMission from "@/components/sections/VisionMission";
 import Partners from "@/components/sections/Partners";
+import InvestorPositioning from "@/components/sections/InvestorPositioning";
 import Contact from "@/components/sections/Contact";
 import AnnouncementStrip from "@/components/sections/AnnouncementStrip";
 import Footer from "@/components/Footer";
@@ -23,6 +24,7 @@ export default function Home() {
       <Products />
       <VisionMission />
       <Partners />
+      <InvestorPositioning />
       <Contact />
       <AnnouncementStrip />
       <Footer />
