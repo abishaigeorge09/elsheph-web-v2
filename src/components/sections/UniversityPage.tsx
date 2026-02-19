@@ -288,21 +288,12 @@ export default function UniversityPage() {
             {[1, 2].map((copy) => (
               <div key={copy} className="flex items-center shrink-0" aria-hidden={copy === 2}>
                 {Array.from({ length: 8 }).map((_, i) => (
-                  <a
-                    href="https://www.srmist.edu.in/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <div
                     key={`${copy}-${i}`}
-                    className="flex items-center mx-10 lg:mx-14 opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-500"
+                    className="flex items-center justify-center mx-10 lg:mx-14 w-40 h-14 rounded-lg border border-dashed border-white/20 bg-white/5 text-white/30 text-xs font-medium"
                   >
-                    <Image
-                      src="/SRM_Institute_of_Science_and_Technology_Logo.svg"
-                      alt="SRM Institute of Science and Technology"
-                      width={160}
-                      height={64}
-                      className="h-12 lg:h-14 w-auto object-contain"
-                    />
-                  </a>
+                    Partner logo
+                  </div>
                 ))}
               </div>
             ))}
