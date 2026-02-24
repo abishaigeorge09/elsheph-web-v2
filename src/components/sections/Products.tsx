@@ -95,7 +95,7 @@ export default function Products() {
     {
       id: "jobsudarshan",
       name: "Jobsudarshan",
-      description: "Simplifying job discovery for Telugu-speaking professionals. A platform that connects talent with opportunities, making career growth more accessible.",
+      description: "The online home of Job Sudarshan, a Telugu Christian author, Bible teacher, and publisher, offering his books, devotionals, and Bible study resources so you can discover stories that shape your soul.",
       status: "Now Live",
       launchDate: null,
       cta: {
