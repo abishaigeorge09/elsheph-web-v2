@@ -37,7 +37,7 @@
 - Updated headline: **"Products built from ideas. Shipped for the real world."**
 - Updated subtext: **"Product development, IT services, and staffing"**
 - Added Contact Us button visible on mobile only, positioned below the tagline
-- Added subtle product launch pill: `• Product Launch — March 31 >`
+- Added subtle product launch pill: `• Product Launch — April 31 >`
 
 #### Navbar
 - **Transparent on landing**, smoothly transitions to dark (`bg-[#0B0B0B]/95`) on scroll (threshold: 80px, duration: 500ms ease-out)
