@@ -46,7 +46,7 @@ export default function Hero() {
             isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          • Product Launch — April 31{" "}&gt;
+          • Product Launch — April 30{" "}&gt;
         </a>
 
         {/* Headline - Large serif, editorial style (Playfair Display) - restrained sizing */}

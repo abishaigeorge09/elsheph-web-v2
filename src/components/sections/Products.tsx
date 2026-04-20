@@ -88,9 +88,8 @@ export default function Products() {
   atlitosDate.setDate(atlitosDate.getDate() + 30);
   atlitosDate.setHours(0, 0, 0, 0);
 
-  // International Hymn Book official version timer date - April 31, 2026
-  // Note: JavaScript Date will roll this to May 1 (since April has 30 days).
-  const hymnBookOfficialDate = new Date(Date.UTC(2026, 3, 31, 0, 0, 0));
+  // International Hymn Book official version timer date - April 30, 2026
+  const hymnBookOfficialDate = new Date(Date.UTC(2026, 3, 30, 0, 0, 0));
 
   const products = [
     {
@@ -125,7 +124,7 @@ export default function Products() {
       id: "international-hymn-book",
       name: "International Hymn Book",
       description: "A trilingual Christian song platform connecting Netherlands and India. This platform translates Christian hymn books across regions and languages to make worship more accessible globally. Beta version launched March 31st.",
-      status: "Launching April 31",
+      status: "Launching April 30",
       launchDate: hymnBookOfficialDate,
       features: [
         "Telugu songs translated into English with pronunciation and meaning",
