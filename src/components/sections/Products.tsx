@@ -88,9 +88,6 @@ export default function Products() {
   atlitosDate.setDate(atlitosDate.getDate() + 30);
   atlitosDate.setHours(0, 0, 0, 0);
 
-  // International Hymn Book official version timer date - April 30, 2026
-  const hymnBookOfficialDate = new Date(Date.UTC(2026, 3, 30, 0, 0, 0));
-
   const products = [
     {
       id: "jobsudarshan",
@@ -123,9 +120,13 @@ export default function Products() {
     {
       id: "international-hymn-book",
       name: "International Hymn Book",
-      description: "A trilingual Christian song platform connecting Netherlands and India. This platform translates Christian hymn books across regions and languages to make worship more accessible globally. Beta version launched March 31st.",
-      status: "Launching April 30",
-      launchDate: hymnBookOfficialDate,
+      description: "A trilingual Christian song platform connecting Netherlands and India. This platform translates Christian hymn books across regions and languages to make worship more accessible globally. Now live at hymn.elsheph.com.",
+      status: "Now Live",
+      launchDate: null,
+      cta: {
+        text: "Open App",
+        url: "https://hymn.elsheph.com/",
+      },
       features: [
         "Telugu songs translated into English with pronunciation and meaning",
         "Dutch songs translated into English with pronunciation and meaning",
@@ -200,9 +201,9 @@ export default function Products() {
                             <div className="flex items-start justify-between gap-3">
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-3 flex-wrap">
-                                  {product.id === "jobsudarshan" ? (
+                                  {product.cta ? (
                                     <a
-                                      href="https://jobsudarshan.com/"
+                                      href={product.cta.url}
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       className="font-heading text-xl lg:text-2xl font-normal text-white group-hover:text-[#8B6F47] transition-colors duration-300 cursor-pointer"
@@ -289,8 +290,8 @@ export default function Products() {
                                   </div>
                                 )}
                                 
-                                {/* CTA for Jobsudarshan */}
-                                {product.id === "jobsudarshan" && product.cta && (
+                                {/* CTA for products with links */}
+                                {(product.id === "jobsudarshan" || product.id === "international-hymn-book") && product.cta && (
                                   <div className="pt-3">
                                     <a
                                       href={product.cta.url}
