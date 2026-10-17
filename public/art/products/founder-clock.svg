@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" role="img" aria-label="Abstract brand artwork">
+  <defs>
+    <linearGradient id="base-founder-clock" x1="91.0%" y1="78.7%" x2="9.0%" y2="21.3%"><stop offset="0%" stop-color="#582008" /><stop offset="51%" stop-color="#211712" /><stop offset="100%" stop-color="#a05838" /></linearGradient>
+    <radialGradient id="glow-founder-clock" cx="85%" cy="88%" r="75%">
+      <stop offset="0%" stop-color="#c08a4e" stop-opacity="0.55" />
+      <stop offset="60%" stop-color="#c08a4e" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#c08a4e" stop-opacity="0" />
+    </radialGradient>
+    <filter id="soft-founder-clock" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="96" /></filter>
+  </defs>
+  <rect width="1000" height="1250" fill="url(#base-founder-clock)" />
+  <rect width="1000" height="1250" fill="url(#glow-founder-clock)" />
+  <ellipse cx="330" cy="483" rx="397" ry="396" fill="#c08a4e" opacity="0.54" filter="url(#soft-founder-clock)" transform="rotate(62 330 483)" />
+  
+  <filter id="grain-founder-clock">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="77" stitchTiles="stitch" />
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.5 0.5 0.5 0 0" />
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain-founder-clock)" opacity="0.06" />
+</svg>

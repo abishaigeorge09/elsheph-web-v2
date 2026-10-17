@@ -1,0 +1,15 @@
+/node_modules
+/.next/
+/out/
+/build
+.DS_Store
+*.pem
+npm-debug.log*
+.env*
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+# working files that were uploaded with the deployment, not part of the site
+/.research/
+/.scratch/
+/.e3-tmp/

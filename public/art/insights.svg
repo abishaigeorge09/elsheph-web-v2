@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Abstract brand artwork">
+  <defs>
+    <linearGradient id="base-insights" x1="0%" y1="12%" x2="100%" y2="88%">
+      <stop offset="0%" stop-color="#211712" />
+      <stop offset="64%" stop-color="#211712" />
+      <stop offset="100%" stop-color="#582008" />
+    </linearGradient>
+    <radialGradient id="glow-insights" cx="82%" cy="24%" r="80%">
+      <stop offset="0%" stop-color="#c08a4e" stop-opacity="0.45" />
+      <stop offset="55%" stop-color="#c08a4e" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#c08a4e" stop-opacity="0" />
+    </radialGradient>
+    <filter id="soft-insights" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="80" /></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#base-insights)" />
+  <rect width="1200" height="900" fill="url(#glow-insights)" />
+  <ellipse cx="880" cy="640" rx="420" ry="240" fill="#a05838" opacity="0.45" filter="url(#soft-insights)" transform="rotate(-12 880 640)" />
+  
+  <filter id="grain-insights">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="974" stitchTiles="stitch" />
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.5 0.5 0.5 0 0" />
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain-insights)" opacity="0.06" />
+</svg>

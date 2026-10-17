@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Team slot placeholder: an abstract head-and-shoulders silhouette in the
+       brand duotone (deep-surface ground, warm umber figure). One shared file
+       for every waiting slot, so the grid reads calm. Replaced per-card by a
+       real 1:1 photo in public/team/ when the founder supplies a person. -->
+  <rect width="400" height="400" fill="#2c211a"/>
+  <!-- faint ring, the seal's geometry echoed behind the figure -->
+  <circle cx="200" cy="205" r="150" fill="none" stroke="#4a3826" stroke-width="1" opacity="0.5"/>
+  <!-- head -->
+  <circle cx="200" cy="168" r="60" fill="#54412e"/>
+  <!-- shoulders -->
+  <path d="M 64 400 C 64 316 126 266 200 266 C 274 266 336 316 336 400 Z" fill="#54412e"/>
+</svg>

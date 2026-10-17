@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 455 455">
+  <!-- The Elsheph seal: the shepherd's-crook mark (traced from
+       public/logos/elsheph-symbol.png — vertical staff, curl opening left,
+       vine leaves) inside a thin double ring, ELSHEPH SYSTEMS set in the
+       upper ring arc, a leaf-and-dots motif in the lower arc.
+       Single colour via currentColor; reads at 48px and 455px. -->
+  <g fill="none" stroke="currentColor">
+    <!-- double ring -->
+    <circle cx="227.5" cy="227.5" r="220" stroke-width="4"/>
+    <circle cx="227.5" cy="227.5" r="206" stroke-width="1.8"/>
+    <!-- the crook: staff with the head coiling left, as in the mark -->
+    <path d="M240 352 L240 168 C240 118 172 112 168 158 C165 190 206 196 214 168"
+          stroke-width="15" stroke-linecap="round"/>
+    <!-- the vine winding the staff -->
+    <path d="M240 340 C216 320 264 300 240 280 C216 260 264 240 240 220 C222 205 250 192 240 184"
+          stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <!-- vine leaves, alternating sides of the staff -->
+  <g fill="currentColor">
+    <path d="M240 316 C218 312 206 296 204 282 C222 286 236 300 240 316 Z"/>
+    <path d="M240 268 C262 264 274 248 276 234 C258 238 244 252 240 268 Z"/>
+    <path d="M240 232 C218 228 206 212 204 198 C222 202 236 216 240 232 Z"/>
+    <path d="M244 196 C266 192 278 176 280 162 C262 166 248 180 244 196 Z"/>
+  </g>
+  <!-- upper arc lettering -->
+  <defs>
+    <path id="seal-arc-top" d="M 49 227.5 A 178.5 178.5 0 0 1 406 227.5"/>
+    <path id="seal-arc-bottom" d="M 72 227.5 A 155.5 155.5 0 0 0 383 227.5"/>
+  </defs>
+  <text fill="currentColor"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="40" letter-spacing="7">
+    <textPath href="#seal-arc-top" startOffset="50%" text-anchor="middle">ELSHEPH SYSTEMS</textPath>
+  </text>
+  <!-- lower arc: dot · leaf · dot -->
+  <g fill="currentColor">
+    <circle cx="167" cy="374" r="5"/>
+    <circle cx="288" cy="374" r="5"/>
+    <path d="M227.5 366 C213 380 213 396 227.5 404 C242 396 242 380 227.5 366 Z"/>
+  </g>
+</svg>

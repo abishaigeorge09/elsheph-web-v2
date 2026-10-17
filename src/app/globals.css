@@ -1,0 +1,1350 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* The palette is committed light. This variant is kept only so shadcn's
+   `dark:` utilities stay inert instead of firing on prefers-color-scheme. */
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================================
+   LAYER A — PALETTE: "Porcelain & Sienna"
+   ----------------------------------------------------------------------------
+   The ONLY block holding raw colour values. Swapping the entire site's colour
+   scheme means editing this block and nothing else: every later layer refers
+   to these ramps by name, and no component may contain a colour literal.
+
+   Light-first. Dark survives only as the --deep-* ramp below, applied through
+   the .band-deep scope class (overlay menu, the insights top band).
+   ============================================================================ */
+:root {
+  /* Grounds and surfaces, page to cards. --surface is the measured a16z cream
+     (#f6f4ee, from a16z-core.css), now a band colour against the brighter
+     warm-white ground rather than the site's one light exception. */
+  --ground: #faf8f3;
+  --surface: #f6f4ee;
+  --raised: #ffffff;
+  --raised-2: #efe9dd;
+
+  /* Type tones, darkest to dimmest */
+  --ink: #1b1512;
+  --ink-mid: #453b33;
+  --muted: #6f6459;
+  --faint: #9b9084;
+
+  /* Hairlines */
+  --border: rgba(27, 21, 18, 0.12);
+  --border-strong: rgba(27, 21, 18, 0.26);
+
+  /* Brand accents. The logo browns are first-class on light ground:
+     --brand-deep measures ~10.9:1 on --ground.
+     --brand (terracotta) is DISPLAY SIZE ONLY — ~3.6:1 on --ground, below the
+     4.5:1 body-text minimum. Headline accents and large display glyphs, never
+     body text, small labels, icons, or borders that carry meaning.
+     --accent exists precisely so nobody reaches for terracotta on small text:
+     7.4:1, safe for links and UI at any size. */
+  --brand-deep: #582008;
+  --brand: #a05838;
+  --accent: #7c3a1c;
+  --accent-hover: #582008; /* darken on hover — the light-ground convention */
+  --accent-quiet: rgba(160, 88, 56, 0.1);
+  --on-accent: #faf8f3;
+
+  /* Brass, demoted: art gradients only, never text on light ground. */
+  --brass: #c08a4e;
+
+  /* Functional signals (not part of the brand ramp, but swapped with it) */
+  --danger: #a33a1e;
+  --on-danger: #faf8f3;
+
+  /* The one surviving dark: a bounded espresso ramp, applied only through the
+     .band-deep scope class in Layer B. Components never read these directly. */
+  --deep-ground: #211712;
+  --deep-surface: #2c211a;
+  --deep-ink: #f6f1e8;
+  --deep-ink-mid: #c9bcae;
+  --deep-accent: #d9a86c;
+  --deep-line: rgba(246, 241, 232, 0.14);
+
+  /* Drawer panels: a warm cream one step from the page ground (panel one)
+     and the page ground itself (panel two). Read only by the drawer CSS. */
+  --panel: #f3f0ea;
+  --panel-2: #faf8f3;
+
+  /* Field palette — the per-page painted grounds of the full-company
+     expansion. Dark fields reuse the deep ramp's ink/accent (all measured
+     ≥ 4.5:1: --deep-accent is 8.17:1 on espresso, 7.47:1 on oxblood,
+     5.41:1 on olive; --deep-ink-mid is 6.26:1 on olive, the tightest).
+     Applied only through the .field-* scope classes below. */
+  --field-espresso: #211712;
+  --field-oxblood: #3e1408;
+  --field-olive: #3a3a1e;
+  --field-stone: #efe9dd;
+  --field-greige: #f0ece4;
+}
+
+/* ============================================================================
+   LAYER B — SEMANTIC TOKENS
+   ----------------------------------------------------------------------------
+   Ramps mapped to meaning. Components never reach past this layer.
+   Names here are deliberately distinct from Layer A's ramp names so a role can
+   be repointed at a different ramp without a circular reference.
+   The shadcn contract tokens below are part of this layer: several shadcn
+   components read them as raw `var(--…)` (sonner, button), so they must exist
+   as real custom properties and not only as Tailwind theme entries.
+   ============================================================================ */
+:root {
+  /* Elsheph roles */
+  --color-page: var(--ground);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-raised-2: var(--raised-2);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand: var(--brand);
+  --color-ink: var(--ink);
+  --color-ink-mid: var(--ink-mid);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-quiet: var(--accent-quiet);
+  --color-on-accent: var(--on-accent);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+
+  /* Focus is always brass, at full strength, everywhere. */
+  --focus-ring: var(--accent);
+
+  /* Geometry */
+  --radius: 0.625rem;
+  /* The audit's container: 1392px total with 32px inline padding
+     (1328px of content). Section rhythm depends on it. */
+  --shell-max: 1392px;
+  --header-height: 72px;
+
+  /* shadcn contract */
+  --background: var(--ground);
+  --foreground: var(--ink);
+  --card: var(--raised);
+  --card-foreground: var(--ink);
+  --popover: var(--raised);
+  --popover-foreground: var(--ink);
+  --primary: var(--accent);
+  --primary-foreground: var(--on-accent);
+  --secondary: var(--raised-2);
+  --secondary-foreground: var(--ink);
+  --accent-foreground: var(--on-accent);
+  --muted-foreground: var(--muted);
+  --destructive: var(--danger);
+  --destructive-foreground: var(--on-danger);
+  --input: var(--border-strong);
+  --ring: var(--focus-ring);
+}
+
+/* ----------------------------------------------------------------------------
+   .band-deep — the one surviving dark scope.
+
+   Re-points the semantic tokens at the --deep-* ramp, so any component placed
+   inside it (overlay menu, the insights top band) recolours itself with zero
+   component changes. This is the ONLY sanctioned way to put dark on the page.
+
+   .band-media shares the exact re-pointing but paints NO ground: it is the
+   scope for text sitting over full-bleed dark media (the homepage hero),
+   where the media itself is the ground and an opaque espresso fill would
+   hide it. Same contract: components inside read semantic tokens only.
+   ---------------------------------------------------------------------------- */
+.band-deep,
+.band-media {
+  --color-page: var(--deep-ground);
+  --color-surface: var(--deep-surface);
+  --color-raised: var(--deep-surface);
+  --color-raised-2: var(--deep-surface);
+  --color-ink: var(--deep-ink);
+  --color-ink-mid: var(--deep-ink-mid);
+  --color-muted: var(--deep-ink-mid);
+  --color-faint: var(--deep-ink-mid);
+  --color-accent: var(--deep-accent);
+  --color-accent-hover: var(--brass);
+  --color-line: var(--deep-line);
+  --color-line-strong: var(--deep-line);
+  --focus-ring: var(--deep-accent);
+  color: var(--color-ink);
+}
+
+.band-deep {
+  background: var(--color-page);
+}
+
+/* ----------------------------------------------------------------------------
+   Field scopes — the per-page painted grounds, on the .band-deep mechanism.
+
+   Each dark field re-points the SAME semantic set at the deep ramp's ink and
+   accent (contrast measured in Layer A's comment) and swaps only the ground.
+   Components inside read semantic tokens and recolour with zero changes.
+   The two light fields (stone, greige) keep the light ramp — only the ground
+   moves; every light-ramp tone already clears it (stone and greige sit
+   between --ground and --raised-2).
+   ---------------------------------------------------------------------------- */
+.field-espresso,
+.field-oxblood,
+.field-olive,
+.accent-band-dark {
+  --color-surface: var(--deep-surface);
+  --color-raised: var(--deep-surface);
+  --color-raised-2: var(--deep-surface);
+  --color-ink: var(--deep-ink);
+  --color-ink-mid: var(--deep-ink-mid);
+  --color-muted: var(--deep-ink-mid);
+  --color-faint: var(--deep-ink-mid);
+  --color-accent: var(--deep-accent);
+  --color-accent-hover: var(--brass);
+  --color-line: var(--deep-line);
+  --color-line-strong: var(--deep-line);
+  --focus-ring: var(--deep-accent);
+  color: var(--color-ink);
+  background: var(--color-page);
+}
+
+.field-espresso {
+  --color-page: var(--field-espresso);
+}
+
+.field-oxblood {
+  --color-page: var(--field-oxblood);
+}
+
+.field-olive {
+  --color-page: var(--field-olive);
+}
+
+/* The light fields RE-POINT the full semantic set back at the light ramp,
+   not just the ground: the newsletter band nests a greige field inside the
+   dark-field pages (/team, /careers), where the espresso scope has already
+   re-pointed --color-ink at cream. Without this reset the band would set
+   cream text on greige. On light pages every value below resolves to what
+   was already inherited, so nothing changes there. */
+.field-stone,
+.field-greige,
+.accent-band-light {
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-raised-2: var(--raised-2);
+  --color-ink: var(--ink);
+  --color-ink-mid: var(--ink-mid);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --focus-ring: var(--accent);
+  color: var(--color-ink);
+  background: var(--color-page);
+}
+
+.field-stone {
+  --color-page: var(--field-stone);
+}
+
+.field-greige {
+  --color-page: var(--field-greige);
+}
+
+/* E6: the focus pages' one accent event. Each /focus page paints a single
+   band whose ground is that area's accent token, passed inline as
+   --accent-bg (a token reference, never a hex). The band joins one of the
+   two existing ink scopes above by tone, so text inside stays token-driven:
+   - .accent-band-dark rides the deep ramp. Measured for --deep-ink #f6f1e8:
+     11.5:1 on --brand-deep, 5.4:1 on --field-olive, 4.74:1 on --brand.
+     NOTE --brand is the tight one: --deep-ink-mid measures only 2.9:1 on it,
+     so an accent band may set text in --color-ink ONLY, never ink-mid.
+   - .accent-band-light takes the light reset. Measured for --ink #1b1512 on
+     --brass: 6.0:1 (cream on brass is 2.7:1, which is why brass flips). */
+.accent-band-dark,
+.accent-band-light {
+  --color-page: var(--accent-bg);
+}
+
+/* ----------------------------------------------------------------------------
+   .field-pattern — one tiled SVG pattern per field, painted on a ::before.
+
+   The consumer sets two vars and a position context:
+     --pattern-url: url("/patterns/pattern-crook.svg");
+     --pattern-opacity: 0.05 | 0.4 | 1;
+   The tile is painted with currentColor through a mask, so the pattern takes
+   the field's own ink and the opacity var is the only loudness dial.
+   ---------------------------------------------------------------------------- */
+.field-pattern {
+  position: relative;
+}
+
+.field-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--pattern-ink, currentColor);
+  -webkit-mask-image: var(--pattern-url);
+  mask-image: var(--pattern-url);
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-size: var(--pattern-size, 216px) auto;
+  mask-size: var(--pattern-size, 216px) auto;
+  opacity: var(--pattern-opacity, 0.05);
+  pointer-events: none;
+}
+
+/* Tone-on-tone patterning — the reference's full-strength treatment: the
+   pattern is the field's own ground nudged toward ink, so at opacity 1 it
+   reads as blind-embossed print stock, not accent-coloured wiring.
+   Terracotta ink stays available for whisper opacities, where it reads as a
+   tint rather than a wall. */
+.pattern-emboss {
+  --pattern-ink: color-mix(in oklab, var(--color-page) 76%, var(--ink));
+}
+
+/* Off-register modifier — the newsletter band's deliberate print detail:
+   the tile starts 75px above the band's top edge, so the arches are cut
+   mid-curve at the seam instead of aligning to it. The wrapper clips the
+   overhang. */
+.field-pattern-offset {
+  overflow: hidden;
+}
+
+.field-pattern-offset::before {
+  top: -75px;
+}
+
+/* ============================================================================
+   LAYER C — TAILWIND WIRING
+   ----------------------------------------------------------------------------
+   Semantic tokens into Tailwind namespaces, so `bg-surface text-ink
+   border-border text-accent` are real utilities. `inline` is required: these
+   values are var() chains, and Tailwind must resolve through them.
+   ============================================================================ */
+@theme inline {
+  /* Elsheph namespace */
+  --color-page: var(--color-page);
+  --color-surface: var(--color-surface);
+  --color-raised: var(--color-raised);
+  --color-raised-2: var(--color-raised-2);
+  --color-brand-deep: var(--color-brand-deep);
+  --color-brand: var(--color-brand);
+  --color-ink: var(--color-ink);
+  --color-ink-mid: var(--color-ink-mid);
+  --color-faint: var(--color-faint);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-quiet: var(--color-accent-quiet);
+  --color-on-accent: var(--color-on-accent);
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+  --color-border-strong: var(--border-strong);
+
+  /* shadcn namespace */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--raised-2);
+  --color-muted-foreground: var(--muted-foreground);
+  /* Routed through the SEMANTIC token (not the raw ramp) so a .band-deep
+     scope re-points these utilities along with everything else. */
+  --color-accent: var(--color-accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--color-line);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Typography. Two roles, per the reference: a display serif for headlines
+     (Fraunces, standing in for the reference's commercial Orpheus Pro) and a
+     neutral sans for UI chrome, nav and body copy (Inter, standing in for
+     their commercial Domaine family). Both are loaded in src/app/layout.tsx;
+     swapping either is a one-file change there, not a change here. */
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-body: var(--font-inter);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ============================================================================
+   LAYER D — HELPERS
+   ============================================================================ */
+
+/* The one content container: 1392px total, 32px inline padding. */
+.shell {
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+/* ----------------------------------------------------------------------------
+   .btn — the ONE button style. 48px tall, 4px radius, 1px ink border,
+   transparent fill; hover inverts to solid ink with a ground-coloured label.
+   Reads semantic tokens so it holds on every field.
+   ---------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 28px;
+  border: 1px solid var(--color-ink);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-sans), arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+}
+
+.btn:hover {
+  background: var(--color-ink);
+  color: var(--color-page);
+}
+
+/* Founder rule — theme liveliness: a field change quiets only the PAGE
+   ground; interactive elements keep their vivid brand colour. On the dark
+   fields the button rides the brass accent (computed ≥5.4:1 on every dark
+   field) instead of going monochrome cream, and inverts to a brass fill. */
+.field-espresso .btn,
+.field-oxblood .btn,
+.field-olive .btn,
+.band-deep .btn,
+.band-media .btn {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.field-espresso .btn:hover,
+.field-oxblood .btn:hover,
+.field-olive .btn:hover,
+.band-deep .btn:hover,
+.band-media .btn:hover {
+  background: var(--color-accent);
+  color: var(--color-page);
+}
+
+/* ----------------------------------------------------------------------------
+   .link-arrow — the standard read-on link: text + long thin em-arrow ⟶.
+   The arrow nudges right on hover; reduced motion drops the nudge.
+   ---------------------------------------------------------------------------- */
+.link-arrow {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55em;
+}
+
+.link-arrow::after {
+  content: "⟶";
+  font-weight: 300;
+  transition: transform 0.15s ease-out;
+}
+
+.link-arrow:hover::after {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-arrow::after {
+    transition: none;
+  }
+
+  .link-arrow:hover::after {
+    transform: none;
+  }
+}
+
+/* Long-form body text: the audit's 28px-at-16px measure, weight 300. */
+.prose {
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* ----------------------------------------------------------------------------
+   .seal-mark — the brand seal painted in currentColor via a CSS mask, so the
+   one SVG serves every ground (cream over hero media, ink on light). Size it
+   with width/height utilities; it stays square.
+   ---------------------------------------------------------------------------- */
+.seal-mark {
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask: url("/brand/seal.svg") center / contain no-repeat;
+  mask: url("/brand/seal.svg") center / contain no-repeat;
+}
+
+/* Horizontal scroll-snap row — the reference's IPO card strip on Portfolio
+   and card carousel on News & Content. A native scroller, not a JS carousel:
+   `scroll-snap-type: x mandatory` on the row, `scroll-snap-align: start` on
+   each child. Scrollbar hidden cross-browser since the row is visually a
+   single wide composition, not a list a user scans by scrollbar. */
+.snap-row {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* Without this, mandatory snapping aligns the first card to the scrollport
+     edge and silently swallows the .shell's inline padding — the strip must
+     start on the same left rule as the heading above it. */
+  scroll-padding-inline: 32px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.snap-row::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   LAYER E2 — THE a16z-MODE TYPE SCALE
+   ----------------------------------------------------------------------------
+   The site's one heading scale. (Layer E — the earlier reference's measured
+   weight-900 scale — died in Phase 6 with the last sections that consumed
+   it.) Weights and line-heights transcribed from a16z's own production CSS
+   (.research/a16z-core.css), then retuned as described below.
+
+   h1/h2 sit at weight 400, h3/h4 drop to weight 300 — the reference's own
+   light/regular split, not the earlier layer's light/black split. Sizes are
+   fluid clamps using the reference's own technique
+   (`--heading-lg-2: clamp(2rem, .8382rem + 4.6243vw, 5rem)` in their sheet)
+   with values re-tuned to Elsheph's actual copy lengths rather than copied
+   verbatim — a16z's headlines are short ("It's Time to Build"); Elsheph's
+   real tagline is a full sentence, so the max size is held lower to keep a
+   long line from breaking badly at 1440px.
+   ============================================================================ */
+/* Retuned for the light system: Fraunces variable weights in the 380–420
+   register. Weight 300 is dead everywhere in this scale — it shimmers on
+   cream at Retina scaling. */
+/* Flattened per the audit: headings are effectively ONE size (~42px serif),
+   hierarchy from colour/position/whitespace, not a type ladder. .az-h1 and
+   .az-h2 share the 42px-class fluid clamp; only the homepage hero keeps a
+   larger cut via .az-h1-hero — at 42px over full-bleed viewport media the
+   headline lost its presence entirely (judgment call, noted). */
+.az-h1,
+.az-h2 {
+  font-family: var(--font-display), georgia, serif;
+  font-weight: 400;
+  line-height: 1.15;
+  font-size: clamp(2rem, 1.55rem + 1.2vw, 2.625rem);
+}
+
+/* Homepage hero ONLY. No other consumer may take this class. */
+.az-h1-hero {
+  font-weight: 380;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.5rem, 1.2rem + 4.2vw, 4.75rem);
+}
+
+.az-h3 {
+  font-family: var(--font-display), georgia, serif;
+  font-weight: 400;
+  line-height: 1.25;
+  font-size: clamp(1.4rem, 1rem + 1.6vw, 2.1rem);
+}
+
+.az-h4 {
+  font-family: var(--font-display), georgia, serif;
+  font-weight: 420;
+  line-height: 1.375;
+  font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.35rem);
+}
+
+/* The uppercase label scale is dead — founder decision: no such labels
+   anywhere. The serif heading alone labels a section. */
+
+/* The light-system link treatment: hairline underline at rest, accent on
+   hover. Decoration colour only — the text keeps its own colour. Reads the
+   semantic tokens so it also works inside .band-deep. */
+.link-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-line-strong);
+  transition: text-decoration-color 150ms ease-out;
+}
+
+.link-underline:hover {
+  text-decoration-color: var(--color-accent);
+}
+
+/* ============================================================================
+   LAYER E3 — SITE CHROME (Phase 2: bar, hamburger, overlay menu)
+   ----------------------------------------------------------------------------
+   The header bar's scroll states, the drawn hamburger that morphs into ✕,
+   and the full-screen overlay menu's motion. All colour is read through the
+   semantic tokens, so the overlay (which carries .band-deep) recolours itself.
+   The [data-starting-style] / [data-ending-style] selectors are Base UI's
+   documented enter/exit transition hooks on the Dialog popup.
+   ============================================================================ */
+
+/* The bar drops to 60px on small screens; scroll-padding-top follows. */
+@media (max-width: 640px) {
+  :root {
+    --header-height: 60px;
+  }
+}
+
+/* Transparent at rest; once the page has moved 24px, blurred warm-white with
+   a bottom hairline. data-scrolled is toggled by a passive scroll listener. */
+.site-header {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 200ms ease-out,
+    border-color 200ms ease-out;
+  /* The bar itself is click-transparent so the drawer's ✕ (which sits under
+     the header's strip while the drawer is open) stays clickable; only the
+     bar's real controls take the pointer back. */
+  pointer-events: none;
+}
+
+.site-header :is(button, a, input) {
+  pointer-events: auto;
+}
+
+.site-header[data-scrolled] {
+  background: color-mix(in oklab, var(--ground) 92%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--border);
+}
+
+/* Homepage only: the whole viewport behind the transparent bar is full-bleed
+   dark hero media, so BOTH icons flip to the deep ramp while the bar is
+   transparent. (The wordmark swap to the cream knockout happens in
+   SiteHeader.tsx, since it is an image source, not a colour.) The page
+   cannot scroll, so this is the homepage's only state; the :not() guard
+   stays anyway so the rule cannot leak if that ever changes. */
+.site-header[data-home]:not([data-scrolled]) .header-search,
+.site-header[data-home]:not([data-scrolled]) .burger-box {
+  color: var(--deep-ink);
+}
+
+.site-header[data-home]:not([data-scrolled]) .header-search:hover,
+.site-header[data-home]:not([data-scrolled]) button:hover .burger-box {
+  color: var(--deep-accent);
+}
+
+/* Dark-FIELD pages (/team, /about, /careers, /offices): the page mounts
+   <DarkChrome />, which sets `data-dark-field` on <html> — the generalised
+   ground detection, same mechanism family as data-home. While the bar is
+   transparent over the espresso/oxblood field, icons flip to the deep ramp
+   exactly as on the homepage. (The wordmark swap happens in SiteHeader.tsx,
+   which subscribes to the same store.) Once scrolled the bar paints its
+   warm-white blur and the ink treatment returns. */
+:root[data-dark-field] .site-header:not([data-scrolled]) .header-search,
+:root[data-dark-field] .site-header:not([data-scrolled]) .burger-box {
+  color: var(--deep-ink);
+}
+
+:root[data-dark-field] .site-header:not([data-scrolled]) .header-search:hover,
+:root[data-dark-field]
+  .site-header:not([data-scrolled])
+  button:hover
+  .burger-box {
+  color: var(--deep-accent);
+}
+
+/* The drawn hamburger: two 18px × 1.5px bars, 5px apart, currentColor so the
+   button's own text colour (ink, accent on hover) paints them. */
+.burger-box {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 8px;
+}
+
+.burger-bar {
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.burger-top {
+  top: 0;
+}
+
+.burger-bot {
+  top: 6.5px;
+}
+
+/* ----------------------------------------------------------------------------
+   THE DRAWER MENU — a left drawer over a light scrim, the audit's anatomy.
+
+   Panel one: 420px at xl / 320px at lg / full width below, full height, on
+   --panel (one warm step from the ground). Behind it a 20% black scrim — the
+   page stays visible and unblurred, and the header (z-200) stays live above
+   both. Chevroned parents slide a SECOND panel out to the right of panel one
+   (same width, --panel-2 ground, hairline seam, 280ms ease-out); switching
+   parents while it is open cross-fades its contents in place instead of
+   re-sliding. Reduced motion: no slides, opacity only.
+   ---------------------------------------------------------------------------- */
+.drawer-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(0, 0, 0, 0.2);
+  /* The site's signature damped easing; the scrim outlasts the panel a
+     touch so the close reads layered rather than abrupt. */
+  transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.drawer-scrim[data-starting-style],
+.drawer-scrim[data-ending-style] {
+  opacity: 0;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 160;
+  height: 100dvh;
+  width: 100%;
+  background: var(--panel);
+  outline: none;
+  transform: translateX(0);
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Level-one items settle in with a small fade-and-drift as the panel lands —
+   subtle, staggered, and collapsed entirely under reduced motion. */
+.drawer:not([data-starting-style]):not([data-ending-style]) .drawer-item {
+  animation: drawer-item-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.drawer .drawer-item:nth-child(1) { animation-delay: 40ms; }
+.drawer .drawer-item:nth-child(2) { animation-delay: 75ms; }
+.drawer .drawer-item:nth-child(3) { animation-delay: 110ms; }
+.drawer .drawer-item:nth-child(4) { animation-delay: 145ms; }
+.drawer .drawer-item:nth-child(5) { animation-delay: 180ms; }
+.drawer .drawer-item:nth-child(6) { animation-delay: 215ms; }
+
+@keyframes drawer-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer:not([data-starting-style]):not([data-ending-style]) .drawer-item {
+    animation: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .drawer {
+    width: 320px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .drawer {
+    width: 420px;
+  }
+}
+
+.drawer[data-starting-style],
+.drawer[data-ending-style] {
+  transform: translateX(-100%);
+}
+
+/* Level-one items: Fraunces 400 at 28px, muted at rest, black when the
+   section is open or the route active, black on hover, 0.2s colour. */
+.drawer-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  font-family: var(--font-display), georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--color-muted);
+  transition: color 0.2s;
+}
+
+.drawer-item:hover,
+.drawer-item[data-active],
+.drawer-item[data-open] {
+  color: var(--color-ink);
+}
+
+/* The chevron: a thin right angle, drawn, right-aligned. */
+.drawer-chevron {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* Panel two rides in a clipping wrapper to panel one's right, so the slide
+   reveals from under the seam instead of crossing the scrim. Below lg the
+   wrapper covers the (full-width) drawer itself. */
+.drawer-panel2-clip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .drawer-panel2-clip {
+    left: 100%;
+  }
+}
+
+.drawer-panel2 {
+  position: absolute;
+  inset: 0;
+  background: var(--panel-2);
+  border-left: 1px solid var(--color-line);
+  pointer-events: auto;
+  transform: translateX(-100%);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.drawer-panel2[data-open] {
+  transform: translateX(0);
+}
+
+/* Cross-fade for panel-two contents when the open parent switches. */
+.drawer-panel2-content {
+  animation: drawer-content-fade 200ms ease-out;
+}
+
+@keyframes drawer-content-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Panel-two items: Inter 15px, generous line spacing. */
+.drawer-sub {
+  display: block;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-ink-mid);
+  transition: color 0.2s;
+}
+
+.drawer-sub:hover {
+  color: var(--color-ink);
+}
+
+/* Panel two's back affordance: only where the full-width drawer makes
+   panel two cover panel one (below lg). A media query, not a Tailwind
+   utility — the unlayered .drawer-sub display would beat a layered
+   lg:hidden. */
+.drawer-back {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .drawer-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+/* The ✕ on the outermost open panel: two thin bars, currentColor. */
+.drawer-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--color-muted);
+  transition: color 0.2s;
+}
+
+.drawer-close:hover {
+  color: var(--color-ink);
+}
+
+.drawer-close-glyph {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.drawer-close-glyph::before,
+.drawer-close-glyph::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7.5px;
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+}
+
+.drawer-close-glyph::before {
+  transform: rotate(45deg);
+}
+
+.drawer-close-glyph::after {
+  transform: rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer-panel2 {
+    transition: opacity 150ms linear;
+  }
+
+  .drawer[data-starting-style],
+  .drawer[data-ending-style] {
+    transform: none;
+    opacity: 0;
+  }
+
+  .drawer-panel2 {
+    transform: none;
+    opacity: 0;
+  }
+
+  .drawer-panel2[data-open] {
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   THE SEARCH PILL — the magnifier expands in place into a ~308×36 pill in
+   the header bar; a frosted typeahead panel drops directly below at the
+   pill's exact width. No backdrop, no dim, no scroll lock.
+
+   Colour rides two header-scoped vars so the same mechanism the header uses
+   for data-home flips the pill between the light and dark treatments.
+   ---------------------------------------------------------------------------- */
+.site-header {
+  --search-ink: var(--color-ink);
+  --search-glass: rgba(27, 21, 18, 0.06);
+}
+
+.site-header[data-home]:not([data-scrolled]),
+:root[data-dark-field] .site-header:not([data-scrolled]) {
+  --search-ink: var(--deep-ink);
+  --search-glass: rgba(255, 255, 255, 0.1);
+}
+
+.search-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: min(308px, calc(100vw - 120px));
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid color-mix(in srgb, var(--search-ink) 10%, transparent);
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--search-ink);
+}
+
+.search-pill input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 13px;
+  color: var(--search-ink);
+}
+
+.search-pill input::placeholder {
+  color: color-mix(in srgb, var(--search-ink) 55%, transparent);
+}
+
+.search-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--search-ink) 14%, transparent);
+  border-radius: 8px;
+  background: var(--search-glass);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+}
+
+.search-row {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  color: var(--search-ink);
+}
+
+.search-row + .search-row {
+  border-top: 1px solid color-mix(in srgb, var(--search-ink) 12%, transparent);
+}
+
+.search-row[data-active] {
+  background: color-mix(in srgb, var(--search-ink) 8%, transparent);
+}
+
+.search-row-title {
+  font-family: var(--font-display), georgia, serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.search-row-desc {
+  margin-top: 1px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--search-ink) 65%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+}
+
+/* ============================================================================
+   LAYER F — CONTENT HELPERS
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   Text-over-art scrim.
+
+   Any text set directly over generated art needs a scrim or it will collide
+   with the art's light regions. The gradient reads the deep ramp's ground so
+   a palette swap moves it too. Used by the products featured strip.
+   ---------------------------------------------------------------------------- */
+.art-scrim {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--deep-ground) 72%, transparent),
+    transparent 55%
+  );
+}
+
+/* Companion to .art-scrim for the full-viewport hero: a faint even espresso
+   veil over the WHOLE media layer, so the transparent header's cream icons
+   and wordmark still read when a slide is bright at the top. The scrim
+   handles the bottom half where the headline sits; this handles the rest. */
+.art-veil {
+  background: color-mix(in srgb, var(--deep-ground) 22%, transparent);
+}
+
+/* The heavier veil a LIVE-SITE hero slide carries inside itself, under the
+   global veil/scrim. Real pages are usually white; at 22% the cream header
+   chrome and headline lose the ground. Top-weighted: heaviest where the
+   embedded page's own white header lands behind OUR transparent header's
+   cream chrome, easing to 42% so the middle of the live site stays clearly
+   alive. The global scrim already guards the headline at the bottom. */
+.art-veil-embed {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--deep-ground) 70%, transparent),
+    color-mix(in srgb, var(--deep-ground) 42%, transparent) 30%
+  );
+}
+
+/* Text set over the scrim reads the deep ramp's ink — defined here so no
+   component ever reaches for a --deep-* token directly. */
+.over-art-title {
+  color: var(--deep-ink);
+}
+
+.over-art-caption {
+  color: var(--deep-ink-mid);
+}
+
+/* ----------------------------------------------------------------------------
+   Awaiting-content wells.
+
+   Several bands on this page are structurally present but hold no content,
+   because Elsheph has no verified figures, no publishable case study, no
+   confirmed partners and no articles yet. Inventing any of those would put a
+   false claim on the page, so the band renders its container and nothing else.
+
+   This is deliberate and must read as deliberate: a quiet ruled well, not a
+   collapsed section and not a broken one. It is removed the moment the founder
+   supplies real content for that band.
+   ---------------------------------------------------------------------------- */
+/* Reads the SEMANTIC tokens (not the raw ramp) so the well also holds on a
+   dark field — /careers renders its open-roles well on espresso. On light
+   pages the semantic tokens resolve to the same raw values as before. */
+.awaiting {
+  border: 1px dashed var(--color-line-strong);
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  padding: 32px;
+  text-align: center;
+}
+
+.awaiting-note {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ----------------------------------------------------------------------------
+   Homepage hero helpers. HomeHero.tsx is the only consumer.
+
+   .hero-slide is one layer of the full-bleed media carousel: cover-fitted to
+   the whole viewport, crossfading on opacity over 1200ms. data-active drives
+   which layer shows; with a single slide no transition ever fires because
+   the value never changes. Reduced motion collapses the fade to a hard cut.
+
+   .hero-rise is the load-in for the headline block: 16px rise + fade over
+   600ms on the overlay's own curve; the stagger (0/80/160ms) is set inline
+   per element. Reduced motion keeps the fade, drops the rise.
+   ---------------------------------------------------------------------------- */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1200ms ease;
+}
+
+.hero-slide[data-active] {
+  opacity: 1;
+}
+
+.hero-rise {
+  opacity: 0;
+  animation: hero-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    transition: none;
+  }
+
+  .hero-rise {
+    animation-name: hero-fade;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   E4 — company-family helpers.
+
+   .fade-taupe-top: the values band's entry edge — a darker taupe easing into
+   the stone field (the audit's travertine gradient). Mixed from the stone
+   token and the ink ramp so a palette swap moves it too; painted as a block
+   at the top of the .field-stone band, under the content.
+
+   .office-plate: the offices grid's card — 10% white plate over the oxblood
+   field, the pattern showing through. Text sets in the RIGHT half; the left
+   half is deliberately empty (the audit's plate detail).
+   ---------------------------------------------------------------------------- */
+.fade-taupe-top {
+  height: 120px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--field-stone) 82%, var(--ink)),
+    var(--field-stone)
+  );
+}
+
+.office-plate {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ----------------------------------------------------------------------------
+   E5 — content-family helpers.
+
+   .newsletter-plate: the /newsletters card — 40% white over the full-strength
+   arches field, so the printed pattern reads through the card body. Square
+   corners; the plate family never rounds.
+
+   .newsletter-card: the site-wide newsletter band's floating card — the
+   field's own ground at slight translucency with a 2px blur, so the
+   off-register arches ghost through its edges without fighting the text.
+   ---------------------------------------------------------------------------- */
+.newsletter-plate {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--color-line);
+}
+
+.newsletter-card {
+  background: color-mix(in srgb, var(--field-greige) 90%, white);
+  border: 1px solid var(--color-line);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+/* ----------------------------------------------------------------------------
+   PHASE 7 — real-photo duotone.
+
+   The university page carries the one real photograph on the site
+   (public/university-campus.png). Raw, its blues and greens fight the warm
+   palette, so the wrapper desaturates and warms the image and lays a 20%
+   --brand-deep multiply over it — the photo reads as part of the brand ramp
+   rather than a stock drop-in. The overlay reads the raw ramp token because
+   this treatment is art direction, not text colour, and must not re-point
+   inside .band-deep.
+   ---------------------------------------------------------------------------- */
+.photo-duotone {
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-duotone img {
+  filter: sepia(0.35) saturate(0.7) contrast(1.05);
+}
+
+.photo-duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--brand-deep);
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Next.js dev overlay portal positioning fix. */
+nextjs-portal,
+nextjs-portal[style*="position: absolute"],
+nextjs-portal[style*="position:fixed"] {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+nextjs-portal[data-cursor-element-id] {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+nextjs-portal > * {
+  pointer-events: auto;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height);
+  }
+
+  /* Body copy: 17px on the audit's 1.75 measure (28px at 16px). Positive
+     tracking survives only on .btn. font-optical-sizing inherits down to
+     every Fraunces heading, engaging its opsz axis. */
+  body {
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-body), arial, helvetica, sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Headings carry POSITIVE tracking in the reference, not the negative
+     tracking a modern grotesk usually wants. Per-level sizes, weights and
+     tracking live in the .t-h* classes below; this only sets the family and
+     clears the browser default so nothing inherits a wrong value. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display), arial, helvetica, sans-serif;
+    letter-spacing: normal;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
