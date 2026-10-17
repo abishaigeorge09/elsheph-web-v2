@@ -3,7 +3,12 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import ProductEmbed from "@/components/products/ProductEmbed";
-import { visibleProducts, type Product } from "@/content/products";
+import {
+  productImage,
+  statusLabel,
+  visibleProducts,
+  type Product,
+} from "@/content/products";
 
 /**
  * The focus pages' related-products strip: a compact row of living
@@ -23,7 +28,8 @@ import { visibleProducts, type Product } from "@/content/products";
  */
 
 function caption(product: Product): string {
-  const status = product.status === "live" ? "Live" : "Coming soon";
+  const status =
+    product.status === "unconfirmed" ? "" : statusLabel[product.status];
   return product.kind === "client" ? `${status} · Client work` : status;
 }
 
@@ -60,7 +66,7 @@ export default function RelatedProductsStrip({
                 url={product.url}
                 embeddable={product.embeddable}
                 name={product.name}
-                artSrc={`/art/products/${product.id}.svg`}
+                artSrc={productImage(product)}
                 allow={!isMobile}
               />
             </div>

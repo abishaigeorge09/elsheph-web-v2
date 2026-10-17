@@ -16,7 +16,8 @@
  *    rule's own wording cannot trip its own check.
  */
 
-export type Status = "live" | "coming-soon" | "unconfirmed";
+/** "offline" = a live product whose address is temporarily not serving it. */
+export type Status = "live" | "coming-soon" | "offline" | "unconfirmed";
 
 /** "own" = an Elsheph product. "client" = work delivered for a client. */
 export type Kind = "own" | "client";
@@ -126,11 +127,10 @@ export const products: readonly Product[] = [
     name: "Jobsudarshan",
     description:
       "The online home of Job Sudarshan, a Telugu Christian author and Bible teacher. His books and study resources, in one place.",
-    status: "live",
+    /* 2026-10-17: jobsudarshan.com redirects to a registrar parking page, so no
+       link until the domain points back. Restore url + "live" when it does. */
+    status: "offline",
     kind: "client",
-    url: "https://jobsudarshan.com",
-    /* probed 2026-08-13: no framing headers */
-    embeddable: true,
     icon: "Library",
   },
   {
@@ -189,6 +189,23 @@ export const productsPage = {
     "Every product on this page exists. Most of them you can open right now.",
   emptyFilter: "Nothing matches. Loosen a filter.",
 } as const;
+
+/**
+ * The card image: a real screenshot of the product, captured 2026-10-17 into
+ * public/products/. Products without a public web page (BelieversDiary,
+ * Jobsudarshan while offline) use their app icon; Follow Me uses its approved
+ * mockup screens.
+ */
+export function productImage(product: Product): string {
+  return `/products/${product.id}.jpg`;
+}
+
+/** The words a card shows for each visible status. */
+export const statusLabel: Record<Exclude<Status, "unconfirmed">, string> = {
+  live: "Live",
+  "coming-soon": "Coming soon",
+  offline: "Temporarily offline",
+};
 
 /** The only list a component may render. Unconfirmed items never reach the DOM. */
 export const visibleProducts: readonly Product[] = products.filter(

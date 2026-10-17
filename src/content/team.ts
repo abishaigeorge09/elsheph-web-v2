@@ -1,43 +1,22 @@
 /**
- * The team ledger. Role slots only — no invented people.
+ * The team ledger. Real people only, no invented names.
  *
  * Rules that are not negotiable:
- * 1. Zero invented names. A slot is a role, not a person. A card renders a
- *    role and the shared slot line until the founder supplies a real person.
- * 2. Founder drops real people in as `{ name, role, section, photo }` — add a
- *    `TeamMember` entry and the page replaces the matching slot. Photos go to
- *    `public/team/`, cropped 1:1 (the grid renders square portraits; an
+ * 1. Zero invented people. Every entry is a real person who has agreed to be
+ *    named. There are no empty role slots: a role nobody holds yet is not
+ *    shown.
+ * 2. A new team member arrives as `{ name, role, section, photo }`. Photos go
+ *    to `public/team/`, cropped 1:1 (the grid renders square portraits; an
  *    off-ratio image gets center-cropped and may lose a forehead).
- * 3. Shoot everyone against the SAME backdrop. The a16z audit found their
- *    single-backdrop consistency is the most expensive-looking detail on
- *    their team page — one wall, one light, and a small team photographs
- *    like an institution. Mixed backdrops photograph like a group chat.
+ * 3. Shoot everyone against the SAME backdrop. One wall, one light, and a
+ *    small team photographs like an institution.
+ * 4. Advisors are listed by name, title and organisation exactly as on the
+ *    Board of Advisors slide (March 2026). No advisor photos exist, so the
+ *    advisor cards are text only. Never stand a silhouette in for a face.
  */
 
-export type TeamSection =
-  | "Leadership"
-  | "Engineering"
-  | "Design"
-  | "University Programs";
+export type TeamSection = "Leadership";
 
-export const teamSections: readonly TeamSection[] = [
-  "Leadership",
-  "Engineering",
-  "Design",
-  "University Programs",
-];
-
-export type TeamSlot = {
-  role: string;
-  /** The line the card shows where a name will go. Stance, not apology. */
-  slotLabel: string;
-  section: TeamSection;
-};
-
-/**
- * A real person, once the founder supplies one. None exist in the ledger yet
- * — see rule 2 above for how one arrives.
- */
 export type TeamMember = {
   name: string;
   role: string;
@@ -46,34 +25,67 @@ export type TeamMember = {
   photo: string;
 };
 
-/** One shared slot line, so every waiting card says the same thing. */
-export const slotLine = "Joining the page soon.";
+export type Advisor = {
+  name: string;
+  title: string;
+  organisation: string;
+};
 
-export const teamSlots: readonly TeamSlot[] = [
-  { role: "Founder", slotLabel: slotLine, section: "Leadership" },
-  { role: "Engineering Lead", slotLabel: slotLine, section: "Engineering" },
-  { role: "Product Engineer", slotLabel: slotLine, section: "Engineering" },
-  { role: "Design Lead", slotLabel: slotLine, section: "Design" },
+export const teamMembers: readonly TeamMember[] = [
   {
-    role: "University Programs Lead",
-    slotLabel: slotLine,
-    section: "University Programs",
-  },
-  {
-    role: "Program Mentor",
-    slotLabel: slotLine,
-    section: "University Programs",
+    name: "Abishai Gosula",
+    role: "Founder and CEO",
+    section: "Leadership",
+    photo: "/team/abishai-gosula.jpg",
   },
 ];
 
-/** Real people go here. Empty until the founder sends them. */
-export const teamMembers: readonly TeamMember[] = [];
+export const advisors: readonly Advisor[] = [
+  {
+    name: "Dr. J A Chowdary",
+    title: "Founder and Chairman",
+    organisation: "International Startup Foundation",
+  },
+  {
+    name: "Seshadri Vangala",
+    title: "Chairman and Group CEO",
+    organisation: "IFIN Global Group, SGlobal BV",
+  },
+  {
+    name: "Aravinda De Silva",
+    title: "Former Captain, ICC Hall of Fame",
+    organisation: "Sri Lanka Cricket",
+  },
+  {
+    name: "Prasad Gundumogula",
+    title: "Founder",
+    organisation: "Tabhi and Mondee",
+  },
+  {
+    name: "Arun Boda",
+    title: "Chief Operating Officer",
+    organisation: "ANG Infotech",
+  },
+  {
+    name: "Sathyendra Kumar",
+    title: "Co-founder and Director",
+    organisation: "International Startup Foundation",
+  },
+  {
+    name: "Ram Alluri",
+    title: "CEO and General Manager",
+    organisation: "iClickInteractive",
+  },
+  {
+    name: "Amy Peck",
+    title: "Founder and CEO",
+    organisation: "EndeavorXR",
+  },
+];
 
 export const teamPage = {
-  h1: "The people who ship.",
+  h1: "The people behind Elsheph.",
   intro:
-    "Elsheph is a small firm, and that is the point: the people you meet are the people who build. There is no account layer between you and the person writing your software. Real faces land on this page as each of us steps onto it.",
-  /** The one real facet: the roles list, derived from the slots. */
-  filterLabel: "Role",
-  roles: teamSlots.map((slot) => slot.role),
+    "Elsheph is a small firm, and that is the point: the person you meet is the person who builds. There is no account layer between you and the person writing your software.",
+  advisorsHeading: "Board of Advisors",
 } as const;

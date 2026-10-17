@@ -38,9 +38,9 @@ export const focusAreas: readonly FocusArea[] = [
     title: "Product Development",
     statement: "We take a product from idea to running software.",
     body: [
-      "Product development here means the whole arc: scope, design, build, deploy, and stay for what breaks. We start by restating your problem until we can pose it better than you did, then write the plan down and agree on it — what we will make, in what order, and what we will not.",
+      "Product development here means the whole arc: scope, design, build, deploy, and stay for what breaks. We start by restating your problem until we can pose it better than you did, then write the plan down and agree on it: what we will make, in what order, and what we will not.",
       "The build runs in short cycles with working software at the end of each one. You see progress, not status reports. Shipping is the midpoint: we watch what the software does in the world and keep making it better.",
-      "The products page is the proof. Everything on it exists, and most of it you can open right now — our own products and the ones we built for clients.",
+      "The products page is the proof. Everything on it exists, and most of it you can open right now: our own products and the ones we built for clients.",
     ],
     accent: "--brand",
     band: "Shipping is the midpoint, not the finish.",
@@ -64,7 +64,7 @@ export const focusAreas: readonly FocusArea[] = [
     statement: "We send people we would hire ourselves.",
     body: [
       "Staffing here is placement, not resume forwarding. Engineers who have shipped join your team for as long as the work lasts, and the bar for who we send is the bar for who we keep.",
-      "Because we build products of our own, we know what a shipping engineer looks like from the inside — how they scope, how they handle what breaks, how they finish. That is the filter every placement passes through.",
+      "Because we build products of our own, we know what a shipping engineer looks like from the inside: how they scope, how they handle what breaks, how they finish. That is the filter every placement passes through.",
     ],
     accent: "--brass",
     band: "The bar for who we send is the bar for who we keep.",
@@ -75,7 +75,7 @@ export const focusAreas: readonly FocusArea[] = [
     title: "Corporate L&D",
     statement: "Teams leave having shipped something.",
     body: [
-      "Training built around real builds, not slide decks. A program here covers the whole arc — requirements, architecture, build, test, deploy — and every participant does all of it, not one slice.",
+      "Training built around real builds, not slide decks. A program here covers the whole arc (requirements, architecture, build, test, deploy), and every participant does all of it, not one slice.",
       "The certificate rule is the same one our university programs hold: delivery earns it, attendance alone earns nothing. Shipping is the only proof of learning we accept, which is why every program ends with something running.",
     ],
     accent: "--field-olive",

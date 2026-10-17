@@ -4,7 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import ProductEmbed from "@/components/products/ProductEmbed";
 import {
+  productImage,
   productsPage,
+  statusLabel,
   visibleProducts,
   type Kind,
   type Product,
@@ -20,13 +22,13 @@ const liveProducts = visibleProducts.filter((p) => p.status === "live");
  * The Products page — the light translation of the a16z reference's Portfolio
  * mode (`.research/a16z-shots/portfolio.jpg`): a serif headline on the warm
  * ground, a horizontal scroll-snap strip of large 4:5 featured tiles carrying
- * the per-product generated art, then a cream band with underline-selects and
+ * a real screenshot of each product, then a cream band with underline-selects and
  * a white-card grid of everything.
  *
  * Deliberate divergences from the reference, both structural:
  * 1. The reference's portfolio mode is navy-dark; this one stays on the light
  *    system. The colour moves INTO the cards — each tile is full-bleed
- *    generated art — rather than onto the page ground.
+ *    product screenshot, rather than onto the page ground.
  * 2. Filters are Status and Kind only. The reference filters by Sort, Focus
  *    Area, Stage and Search; Elsheph's ledger holds no such facets, and
  *    controls over data that does not exist would be fake UI.
@@ -57,13 +59,13 @@ function FeaturedCard({
   const inner = (
     <>
       {/* Living thumbnail: the real live site for embeddable products, the
-          generated art for everything else — ProductEmbed decides, and its
-          art base doubles as skeleton and fallback. */}
+          screenshot for everything else. ProductEmbed decides, and its
+          screenshot base doubles as skeleton and fallback. */}
       <ProductEmbed
         url={product.url}
         embeddable={product.embeddable}
         name={product.name}
-        artSrc={`/art/products/${product.id}.svg`}
+        artSrc={productImage(product)}
         allow={embedAllowed}
       />
       {/* Text over art or a live page always needs the scrim. */}
@@ -88,7 +90,7 @@ function FeaturedCard({
       target="_blank"
       rel="noopener noreferrer"
       className={className}
-      aria-label={`${product.name} — opens in a new tab`}
+      aria-label={`${product.name}, opens in a new tab`}
     >
       {inner}
     </a>
@@ -149,7 +151,7 @@ function GridCard({
           url={product.url}
           embeddable={product.embeddable}
           name={product.name}
-          artSrc={`/art/products/${product.id}.svg`}
+          artSrc={productImage(product)}
           allow={embedAllowed}
         />
       </div>
@@ -162,11 +164,11 @@ function GridCard({
           <span className="bg-accent-quiet px-2.5 py-1 text-[11px] font-semibold tracking-[0.12em] text-accent uppercase">
             Live
           </span>
-        ) : (
+        ) : product.status !== "unconfirmed" ? (
           <span className="bg-raised-2 px-2.5 py-1 text-[11px] font-semibold tracking-[0.12em] text-ink-mid uppercase">
-            Coming soon
+            {statusLabel[product.status]}
           </span>
-        )}
+        ) : null}
         {isClient ? (
           <span className="border border-border-strong px-2.5 py-1 text-[11px] font-semibold tracking-[0.12em] text-ink-mid uppercase">
             Client project
@@ -267,6 +269,9 @@ export default function ProductsView() {
                   { value: "all", label: "All" },
                   { value: "live", label: "Live" },
                   { value: "coming-soon", label: "Coming soon" },
+                  ...(visibleProducts.some((p) => p.status === "offline")
+                    ? [{ value: "offline", label: statusLabel.offline }]
+                    : []),
                 ]}
               />
               <UnderlineSelect

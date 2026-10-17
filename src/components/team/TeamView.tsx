@@ -1,147 +1,64 @@
 "use client";
 
-import { useMemo, useState, type CSSProperties } from "react";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import type { CSSProperties } from "react";
 import {
+  advisors,
   teamMembers,
   teamPage,
-  teamSections,
-  teamSlots,
+  type Advisor,
   type TeamMember,
-  type TeamSection,
-  type TeamSlot,
 } from "@/content/team";
 
 /**
- * The Team page — the espresso field with the crook pattern at the whisper
+ * The Team page: the espresso field with the crook pattern at the whisper
  * setting (0.05), per the audited spec.
  *
- * Everything rendered here comes from the team ledger. The ledger currently
- * holds role SLOTS only — zero invented names — so every card shows the
- * shared duotone placeholder portrait, the shared slot line where a name
- * will go, and the role. The real-person path is built and dormant: when the
- * founder adds a `TeamMember` to the ledger, that person renders FIRST in
- * their section with a real name and photo, and the slot whose role they
- * fill drops out.
- *
- * One filter only — Role, the single real facet the ledger holds. A second
- * facet would be a control over data that does not exist.
+ * Everything rendered here comes from the team ledger, which holds real
+ * people only. Team members get a square portrait card; advisors get a
+ * text-only card, because no advisor photos exist and a silhouette would
+ * read as a placeholder.
  *
  * Card anatomy (from the audit): exact 1:1 portrait, name line, role line
- * (small, quieter), all centered. The one interaction: hover flips the name
- * line to the field's accent. Nothing else moves.
+ * (small, quieter). The one interaction: hover flips the name line to the
+ * field's accent. Nothing else moves.
  */
 
-/** A card is either a real person or a waiting slot. */
-type Card =
-  | { kind: "member"; member: TeamMember }
-  | { kind: "slot"; slot: TeamSlot };
-
-function cardRole(card: Card): string {
-  return card.kind === "member" ? card.member.role : card.slot.role;
-}
-
-function TeamCard({ card }: { card: Card }) {
-  const isMember = card.kind === "member";
+function MemberCard({ member }: { member: TeamMember }) {
   return (
-    <div className="group text-center">
-      {/* EXACT 1:1 portrait. Real people bring a photo cropped square; every
-          waiting slot shares the one placeholder file so the grid reads calm. */}
+    <div className="group">
       <div className="relative aspect-square overflow-hidden">
         <Image
-          src={isMember ? card.member.photo : "/team/placeholder.svg"}
-          alt={isMember ? card.member.name : ""}
+          src={member.photo}
+          alt={member.name}
           fill
           unoptimized
           className="object-cover"
         />
       </div>
-
-      {/* Name line. A slot has no name — it shows the ledger's slot line as
-          a stance, set in the serif italic so it cannot be mistaken for a
-          person. Hover flips this line to the accent; nothing else moves. */}
-      {isMember ? (
-        <p className="mt-3 text-[15px] font-medium text-ink transition-colors duration-150 group-hover:text-accent">
-          {card.member.name}
-        </p>
-      ) : (
-        <p className="mt-3 font-display text-[15px] italic text-ink transition-colors duration-150 group-hover:text-accent">
-          {card.slot.slotLabel}
-        </p>
-      )}
-
-      {/* Role line: small, quieter. */}
-      <p className="mt-0.5 text-xs text-ink-mid">{cardRole(card)}</p>
+      <p className="mt-3 text-[15px] font-medium text-ink transition-colors duration-150 group-hover:text-accent">
+        {member.name}
+      </p>
+      <p className="mt-0.5 text-xs text-ink-mid">{member.role}</p>
     </div>
   );
 }
 
-/** The a16z underline-select, as on the products page. */
-function UnderlineSelect({
-  label,
-  value,
-  onChange,
-  options,
-}: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  options: readonly { value: string; label: string }[];
-}) {
+function AdvisorCard({ advisor }: { advisor: Advisor }) {
   return (
-    <label className="flex w-full items-baseline gap-3 text-xs text-muted-foreground sm:w-auto">
-      <span className="font-medium tracking-[0.14em] uppercase">{label}</span>
-      <span className="relative flex-1 sm:flex-none">
-        <select
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full appearance-none border-0 border-b border-border-strong bg-transparent py-1.5 pr-7 pl-0 text-sm text-ink outline-none focus-visible:border-accent sm:w-auto"
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <ChevronDown
-          aria-hidden
-          className="pointer-events-none absolute top-1/2 right-1 size-3.5 -translate-y-1/2 text-muted-foreground"
-        />
-      </span>
-    </label>
+    <div className="group border-t border-border pt-4">
+      <p className="font-display text-[19px] leading-snug text-ink transition-colors duration-150 group-hover:text-accent">
+        {advisor.name}
+      </p>
+      <p className="mt-1.5 text-xs text-ink-mid">{advisor.title}</p>
+      <p className="mt-0.5 text-xs text-muted-foreground">
+        {advisor.organisation}
+      </p>
+    </div>
   );
-}
-
-/** Members first, then the slots whose role no member already fills. */
-function sectionCards(section: TeamSection): Card[] {
-  const members = teamMembers.filter((m) => m.section === section);
-  const filledRoles = new Set(members.map((m) => m.role));
-  const slots = teamSlots.filter(
-    (s) => s.section === section && !filledRoles.has(s.role),
-  );
-  return [
-    ...members.map((member): Card => ({ kind: "member", member })),
-    ...slots.map((slot): Card => ({ kind: "slot", slot })),
-  ];
 }
 
 export default function TeamView() {
-  const [role, setRole] = useState("all");
-
-  const sections = useMemo(
-    () =>
-      teamSections
-        .map((section) => ({
-          section,
-          cards: sectionCards(section).filter(
-            (card) => role === "all" || cardRole(card) === role,
-          ),
-        }))
-        .filter(({ cards }) => cards.length > 0),
-    [role],
-  );
-
   return (
     <div
       className="field-espresso field-pattern min-h-dvh"
@@ -154,46 +71,29 @@ export default function TeamView() {
     >
       <div className="relative">
         <div className="shell pt-[calc(var(--header-height)+64px)] pb-24">
-          {/* No eyebrow — the serif headline stands alone. */}
+          {/* No eyebrow: the serif headline stands alone. */}
           <h1 className="az-h1 text-ink">{teamPage.h1}</h1>
           <p className="prose mt-6 max-w-[980px] text-ink-mid">
             {teamPage.intro}
           </p>
 
-          {/* The one real facet. Full-width on 390px. */}
-          <div className="mt-10 flex border-t border-b border-border py-4">
-            <div className="flex w-full sm:w-auto">
-              <UnderlineSelect
-                label={teamPage.filterLabel}
-                value={role}
-                onChange={setRole}
-                options={[
-                  { value: "all", label: "All" },
-                  ...teamPage.roles.map((r) => ({ value: r, label: r })),
-                ]}
-              />
+          <section className="mt-14 border-t border-border pt-10">
+            <h2 className="az-h3 text-ink">Leadership</h2>
+            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
+              {teamMembers.map((member) => (
+                <MemberCard key={member.name} member={member} />
+              ))}
             </div>
-          </div>
+          </section>
 
-          {sections.map(({ section, cards }) => (
-            <section key={section} className="mt-14">
-              <h2 className="az-h3 text-ink">{section}</h2>
-              {/* 5-up at desktop (~253px cards on the 1328px shell), 2-up at
-                  390px; 24px / 16px gaps. */}
-              <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
-                {cards.map((card) => (
-                  <TeamCard
-                    key={
-                      card.kind === "member"
-                        ? `member-${card.member.name}`
-                        : `slot-${card.slot.role}`
-                    }
-                    card={card}
-                  />
-                ))}
-              </div>
-            </section>
-          ))}
+          <section className="mt-16">
+            <h2 className="az-h3 text-ink">{teamPage.advisorsHeading}</h2>
+            <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+              {advisors.map((advisor) => (
+                <AdvisorCard key={advisor.name} advisor={advisor} />
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </div>

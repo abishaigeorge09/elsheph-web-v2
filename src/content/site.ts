@@ -30,7 +30,7 @@ export const site = {
    */
   footerTagline: "Everything here is real. Click it.",
   description:
-    "Elsheph Systems builds and ships software — its own products, client products, and the engineers who make both.",
+    "Elsheph Systems builds and ships software: its own products, client products, and the engineers who make both.",
   logo: {
     /**
      * The site is committed dark, so the cream knockout is the default

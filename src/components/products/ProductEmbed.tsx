@@ -12,7 +12,7 @@ import Image from "next/image";
  * glimpse of the live site, not an interactive frame (`pointer-events:
  * none`, so clicks pass through to the card's own anchor).
  *
- * Layering: the product's generated art renders as the base layer always.
+ * Layering: the product's screenshot renders as the base layer always.
  * It is the loading skeleton (the live page cross-fades in over it once
  * `onLoad` fires) AND the automatic fallback — if the iframe has not loaded
  * within 8 seconds, or the product is not embeddable, or it has no URL, the
@@ -43,7 +43,7 @@ export default function ProductEmbed({
   url?: string;
   embeddable?: boolean;
   name: string;
-  /** The generated art, e.g. `/art/products/{id}.svg`. */
+  /** The product screenshot, e.g. `/products/{id}.jpg`. */
   artSrc: string;
   /** Parent-computed performance gate (mobile rules). */
   allow?: boolean;
@@ -102,7 +102,7 @@ export default function ProductEmbed({
 
   return (
     <div ref={rootRef} className="absolute inset-0 overflow-hidden">
-      {/* Art base: skeleton while the live page loads, fallback forever if
+      {/* Screenshot base: skeleton while the live page loads, fallback forever if
           it never does. */}
       <Image src={artSrc} alt="" fill unoptimized className="object-cover" />
 

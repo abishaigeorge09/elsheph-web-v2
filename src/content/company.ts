@@ -30,8 +30,8 @@ export type OfficeLocation = {
 export const about = {
   h1: "A small firm that ships.",
   intro: [
-    "Elsheph Systems exists for one reason: to be the firm people call when they want software to actually exist. Not a deck, not a roadmap, not a prototype that dies in a demo — software that is live, that users open, that keeps running after everyone has gone home.",
-    "The work takes three forms. We build products of our own and keep them running. We build products for clients and stay for what breaks. And we place and train engineers — because the people who make software real are the product too.",
+    "Elsheph Systems exists for one reason: to be the firm people call when they want software to actually exist. Not a deck, not a roadmap, not a prototype that dies in a demo. Software that is live, that users open, that keeps running after everyone has gone home.",
+    "The work takes three forms. We build products of our own and keep them running. We build products for clients and stay for what breaks. And we place and train engineers, because the people who make software real are the product too.",
     "Everything on this site follows from that. The products page links to things you can open right now. The team page shows the people who build, as they join it. Where we have nothing real to show yet, the page says so instead of pretending.",
   ],
 } as const;
@@ -41,7 +41,7 @@ export const careers = {
   body: [
     "Shipped means a real thing, used by real people, that you carried past the point where it got hard. A repository of started projects is not shipping. One finished one is.",
     "Working here is working close to the metal of the firm. We say what we are doing, what it costs, and what went wrong. We set dates we can hit, then hit them. We build things meant to still be running in five years, and the build runs in short cycles with working software at the end of each one.",
-    "You will touch the whole arc — scope, design, build, deploy, and what breaks after — on our own products and on client work. There is no layer of the company where the software is somebody else's problem.",
+    "You will touch the whole arc (scope, design, build, deploy, and what breaks after) on our own products and on client work. There is no layer of the company where the software is somebody else's problem.",
   ],
   /**
    * TODO(founder): add real roles as `{ title, location, summary }`.

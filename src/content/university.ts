@@ -45,7 +45,7 @@ export type UniversityTestimonial = {
 
 export const universityPage = {
   h1: "Students who ship before they graduate.",
-  sub: "Elsheph runs internships and training inside live products. Students write code that users run — that is the whole idea.",
+  sub: "Elsheph runs internships and training inside live products. Students write code that users run. That is the whole idea.",
   cta: "Start a partnership",
   formButton: "Send inquiry",
 } as const;
@@ -78,7 +78,7 @@ export const universityOffers: readonly UniversityOffer[] = [
   {
     title: "Internships inside live products",
     description:
-      "Students join a live Elsheph product team and ship code that users run. Not exercises — releases.",
+      "Students join a live Elsheph product team and ship code that users run. Not exercises. Releases.",
     icon: "Rocket",
   },
   {
@@ -141,7 +141,7 @@ export const universityTestimonials: readonly UniversityTestimonial[] = [
   },
   {
     quote:
-      "The program structure is different. It's not just coding exercises — it's ownership. Students own a feature, from design to deployment.",
+      "The program structure is different. It's not just coding exercises. It's ownership. Students own a feature, from design to deployment.",
     initial: "P",
     attribution: "Department Head",
     detail: "Faculty Partner",
@@ -184,13 +184,13 @@ export const universityEmail = "contact@elsheph.com";
  */
 export const internshipsPage = {
   h1: "Internships that ship.",
-  sub: "Interns at Elsheph join a live product team and write code that users run. Not exercises, not shadowing — releases.",
+  sub: "Interns at Elsheph join a live product team and write code that users run. Not exercises, not shadowing. Releases.",
   /** What an intern actually does, restated from the offers/process facts. */
   points: [
     {
       title: "A real team, from day one",
       description:
-        "Interns sit inside a live product team with mentorship, sprints and regular reviews — the same rhythm as everyone else.",
+        "Interns sit inside a live product team with mentorship, sprints and regular reviews, the same rhythm as everyone else.",
     },
     {
       title: "The whole arc, not one slice",
