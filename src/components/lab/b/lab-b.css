@@ -1,0 +1,405 @@
+/* ============================================================================
+   Lab B: "Arched windows"
+
+   One non-scrolling screen. A row of the brand's arches stands on a floor
+   hairline; each arch is a window onto a real product screenshot that pans
+   slowly, as if looking into the running product. The active arch opens
+   taller and wider. Everything reads semantic tokens from globals.css.
+
+   Easing is the site's damped curve, cubic-bezier(0.22, 1, 0.36, 1): eases
+   in and stops, never overshoots.
+   ============================================================================ */
+
+.lb-root {
+  --lb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --lb-ring: var(--color-line-strong);
+  position: relative;
+  display: flex;
+  height: 100dvh;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-page);
+  color: var(--color-ink);
+}
+
+/* ---------------------------------------------------------------------------
+   Entrance keyframes. Each consumer sets its own delay inline.
+   --------------------------------------------------------------------------- */
+@keyframes lb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lb-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* An arch is drawn up from the floor: clip reveals bottom to top. The
+   negative insets leave room for the rings and apex dot outside the box. */
+@keyframes lb-arch-rise {
+  from {
+    clip-path: inset(100% -24px 0 -24px);
+  }
+  to {
+    clip-path: inset(-40px -24px 0 -24px);
+  }
+}
+
+/* The slow vertical pan inside a window. The image is 136% of the window's
+   height, so -26.5% of its own height walks the full overhang. */
+@keyframes lb-pan {
+  from {
+    transform: translate(var(--lb-x), 0);
+  }
+  to {
+    transform: translate(var(--lb-x), -26.5%);
+  }
+}
+
+@keyframes lb-cap-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lb-rise {
+  animation: lb-rise 700ms var(--lb-ease) both;
+}
+
+.lb-drop {
+  animation: lb-drop 600ms var(--lb-ease) both;
+}
+
+/* ---------------------------------------------------------------------------
+   The nav pill: arch-topped (full radius on top, tight on the bottom).
+   --------------------------------------------------------------------------- */
+.lb-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 54px;
+  padding: 0 8px 0 10px;
+  border: 1px solid var(--color-line);
+  border-radius: 27px 27px 12px 12px;
+  background: var(--color-raised);
+  box-shadow: 0 18px 40px -26px color-mix(in oklab, var(--brand-deep) 60%, transparent);
+}
+
+.lb-pill-link {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-ink-mid);
+  transition: color 200ms var(--lb-ease), background-color 200ms var(--lb-ease);
+}
+
+.lb-pill-link:hover {
+  color: var(--color-ink);
+  background: var(--color-raised-2);
+}
+
+/* No display here: the consumer sets it, so Tailwind's responsive `hidden`
+   can still take the pill's CTA off below md. */
+.lb-cta {
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 19px;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 200ms var(--lb-ease);
+}
+
+.lb-cta:hover {
+  background: var(--color-accent-hover);
+}
+
+/* On the espresso sheet the CTA rides brass; cream on brass is too tight, so
+   the label takes the sheet ground instead. */
+.band-deep .lb-cta {
+  color: var(--color-page);
+}
+
+.lb-focus:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------------
+   The row of arches.
+   --------------------------------------------------------------------------- */
+.lb-row {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: 32px;
+  flex: 1 1 auto;
+  min-height: 0;
+  align-items: flex-end;
+  gap: 16px;
+  padding-top: 44px;
+}
+
+/* The floor hairline the arches stand on, full width of the viewport. */
+.lb-floor {
+  position: relative;
+  height: 1px;
+  background: var(--color-line-strong);
+}
+
+.lb-arch {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 70%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: lb-arch-rise 800ms var(--lb-ease) both;
+  transition:
+    flex-grow 650ms var(--lb-ease),
+    flex-basis 650ms var(--lb-ease),
+    height 650ms var(--lb-ease);
+}
+
+.lb-arch:focus-visible {
+  outline: none;
+}
+
+.lb-arch:focus-visible .lb-ring-2 {
+  border-color: var(--focus-ring);
+  border-width: 2px;
+}
+
+/* The glass: the window itself, clipped to the arch. */
+.lb-glass {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 999px 999px 0 0;
+  background: var(--color-raised-2);
+}
+
+/* The crop sits left of centre (--lb-x): product pages carry their headline
+   on the left, so a window biased that way shows words, not margins. */
+.lb-glass img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 136%;
+  width: auto;
+  max-width: none;
+  transform: translate(var(--lb-x), 0);
+  animation: lb-pan 18s linear infinite alternate;
+  filter: saturate(0.92);
+  transition: filter 400ms var(--lb-ease);
+}
+
+.lb-arch[data-active] .lb-glass img {
+  filter: saturate(1);
+}
+
+/* A faint inner shade at the foot so the window reads as recessed. */
+.lb-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--brand-deep) 28%, transparent),
+    transparent 36%
+  );
+  pointer-events: none;
+}
+
+/* The nested rings, as in pattern-arches.svg: concentric arcs, legs to the floor. */
+.lb-ring {
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid var(--lb-ring);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  transition: border-color 400ms var(--lb-ease);
+}
+
+.lb-ring-1 {
+  inset: -7px -7px 0 -7px;
+}
+
+.lb-ring-2 {
+  inset: -14px -14px 0 -14px;
+}
+
+/* The apex dot above the active arch (the circle in pattern-arches.svg). */
+.lb-arch::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -4px;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 400ms var(--lb-ease);
+}
+
+.lb-arch:hover .lb-ring,
+.lb-arch[data-active] .lb-ring {
+  --lb-ring: var(--color-accent);
+}
+
+/* Armed: once the entrance has finished, the active arch opens. */
+.lb-row[data-armed] .lb-arch[data-active] {
+  flex-grow: 2.4;
+  height: 100%;
+}
+
+.lb-row[data-armed] .lb-arch[data-active]::before {
+  opacity: 1;
+}
+
+/* The name plate under the active arch's foot, inside the glass. */
+.lb-plate {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 0 12px 14px;
+  text-align: center;
+  color: var(--deep-ink);
+  opacity: 0;
+  transition: opacity 400ms var(--lb-ease);
+}
+
+.lb-row[data-armed] .lb-arch[data-active] .lb-plate {
+  opacity: 1;
+}
+
+/* The caption block (name, description, link) crossfades on change. */
+.lb-cap {
+  animation: lb-cap-in 500ms var(--lb-ease) both;
+}
+
+.lb-caption {
+  opacity: 0;
+  transition: opacity 500ms var(--lb-ease);
+}
+
+.lb-caption[data-armed] {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   Below md: a horizontal snap row. Fewer arches on screen, same windows.
+   --------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .lb-row {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    gap: 30px;
+    padding-inline: 20px;
+    padding-top: 40px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .lb-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lb-arch {
+    flex: 0 0 172px;
+    height: 76%;
+    scroll-snap-align: start;
+  }
+
+  .lb-row[data-armed] .lb-arch[data-active] {
+    flex: 0 0 216px;
+    height: 100%;
+  }
+
+  /* A trailing spacer so the last arch can snap to the start edge. */
+  .lb-row::after {
+    content: "";
+    flex: 0 0 1px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion: the complete, still, final composition. No entrance, no
+   pan, no cycling; the first arch is open from the first paint.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .lb-rise,
+  .lb-drop,
+  .lb-arch,
+  .lb-cap {
+    animation: none;
+  }
+
+  .lb-glass img {
+    animation: none;
+    transform: translate(var(--lb-x), -13%);
+  }
+
+  .lb-arch,
+  .lb-ring,
+  .lb-arch::before,
+  .lb-plate,
+  .lb-caption,
+  .lb-pill-link,
+  .lb-cta,
+  .lb-glass img {
+    transition: none;
+  }
+
+  .lb-arch[data-active] {
+    flex-grow: 2.4;
+    height: 100%;
+  }
+
+  .lb-arch[data-active]::before,
+  .lb-arch[data-active] .lb-plate,
+  .lb-caption {
+    opacity: 1;
+  }
+
+  @media (max-width: 767px) {
+    .lb-arch[data-active] {
+      flex: 0 0 216px;
+    }
+  }
+}
