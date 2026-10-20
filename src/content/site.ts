@@ -156,7 +156,7 @@ export const footerGroups: FooterGroup[] = [
         href: "https://scripture.elsheph.com",
         external: true,
       },
-      { label: "GMV.LIVE", href: "https://gmv.live", external: true },
+      { label: "GMV.LIVE", href: "https://gmv-live.vercel.app", external: true },
       {
         label: "Gosula Store",
         href: "https://gosulastore.vercel.app",

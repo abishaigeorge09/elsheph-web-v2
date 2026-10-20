@@ -78,10 +78,11 @@ export const products: readonly Product[] = [
   {
     id: "gmv-live",
     name: "GMV.LIVE",
-    description: "An Elsheph product, live at gmv.live.",
+    description: "A live host marketplace from Elsheph.",
     status: "live",
     kind: "own",
-    url: "https://gmv.live",
+    /* 2026-10-20: gmv.live renders blank; pointing at the working Vercel address for now. */
+    url: "https://gmv-live.vercel.app",
     /* probed 2026-08-13: no framing headers */
     embeddable: true,
     icon: "Activity",
