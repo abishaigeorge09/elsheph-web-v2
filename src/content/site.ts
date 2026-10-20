@@ -28,7 +28,7 @@ export const site = {
    * Footer tagline slot (Fraunces italic, the a16z "Software Is Eating the
    * World" position). The shell reads `site.footerTagline ?? site.tagline`.
    */
-  footerTagline: "Everything here is real. Click it.",
+  footerTagline: "From idea to running software.",
   description:
     "Elsheph Systems builds and ships software: its own products, client products, and the engineers who make both.",
   logo: {
