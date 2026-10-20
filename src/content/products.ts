@@ -64,18 +64,6 @@ export const products: readonly Product[] = [
     icon: "BookOpen",
   },
   {
-    id: "gosula-store",
-    name: "Gosula Store",
-    description:
-      "A home resale shop. Photograph an item and the listing is drafted, priced and published from that one picture.",
-    status: "live",
-    kind: "own",
-    url: "https://gosulastore.vercel.app",
-    /* probed 2026-08-13: no framing headers */
-    embeddable: true,
-    icon: "ShoppingBag",
-  },
-  {
     id: "gmv-live",
     name: "GMV.LIVE",
     description: "A live host marketplace from Elsheph.",
@@ -88,25 +76,13 @@ export const products: readonly Product[] = [
     icon: "Activity",
   },
   {
-    id: "founder-clock",
-    name: "Founder Clock",
-    description:
-      "A shared timezone portal for a distributed founding team. One glance shows who is awake.",
-    status: "live",
-    kind: "own",
-    url: "https://founder-clock.vercel.app",
-    /* probed 2026-08-13: no framing headers */
-    embeddable: true,
-    icon: "Clock",
-  },
-  {
     id: "srm-student-store",
     name: "SRM Student Store",
     description:
       "A campus preorder storefront. Students register demand before a product is stocked, so nothing is bought blind.",
     status: "live",
     kind: "own",
-    url: "https://studentstore.vercel.app",
+    url: "https://studentstore.in",
     /* probed 2026-08-13: no framing headers */
     embeddable: true,
     icon: "GraduationCap",
