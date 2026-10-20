@@ -105,6 +105,9 @@ export default function SiteHeader() {
      cream knockout wordmark. */
   const overMedia = (isHome || darkField) && !scrolled;
 
+  /* Hero direction prototypes under /lab own their whole screen, nav included. */
+  if (pathname.startsWith("/lab")) return null;
+
   return (
     <>
       <header

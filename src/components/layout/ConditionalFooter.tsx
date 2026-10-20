@@ -16,6 +16,6 @@ import SiteFooter from "@/components/layout/SiteFooter";
  */
 export default function ConditionalFooter() {
   const pathname = usePathname();
-  if (pathname === "/") return null;
+  if (pathname === "/" || pathname.startsWith("/lab")) return null;
   return <SiteFooter />;
 }
