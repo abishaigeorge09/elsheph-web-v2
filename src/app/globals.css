@@ -993,7 +993,7 @@
 .search-panel {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
+  left: 0;
   width: 100%;
   border: 1px solid color-mix(in srgb, var(--search-ink) 14%, transparent);
   border-radius: 8px;

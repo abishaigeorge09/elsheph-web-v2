@@ -157,7 +157,7 @@ export default function SearchPill({ open, onOpenChange }: SearchPillProps) {
         onClick={() => onOpenChange(true)}
         aria-label="Search (Command K)"
         aria-expanded={false}
-        className="header-search ml-auto flex size-9 items-center justify-center text-ink transition-colors duration-150 hover:text-accent"
+        className="header-search -ml-1 flex size-9 items-center justify-center text-ink transition-colors duration-150 hover:text-accent"
       >
         <Search className="size-[18px]" />
       </button>
@@ -165,7 +165,7 @@ export default function SearchPill({ open, onOpenChange }: SearchPillProps) {
   }
 
   return (
-    <div ref={rootRef} className="relative ml-auto">
+    <div ref={rootRef} className="relative">
       <div className="search-pill">
         <Search className="size-[15px] shrink-0 opacity-70" aria-hidden />
         <input

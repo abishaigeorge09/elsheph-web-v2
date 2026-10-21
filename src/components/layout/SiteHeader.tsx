@@ -111,20 +111,8 @@ export default function SiteHeader() {
         data-scrolled={scrolled || undefined}
       >
         <div className="shell relative flex h-full items-center">
-          {/* Hamburger, hard left: two drawn 18px bars. */}
-          <button
-            ref={burgerRef}
-            type="button"
-            onClick={openMenu}
-            aria-label="Open menu"
-            aria-expanded={menuOpen}
-            className="-ml-1 flex size-9 shrink-0 items-center justify-center text-ink transition-colors duration-150 hover:text-accent"
-          >
-            <span className="burger-box" aria-hidden="true">
-              <span className="burger-bar burger-top" />
-              <span className="burger-bar burger-bot" />
-            </span>
-          </button>
+          {/* Search, hard left: magnifier that expands into the pill. */}
+          <SearchPill open={searchOpen} onOpenChange={setSearch} />
 
           {/* Centred wordmark, absolutely positioned against the bar's own
               relative box so hamburger/search width never pushes it
@@ -147,12 +135,24 @@ export default function SiteHeader() {
             />
           </Link>
 
-          {/* Search, hard right: magnifier that expands into the pill. It
-              steps aside while the drawer is open so the drawer's close
-              button, which lands in the same spot, is reachable. */}
-          {!menuOpen ? (
-            <SearchPill open={searchOpen} onOpenChange={setSearch} />
-          ) : null}
+          {/* Hamburger, hard right: two drawn 18px bars. It steps aside while the
+              drawer is open, because the drawer's close button lands in the
+              same spot and the header sits above the drawer. */}
+          <button
+            ref={burgerRef}
+            type="button"
+            onClick={openMenu}
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            className={`-mr-1 ml-auto flex size-9 shrink-0 items-center justify-center text-ink transition-colors duration-150 hover:text-accent ${
+              menuOpen ? "invisible" : ""
+            }`}
+          >
+            <span className="burger-box" aria-hidden="true">
+              <span className="burger-bar burger-top" />
+              <span className="burger-bar burger-bot" />
+            </span>
+          </button>
         </div>
       </header>
 
