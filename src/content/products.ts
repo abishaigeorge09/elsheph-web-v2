@@ -117,6 +117,8 @@ export const products: readonly Product[] = [
       "A daily devotional journal on Android. Reading, reflection and prayer, kept in one place.",
     status: "live",
     kind: "own",
+    /* The product's page, with the Play Store download. Android only. */
+    url: "https://believersdiary.vercel.app",
     platforms: ["Android"],
     icon: "NotebookPen",
   },

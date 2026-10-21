@@ -21,22 +21,23 @@ type ParentId = "focus" | "content" | "programs" | "company";
 type Parent = { id: ParentId; label: string; links: SubLink[] };
 
 /**
- * The drawer menu — the audit's anatomy, replacing the old full-screen
- * espresso overlay. A left panel (420px at xl, 320px at lg, full width
- * below) on the --panel cream, over a 20% black scrim; the page stays
- * visible and unblurred, and the header stays live above both.
+ * The drawer menu. A right panel (420px at xl, 320px at lg, full width
+ * below) that slides in from the right edge, on the --panel cream, over a
+ * 20% black scrim; the page stays visible and unblurred, and the header
+ * stays live above both.
  *
  * Base UI's dialog primitive still sits underneath for portal, focus trap,
  * scroll lock, Esc and scrim-click dismissal; the skin and the second panel
- * are ours. Chevroned parents slide panel two out to the right (below lg it
+ * are ours. Chevroned parents slide panel two out to the left (below lg it
  * covers the full-width panel one, with a back affordance); switching
  * parents while it is open cross-fades panel two's contents in place — the
  * keyed remount runs the .drawer-panel2-content fade.
  *
- * The ✕ rides the top-right of the OUTERMOST open panel: panel one's ✕
- * yields to panel two's while a section is open. Route change closes the
- * drawer (SiteHeader watches the pathname). Social glyphs pin bottom-left
- * of panel one.
+ * The ✕ rides the top-right of panel one, at the bar's right end. Below lg
+ * panel two covers panel one, so panel two carries its own ✕ and panel
+ * one's steps back while a section is open; at lg and up panel two's ✕ is
+ * hidden in CSS. Route change closes the drawer (SiteHeader watches the
+ * pathname). Social glyphs pin bottom-left of panel one.
  *
  * All hrefs below are the approved full-company routes; most target pages
  * arrive in later phases (E3+) and are linked now per the plan.
@@ -214,7 +215,8 @@ export default function MenuOverlay({
             </div>
           </div>
 
-          {/* Panel one's ✕ — yields to panel two's while a section is open. */}
+          {/* Panel one's ✕ — below lg it yields to panel two's while a
+              section is open (panel two covers it there). */}
           {!openParent ? (
             <button
               type="button"
@@ -224,9 +226,18 @@ export default function MenuOverlay({
             >
               <span className="drawer-close-glyph" aria-hidden />
             </button>
-          ) : null}
+          ) : (
+            <button
+              type="button"
+              aria-label="Close menu"
+              className="drawer-close hidden lg:flex"
+              onClick={close}
+            >
+              <span className="drawer-close-glyph" aria-hidden />
+            </button>
+          )}
 
-          {/* PANEL TWO — slides out right of panel one (over it below lg). */}
+          {/* PANEL TWO — slides out left of panel one (over it below lg). */}
           <div className="drawer-panel2-clip">
             <div className="drawer-panel2" data-open={openParent || undefined}>
               {activeParent ? (

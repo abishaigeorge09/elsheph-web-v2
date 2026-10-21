@@ -20,13 +20,11 @@ import { site } from "@/content/site";
  * pill (SearchPill) — the magnifier expands in place, no overlay, no dim,
  * no scroll lock.
  *
- * The site is light-first, so on interior routes the bar is transparent over
- * the warm-white ground with the DARK wordmark and ink icons. The homepage is
- * the exception: its whole viewport is full-bleed dark hero media, so while
- * `data-home` is set and the bar is transparent, the wordmark swaps to the
- * cream knockout and the icons + search pill flip to the deep ramp
- * (globals.css Layer E3). The homepage cannot scroll, so that is its only
- * state; the guard remains anyway.
+ * The site is light-first, so on the homepage and interior routes the bar is
+ * transparent over the warm-white ground with the DARK wordmark and ink
+ * icons. Dark-field pages (/team, /about, /careers, /offices) flip the
+ * wordmark to the cream knockout and the icons + search pill to the deep
+ * ramp while un-scrolled (globals.css Layer E3).
  *
  * Scroll behaviour: transparent under 24px of scroll; past it, a
  * `data-scrolled` attribute (toggled by a passive listener) gives the bar a
@@ -35,7 +33,9 @@ import { site } from "@/content/site";
  * Drawer and search pill are mutually exclusive: opening either closes the
  * other. ⌘K / Ctrl+K toggles the pill from anywhere; the listener lives here
  * so it can enforce the exclusivity. The header itself stays visible ABOVE
- * the drawer's scrim (header z-200, scrim z-150).
+ * the drawer's scrim (header z-200, scrim z-150). The drawer slides in from
+ * the right, so while it is open the search control steps aside and the
+ * drawer's own close button takes its place at the bar's right end.
  */
 export default function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -90,7 +90,6 @@ export default function SiteHeader() {
     if (searchOpen) setSearchOpen(false);
   }
 
-  const isHome = pathname === "/";
   /* Dark-field pages (/team, /about, /careers, /offices) mount <DarkChrome/>,
      which flips this via the darkField store — the generalised ground
      detection. While such a page is un-scrolled, the transparent bar sits
@@ -101,19 +100,14 @@ export default function SiteHeader() {
     getDarkField,
     getDarkFieldServer,
   );
-  /* Over a dark ground (home media or a dark field, bar transparent):
-     cream knockout wordmark. */
-  const overMedia = (isHome || darkField) && !scrolled;
-
-  /* Hero direction prototypes under /lab own their whole screen, nav included. */
-  if (pathname.startsWith("/lab")) return null;
+  /* Over a dark field with the bar transparent: cream knockout wordmark. */
+  const overMedia = darkField && !scrolled;
 
   return (
     <>
       <header
         className="site-header fixed inset-x-0 top-0 z-[200] h-[var(--header-height)]"
         data-scrolled={scrolled || undefined}
-        data-home={isHome || undefined}
       >
         <div className="shell relative flex h-full items-center">
           {/* Hamburger, hard left: two drawn 18px bars. */}
@@ -152,8 +146,12 @@ export default function SiteHeader() {
             />
           </Link>
 
-          {/* Search, hard right: magnifier that expands into the pill. */}
-          <SearchPill open={searchOpen} onOpenChange={setSearch} />
+          {/* Search, hard right: magnifier that expands into the pill. It
+              steps aside while the drawer is open so the drawer's close
+              button, which lands in the same spot, is reachable. */}
+          {!menuOpen ? (
+            <SearchPill open={searchOpen} onOpenChange={setSearch} />
+          ) : null}
         </div>
       </header>
 

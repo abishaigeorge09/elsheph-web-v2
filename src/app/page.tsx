@@ -1,15 +1,13 @@
-import HomeHero from "@/components/home/HomeHero";
+import StaffLine from "@/components/home/StaffLine";
 
 /**
- * The homepage. Deliberately ONE component: a single non-scrolling viewport,
- * matching the a16z reference's measured behaviour
- * (`scrollHeight === innerHeight`). See HomeHero for the full reasoning.
+ * The homepage. Deliberately ONE component: a single non-scrolling viewport
+ * (`scrollHeight === innerHeight`). See StaffLine for the composition.
  *
- * Everything that used to live on this page as scrolling sections — Products,
- * Services, How We Work, About, Contact — has moved to real routes:
- * /products, /about. Nothing was deleted; it was relocated because it can no
- * longer fit a viewport that does not scroll.
+ * Everything that used to live on this page as scrolling sections lives on
+ * real routes: /products, /about, /focus. Nothing was deleted; it was
+ * relocated because it cannot fit a viewport that does not scroll.
  */
 export default function Home() {
-  return <HomeHero />;
+  return <StaffLine />;
 }

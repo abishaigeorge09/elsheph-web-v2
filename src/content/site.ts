@@ -43,6 +43,8 @@ export const site = {
     /** Full lockup (symbol + wordmark), cream knockout. */
     full: "/logos/elsheph-full-light.png",
     symbol: "/logos/elsheph-symbol-light.png",
+    /** The mark in its own colours (staff and vine), for a light ground. */
+    symbolDark: "/logos/elsheph-symbol-cropped.png",
   },
 } as const;
 
