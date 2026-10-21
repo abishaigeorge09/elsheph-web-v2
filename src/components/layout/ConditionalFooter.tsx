@@ -6,7 +6,7 @@ import SiteFooter from "@/components/layout/SiteFooter";
 /**
  * The homepage bakes its footer into the single non-scrolling hero viewport
  * (small mark + tagline bottom-left, socials + legal bottom-right, no
- * separate scrollable footer section). See src/components/home/StaffLine.tsx.
+ * separate scrollable footer section). See src/components/home/CrookLine.tsx.
  *
  * Every other route still needs the real, full footer: nav groups, contact
  * addresses, socials. Rather than forking layout.tsx per route, this one

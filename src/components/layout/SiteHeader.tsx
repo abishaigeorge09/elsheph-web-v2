@@ -15,7 +15,8 @@ import { site } from "@/content/site";
 
 /**
  * The site-wide bar, on the audit's geometry: fixed, hamburger hard left,
- * absolutely centred wordmark, search hard right. The full nav lives behind
+ * the complete logo (staff mark + ELSHEPH wordmark) absolutely centred,
+ * search hard right. The full nav lives behind
  * the hamburger in the left DRAWER (MenuOverlay); search is the in-header
  * pill (SearchPill) — the magnifier expands in place, no overlay, no dim,
  * no scroll lock.
@@ -137,12 +138,12 @@ export default function SiteHeader() {
             }`}
           >
             <Image
-              src={overMedia ? site.logo.wordmark : site.logo.wordmarkDark}
+              src={overMedia ? site.logo.full : site.logo.fullDark}
               alt={site.name}
-              width={495}
-              height={86}
+              width={485}
+              height={120}
               priority
-              className="h-[22px] w-auto sm:h-[26px]"
+              className="h-[32px] w-auto sm:h-[38px]"
             />
           </Link>
 

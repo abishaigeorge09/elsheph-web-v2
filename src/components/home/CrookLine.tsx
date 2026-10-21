@@ -5,27 +5,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { heroHeadline, homeCta, site, socials } from "@/content/site";
 import { productImage, visibleProducts } from "@/content/products";
-import { buildGeometry, type Geometry } from "./staffGeometry";
-import styles from "./staff.module.css";
+import { buildGeometry, type Geometry } from "./crookGeometry";
+import styles from "./crook.module.css";
 
 /**
- * The home page: one non-scrolling viewport.
+ * The home page, "The Crook line": one non-scrolling viewport.
  *
- * The official staff (the seal's mark, used as is) anchors the composition.
- * One terracotta line grows out of its foot, sweeps across the screen and
- * settles as the rule beneath the site header. Real product screenshots ride
- * the sweep as plates and slide along it with the pointer (a slow drift on
- * touch). Everything eases to a stop; reduced motion shows the finished
- * composition at once. The header is the site-wide SiteHeader, fixed above.
+ * One continuous stroke, drawn on load: it starts at the hook's tip, coils
+ * into the shepherd's crook from the seal, runs down the staff, sweeps across
+ * the screen and settles as the rule beneath the site header. The curl frames
+ * the headline; real product screenshots ride the sweep as plates and slide
+ * along it with the pointer (a slow drift on touch). Everything eases to a
+ * stop; reduced motion shows the finished composition at once. The header is
+ * the site-wide SiteHeader, fixed above.
  *
  * Timeline (ms from load):
- *    0  the staff wipes in, top to bottom (700)
- *  600  the line begins at the foot; the sweep is done by ~2200 and the bar
- *       reaches the left edge at 3000
- *  900  headline lines rise (two lines, 120 apart)
- * 1300  lede and CTA rise
- * 1500  plates fade in along the sweep, 110 apart
- * 2600  footer row fades in
+ *  200  stroke begins; the crook is complete by ~1400, the sweep by ~2150,
+ *       the bar reaches the left edge at 3200
+ * 1300  headline lines rise (two lines, 120 apart)
+ * 1750  lede and CTA rise
+ * 1900  plates fade in along the sweep, 110 apart
+ * 2700  vine leaves settle on the staff
+ * 3000  footer row fades in
  */
 
 /* The plates: the products with a screenshot worth showing at thumbnail
@@ -41,6 +42,9 @@ const PLATE_IDS = [
 const plates = PLATE_IDS.map((id) => visibleProducts.find((p) => p.id === id))
   .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
+const LEAF_LEFT = "M0 0 C-22 -4 -34 -20 -36 -34 C-18 -30 -4 -16 0 0 Z";
+const LEAF_RIGHT = "M0 0 C22 -4 34 -20 36 -34 C18 -30 4 -16 0 0 Z";
+
 function useViewport() {
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   useLayoutEffect(() => {
@@ -53,7 +57,7 @@ function useViewport() {
   return size;
 }
 
-export default function StaffLine() {
+export default function CrookLine() {
   const size = useViewport();
   const geo: Geometry | null = useMemo(
     () => (size ? buildGeometry(size.w, size.h) : null),
@@ -72,13 +76,13 @@ export default function StaffLine() {
     const count = geo.narrow ? 3 : plates.length;
     const total = path.getTotalLength();
     /* Where along the sweep each plate sits at rest. */
-    const lo = geo.narrow ? 0.22 : 0.14;
-    const hi = geo.narrow ? 0.72 : 0.84;
+    const lo = geo.narrow ? 0.2 : 0.12;
+    const hi = geo.narrow ? 0.7 : 0.82;
     const span = hi - lo;
     /* How far the pointer (or the drift) can push the plates along the
        sweep, in path fraction. Small enough that the top plate never reaches
-       the bar and the first plate never climbs back into the staff. */
-    const reach = geo.narrow ? 0.035 : 0.05;
+       the bar and the last plate never leaves the viewport. */
+    const reach = geo.narrow ? 0.035 : 0.06;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const touch = window.matchMedia("(hover: none)");
 
@@ -147,29 +151,6 @@ export default function StaffLine() {
 
   return (
     <div className={styles.root}>
-      {/* The official mark. Served unoptimised so the file ships exactly as
-          drawn; sized by the geometry so the line can meet its foot. */}
-      {geo ? (
-        <div
-          className={styles.staff}
-          style={{
-            left: geo.staff.left,
-            top: geo.staff.top,
-            width: geo.staff.width,
-            height: geo.staff.height,
-          }}
-        >
-          <Image
-            src={site.logo.symbolDark}
-            alt={`${site.name} mark: a shepherd's staff with a vine`}
-            width={271}
-            height={402}
-            priority
-            unoptimized
-          />
-        </div>
-      ) : null}
-
       {/* The line. Rendered once the viewport is measured; the stroke's
           draw animation starts on mount. */}
       {geo ? (
@@ -182,10 +163,19 @@ export default function StaffLine() {
         >
           <path ref={sweepRef} d={geo.sweep} fill="none" stroke="none" />
           <path className={styles.thread} d={geo.d} pathLength={1} />
+          {geo.leaves.map(([x, y, k, mirrored], i) => (
+            <path
+              key={i}
+              className={styles.leaf}
+              d={mirrored ? LEAF_RIGHT : LEAF_LEFT}
+              transform={`translate(${x} ${y}) scale(${k})`}
+              style={{ animationDelay: `${2700 + i * 90}ms` }}
+            />
+          ))}
         </svg>
       ) : null}
 
-      {/* The headline, beside the staff. */}
+      {/* The headline, in the hollow of the crook. */}
       {geo ? (
         <div
           className="absolute z-10"
@@ -194,13 +184,13 @@ export default function StaffLine() {
           <h1 className={styles.headline}>
             <span
               className={`${styles.rise} block`}
-              style={{ ["--d" as string]: "900ms" }}
+              style={{ ["--d" as string]: "1300ms" }}
             >
               {heroHeadline.lead.trim()}
             </span>
             <span
               className={`${styles.rise} block`}
-              style={{ ["--d" as string]: "1020ms" }}
+              style={{ ["--d" as string]: "1420ms" }}
             >
               <em>{heroHeadline.accent}</em>
               {heroHeadline.trail}
@@ -208,13 +198,13 @@ export default function StaffLine() {
           </h1>
           <p
             className={`${styles.lede} ${styles.rise} mt-5 sm:mt-7`}
-            style={{ ["--d" as string]: "1300ms" }}
+            style={{ ["--d" as string]: "1750ms" }}
           >
             {site.description}
           </p>
           <div
             className={`${styles.rise} mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 sm:mt-8`}
-            style={{ ["--d" as string]: "1400ms" }}
+            style={{ ["--d" as string]: "1850ms" }}
           >
             <Link href={homeCta.href} className={styles.cta}>
               {homeCta.label}
@@ -253,10 +243,10 @@ export default function StaffLine() {
                 href={href}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noopener noreferrer" : undefined}
-                className={styles.plate}
+                className={`${styles.plate} z-10`}
                 style={{
                   ["--plate-w" as string]: `${plateW}px`,
-                  ["--d" as string]: `${1500 + i * 110}ms`,
+                  ["--d" as string]: `${1900 + i * 110}ms`,
                 }}
                 aria-label={`${product.name}: ${product.description}`}
               >
@@ -275,10 +265,10 @@ export default function StaffLine() {
           })
         : null}
 
-      {/* Footer row, baked into the viewport. */}
+      {/* Footer row, baked into the viewport, with the official mark. */}
       <footer
         className={`${styles.fade} absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-6 px-6 pb-5 sm:px-10 sm:pb-7 lg:px-14`}
-        style={{ ["--d" as string]: "2600ms" }}
+        style={{ ["--d" as string]: "3000ms" }}
       >
         <div className="flex items-center gap-3">
           <Image
@@ -306,7 +296,7 @@ export default function StaffLine() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.footLink}
+                className={`${styles.navLink} text-[12px]`}
               >
                 {social.label}
               </a>

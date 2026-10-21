@@ -1,13 +1,13 @@
-import StaffLine from "@/components/home/StaffLine";
+import CrookLine from "@/components/home/CrookLine";
 
 /**
  * The homepage. Deliberately ONE component: a single non-scrolling viewport
- * (`scrollHeight === innerHeight`). See StaffLine for the composition.
+ * (`scrollHeight === innerHeight`). See CrookLine for the composition.
  *
  * Everything that used to live on this page as scrolling sections lives on
  * real routes: /products, /about, /focus. Nothing was deleted; it was
  * relocated because it cannot fit a viewport that does not scroll.
  */
 export default function Home() {
-  return <StaffLine />;
+  return <CrookLine />;
 }

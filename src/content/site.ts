@@ -40,8 +40,12 @@ export const site = {
     wordmark: "/logos/elsheph-name-light.png",
     /** Dark-ink wordmark, for a light ground. Not used by the dark site. */
     wordmarkDark: "/logos/elsheph-name-cropped.png",
-    /** Full lockup (symbol + wordmark), cream knockout. */
+    /** Full lockup (symbol + wordmark), cream knockout, for a dark ground.
+        True 485x120 trim, so it scales on height with `w-auto`. */
     full: "/logos/elsheph-full-light.png",
+    /** Full lockup in its own colours, for the light ground. The header
+        shows this on every page. */
+    fullDark: "/logos/elsheph-full-cropped.png",
     symbol: "/logos/elsheph-symbol-light.png",
     /** The mark in its own colours (staff and vine), for a light ground. */
     symbolDark: "/logos/elsheph-symbol-cropped.png",
