@@ -8,6 +8,7 @@ import {
   productImage,
   productsPage,
   statusLabel,
+  featuredProducts,
   visibleProducts,
   type Kind,
   type Product,
@@ -16,8 +17,6 @@ import {
 
 type StatusFilter = "all" | Status;
 type KindFilter = "all" | Kind;
-
-const liveProducts = visibleProducts.filter((p) => p.status === "live");
 
 /**
  * The Products page — the light translation of the a16z reference's Portfolio
@@ -46,6 +45,10 @@ const liveProducts = visibleProducts.filter((p) => p.status === "live");
 /** The featured-strip caption: platform truth or the client-work frame. */
 function stripCaption(product: Product): string {
   if (product.kind === "client") return "Client work";
+  if (product.status !== "live") {
+    const label = statusLabel[product.status as Exclude<Status, "unconfirmed">];
+    return product.kind === "venture" ? `${label} · Founder's venture` : label;
+  }
   const platform = product.platforms ? product.platforms.join(" · ") : "Web";
   return `Live · ${platform}`;
 }
@@ -171,6 +174,11 @@ function GridCard({
             Client project
           </span>
         ) : null}
+        {product.kind === "venture" ? (
+          <span className="border border-border-strong px-2.5 py-1 text-[11px] font-semibold tracking-[0.12em] text-ink-mid uppercase">
+            Founder&apos;s venture
+          </span>
+        ) : null}
         {product.platforms ? (
           <span className="text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase">
             {product.platforms.join(" · ")}
@@ -232,7 +240,7 @@ export default function ProductsView() {
 
       {/* Featured strip — live products only, the reference's IPO strip. */}
       <div className="snap-row shell gap-6 pb-16">
-        {liveProducts.map((product) => (
+        {featuredProducts.map((product) => (
           <FeaturedCard
             key={product.id}
             product={product}
@@ -270,6 +278,7 @@ export default function ProductsView() {
                   { value: "all", label: "All" },
                   { value: "own", label: "Elsheph" },
                   { value: "client", label: "Client work" },
+                  { value: "venture", label: "Founder's venture" },
                 ]}
               />
             </div>

@@ -32,7 +32,6 @@ import styles from "./crook.module.css";
 /* The plates: the products with a screenshot worth showing at thumbnail
    size. Only ledger products; links go to the product's own url. */
 const PLATE_IDS = [
-  "elsheph-scripture",
   "gmv-live",
   "srm-student-store",
   "elsheph-hymn",

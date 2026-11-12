@@ -157,11 +157,6 @@ export const footerGroups: FooterGroup[] = [
     links: [
       { label: "All products", href: "/products" },
       { label: "Insights", href: "/insights" },
-      {
-        label: "Elsheph Scripture",
-        href: "https://scripture.elsheph.com",
-        external: true,
-      },
       { label: "GMV.LIVE", href: "https://gmv-live.vercel.app", external: true },
     ],
   },

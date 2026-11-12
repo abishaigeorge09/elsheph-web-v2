@@ -28,17 +28,6 @@ export type ProductDetail = {
 };
 
 export const productDetails: Record<string, ProductDetail> = {
-  "elsheph-scripture": {
-    tagline: "A library of daily devotionals, one shelf for each author.",
-    about: [
-      "Each shelf belongs to one author, and each book is one devotional in their own words.",
-      "Elsheph Scripture is one of Elsheph's faith and publishing tools, built for Telugu-speaking congregations and the authors who serve them.",
-    ],
-    audience: "Readers of daily devotionals, and the authors who write them.",
-    statusNote: "Live now.",
-    linkLabel: "Open Elsheph Scripture",
-    source: "scripture.elsheph.com; Elsheph Vision deck, Oct 2026",
-  },
   "gmv-live": {
     tagline: "A marketplace for live shopping hosts and brands.",
     about: [
@@ -115,6 +104,18 @@ export const productDetails: Record<string, ProductDetail> = {
     statusNote:
       "In development. Launch waits on client decisions, so there is no public link yet.",
     source: "Elsheph Vision deck, Oct 2026",
+  },
+  heypiko: {
+    tagline: "The healthcare robot for the world's 1 billion aging parents.",
+    about: [
+      "HeyPiko is building the healthcare robot for the world's 1 billion aging parents, so families can look after the people they love, wherever they live.",
+      "A tabletop companion that talks with parents in Telugu, Hindi and English, keeps their reminders and alerts the family.",
+    ],
+    audience: "Aging parents, and the families who look after them from near or far.",
+    statusNote:
+      "In development. HeyPiko is a separate company, founded by Elsheph's founder.",
+    linkLabel: "Visit heypiko.co",
+    source: "Founder, 12 Nov 2026; heypiko.co",
   },
   atlitos: {
     tagline: "One app for India's athletes, coaches and academies.",

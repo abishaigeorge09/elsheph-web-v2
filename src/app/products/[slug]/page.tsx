@@ -71,6 +71,11 @@ export default async function ProductPage({
               Client project
             </span>
           ) : null}
+          {product.kind === "venture" ? (
+            <span className="border border-border-strong px-2.5 py-1 text-[11px] font-semibold tracking-[0.12em] text-ink-mid uppercase">
+              Founder&apos;s venture
+            </span>
+          ) : null}
           {product.platforms ? (
             <span className="text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase">
               {product.platforms.join(" · ")}

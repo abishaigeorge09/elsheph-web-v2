@@ -19,8 +19,12 @@
 /** "offline" = a live product whose address is temporarily not serving it. */
 export type Status = "live" | "coming-soon" | "offline" | "unconfirmed";
 
-/** "own" = an Elsheph product. "client" = work delivered for a client. */
-export type Kind = "own" | "client";
+/**
+ * "own" = an Elsheph product. "client" = work delivered for a client.
+ * "venture" = a separate company of the founder, shown with that label and
+ * never presented as an Elsheph product.
+ */
+export type Kind = "own" | "client" | "venture";
 
 export type Product = {
   id: string;
@@ -43,26 +47,7 @@ export type Product = {
   icon: string;
 };
 
-/**
- * TODO(founder): two descriptions below are placeholders pending confirmation
- * — "elsheph-scripture" and "gmv-live". Neither product's positioning was
- * documented anywhere in this repo, so the copy states only what the URL
- * itself establishes. Replace with real copy before launch; do not guess at
- * features, users or scale.
- */
 export const products: readonly Product[] = [
-  {
-    id: "elsheph-scripture",
-    name: "Elsheph Scripture",
-    description:
-      "A library of daily devotionals. Each shelf belongs to one author, and each book is one devotional in their own words.",
-    status: "live",
-    kind: "own",
-    url: "https://scripture.elsheph.com",
-    /* probed 2026-08-13: X-Frame-Options DENY */
-    embeddable: false,
-    icon: "BookOpen",
-  },
   {
     id: "gmv-live",
     name: "GMV.LIVE",
@@ -143,6 +128,16 @@ export const products: readonly Product[] = [
     icon: "MapPin",
   },
   {
+    id: "heypiko",
+    name: "HeyPiko",
+    description:
+      "A tabletop companion that talks with aging parents in Telugu, Hindi and English, keeps their reminders and alerts the family.",
+    status: "coming-soon",
+    kind: "venture",
+    url: "https://heypiko.co",
+    icon: "Bot",
+  },
+  {
     id: "atlitos",
     name: "Atlitos",
     description:
@@ -190,10 +185,22 @@ export const statusLabel: Record<Exclude<Status, "unconfirmed">, string> = {
   offline: "Temporarily offline",
 };
 
+/** The top row on /products, in this order. Ids resolve against the visible ledger. */
+export const featuredIds = [
+  "synth",
+  "heypiko",
+  "atlitos",
+  "believersdiary",
+] as const;
+
 /** The only list a component may render. Unconfirmed items never reach the DOM. */
 export const visibleProducts: readonly Product[] = products.filter(
   (product) => product.status !== "unconfirmed",
 );
+
+export const featuredProducts: readonly Product[] = featuredIds
+  .map((id) => visibleProducts.find((p) => p.id === id))
+  .filter((p): p is Product => Boolean(p));
 
 /** Live products with a reachable URL — used by the command palette. */
 export const liveProducts: readonly (Product & { url: string })[] =
