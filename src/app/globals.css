@@ -1280,3 +1280,39 @@ nextjs-portal > * {
     }
   }
 }
+
+/* ============================================================================
+   The lab grid padlocks.
+   Locked padlocks start with the shackle raised and click shut, one after
+   another, when the grid scrolls into view. Open padlocks keep the shackle
+   lifted and swung aside. A locked padlock lifts a little on hover or focus.
+   ---------------------------------------------------------------------------- */
+.lab-lock .lab-shackle {
+  transform-box: fill-box;
+  transform-origin: 100% 100%;
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: var(--lock-delay, 0ms);
+}
+.lab-lock[data-open="false"] .lab-shackle {
+  transform: translateY(-3px);
+}
+.lab-grid[data-in="true"] .lab-lock[data-open="false"] .lab-shackle {
+  transform: translateY(0);
+}
+.lab-lock[data-open="true"] .lab-shackle {
+  transform: translateY(-3px) rotate(-28deg);
+  transition-delay: 0ms;
+}
+.lab-grid[data-in="true"] .lab-card:hover .lab-lock[data-open="false"] .lab-shackle,
+.lab-grid[data-in="true"] .lab-card:focus-within .lab-lock[data-open="false"] .lab-shackle {
+  transform: translateY(-2px);
+  transition-delay: 0ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lab-lock .lab-shackle {
+    transition: none;
+  }
+  .lab-lock[data-open="false"] .lab-shackle {
+    transform: translateY(0);
+  }
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import NewsletterBand from "@/components/layout/NewsletterBand";
+import LabProjects from "@/components/products/LabProjects";
 import ProductsView from "@/components/products/ProductsView";
 import { site } from "@/content/site";
 
@@ -12,6 +13,9 @@ export default function ProductsPage() {
   return (
     <>
       <ProductsView />
+      <div className="border-t border-border bg-page">
+        <LabProjects />
+      </div>
       <NewsletterBand />
     </>
   );
