@@ -40,6 +40,11 @@ export const teamMembers: readonly TeamMember[] = [
     photo: "/team/abishai-gosula.jpg",
   },
   {
+    name: "Rajesh Rangisetti",
+    role: "Chief Technology Officer (CTO)",
+    section: "Leadership",
+  },
+  {
     name: "Aaron Gosula",
     role: "Chief Operating Officer (COO)",
     section: "Leadership",

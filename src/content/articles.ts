@@ -152,20 +152,20 @@ export const articles: readonly Article[] = [
     slug: "faith-and-publishing-tools-for-telugu-readers",
     title: "Faith and publishing tools: a hymn book, a diary and a publisher's shop",
     summary:
-      "Three products from Elsheph's faith and publishing work: Elsheph Hymn, BelieversDiary and the Job Sudarshan online shop. What each was for and where each stands.",
+      "Three products from Elsheph's faith and publishing work: Global Hymns, BelieversDiary and the Job Sudarshan online shop. What each was for and where each stands.",
     tag: "Products",
     date: "2026-11-12",
     author: "Elsheph Systems",
     readingMinutes: 4,
     body: [
-      { type: "h2", text: "Elsheph Hymn: one page for a whole congregation" },
+      { type: "h2", text: "Global Hymns: one page for a whole congregation" },
       {
         type: "p",
         text: "The problem was specific. Young people in Telugu congregations often cannot read Telugu script. Believers abroad, in the Netherlands, the UK and New Zealand, cannot pronounce the lyrics. And around 500 songs were locked in print.",
       },
       {
         type: "p",
-        text: "Elsheph Hymn puts every hymn in three scripts side by side: Telugu, transliteration and English. A whole congregation sings from one page. The book holds more than 500 hymns, readers can save their favourites, and a Dutch edition is planned. It was built as client work with Elbert Technology and launched on 31 March 2026.",
+        text: "Global Hymns puts every hymn in three scripts side by side: Telugu, transliteration and English. A whole congregation sings from one page. The book holds more than 500 hymns, readers can save their favourites, and a Dutch edition is planned. It was built as client work with Elbert Technology and launched on 15 April 2026.",
       },
       {
         type: "p",
@@ -192,7 +192,7 @@ export const articles: readonly Article[] = [
       },
     ],
     sources: [
-      { label: "Elsheph Hymn", url: "https://hymn.elsheph.com" },
+      { label: "Global Hymns", url: "https://hymn.elsheph.com" },
       { label: "BelieversDiary", url: "https://believersdiary.vercel.app" },
       { label: "International Hymn Book project proposal, February 2026 (company document)" },
       {

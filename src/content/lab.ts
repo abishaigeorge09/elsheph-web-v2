@@ -5,6 +5,9 @@
  * products already shown on the Products page, and Elsheph Scripture and
  * Gosula Store, which the founder removed.
  *
+ * Founder Clock and Gosula Store moved to the Products page on 12 Nov 2026
+ * (Amma). Family Studio is left out: it is Raja's own, not Elsheph's.
+ *
  * Every one-liner is the wording of the Elsheph Interns Kickoff deck
  * (23 October 2026, "Portfolio overview" and "More products we have built"),
  * lightly completed into a sentence. A link is added only when the page was
@@ -24,7 +27,6 @@ export type LabProject = {
 };
 
 export const labProjects: readonly LabProject[] = [
-  { name: "Founder Clock", oneLiner: "A shared timezone portal for teams.", url: "https://founder-clock.vercel.app" },
   { name: "Faith Animation", oneLiner: "Turns scripture or a sermon into an animated video.", url: "https://faith-animation.vercel.app" },
   { name: "AidByFaith", oneLiner: "A Christian resource finder.", url: "https://aidbyfaith.vercel.app", note: "Collaborative" },
   { name: "Callsheet", oneLiner: "A marketplace for film crews." },
@@ -39,7 +41,6 @@ export const labProjects: readonly LabProject[] = [
   { name: "PrayerLink", oneLiner: "Prayer and gatherings." },
   { name: "ChurchSite", oneLiner: "A church website builder." },
   { name: "FamSync", oneLiner: "A family calendar and notes." },
-  { name: "Family Studio", oneLiner: "A family document generator." },
   { name: "Handtext", oneLiner: "Turns text into handwriting." },
   { name: "Salon AR", oneLiner: "An AR haircut try-on." },
   { name: "Watchman", oneLiner: "A focus tool for macOS." },

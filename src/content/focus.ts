@@ -44,7 +44,7 @@ export const focusAreas: readonly FocusArea[] = [
     ],
     accent: "--brand",
     band: "Shipping is the midpoint, not the finish.",
-    relatedProductIds: ["elsheph-hymn", "jobsudarshan", "follow-me"],
+    relatedProductIds: ["global-hymns", "jobsudarshan", "follow-me"],
   },
   {
     slug: "it-services",

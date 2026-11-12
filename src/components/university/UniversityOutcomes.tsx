@@ -1,15 +1,14 @@
 import Reveal from "@/components/sections/Reveal";
 import {
-  universityCompanies,
-  universityCompaniesHeading,
+  universityStudents,
+  universityStudentsHeading,
   universityTestimonials,
 } from "@/content/university";
 
 /**
- * Placement outcomes, not partners: the ledger frames the company names as
- * where alumni ended up, so they render as a quiet row of text chips — no
- * logos, no marquee, no implied endorsement. The two founder-attested
- * testimonials sit alongside as restrained quote cards.
+ * Placement outcomes: the students named in the ledger are shown by name
+ * with no employer, since none was confirmed. Two interns' own public
+ * LinkedIn quotes sit alongside as restrained quote cards.
  */
 export default function UniversityOutcomes() {
   return (
@@ -17,15 +16,17 @@ export default function UniversityOutcomes() {
       <div className="shell">
         <Reveal>
           <h2 className="az-h2 mt-5 max-w-[20ch] text-ink">
-            {universityCompaniesHeading}
+            {universityStudentsHeading}
           </h2>
-          <ul className="mt-10 flex max-w-[720px] flex-wrap gap-2.5">
-            {universityCompanies.map((company) => (
-              <li
-                key={company}
-                className="rounded-full border border-border-strong px-4 py-1.5 text-[13px] font-medium text-muted-foreground"
-              >
-                {company}
+          <ul className="mt-10 grid max-w-[720px] gap-6 sm:grid-cols-2">
+            {universityStudents.map((student) => (
+              <li key={student.name} className="border-t border-border pt-4">
+                <p className="font-display text-[22px] leading-snug text-ink">
+                  {student.name}
+                </p>
+                <p className="mt-1.5 text-[13px] text-muted-foreground">
+                  {student.note}
+                </p>
               </li>
             ))}
           </ul>

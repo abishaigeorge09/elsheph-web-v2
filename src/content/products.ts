@@ -74,8 +74,28 @@ export const products: readonly Product[] = [
     icon: "GraduationCap",
   },
   {
-    id: "elsheph-hymn",
-    name: "Elsheph Hymn",
+    id: "gosula-store",
+    name: "Gosula Store",
+    description:
+      "A home resale shop. Photograph an item and the listing is drafted, priced and published from that one picture.",
+    status: "live",
+    kind: "own",
+    url: "https://gosulastore.vercel.app",
+    icon: "ShoppingBag",
+  },
+  {
+    id: "founder-clock",
+    name: "Founder Clock",
+    description:
+      "A shared timezone portal for a distributed founding team. One glance shows who is awake.",
+    status: "live",
+    kind: "own",
+    url: "https://founder-clock.vercel.app",
+    icon: "Clock",
+  },
+  {
+    id: "global-hymns",
+    name: "Global Hymns",
     description:
       "A hymn book in three scripts: Telugu, transliteration and English. A congregation sings from one page.",
     status: "live",
@@ -150,8 +170,8 @@ export const products: readonly Product[] = [
     icon: "Trophy",
   },
   {
-    id: "elsheph-hymn-mobile",
-    name: "Elsheph Hymn Mobile",
+    id: "global-hymns-mobile",
+    name: "Global Hymns Mobile",
     description: "Mobile companion to the hymn book.",
     status: "unconfirmed",
     kind: "client",

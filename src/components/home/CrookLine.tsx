@@ -34,7 +34,7 @@ import styles from "./crook.module.css";
 const PLATE_IDS = [
   "gmv-live",
   "srm-student-store",
-  "elsheph-hymn",
+  "global-hymns",
   "synth",
 ] as const;
 

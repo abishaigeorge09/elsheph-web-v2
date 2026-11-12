@@ -6,7 +6,7 @@
  *   this session and are carried over from the legacy UniversityPage
  *   verbatim in their facts. Do not add a number, name or quote without the
  *   same attestation.
- * - The companies are framed as placement outcomes ("Where alumni work"),
+ * - Named students are framed as placement outcomes ("Students now working"),
  *   not "corporate partners" — the stat label stays as attested, but the
  *   section must not imply formal partnership beyond what is confirmed.
  * - Atlitos is never named here: it is `unconfirmed` in the product ledger.
@@ -92,7 +92,7 @@ export const universityOffers: readonly UniversityOffer[] = [
   {
     title: "A path into industry",
     description:
-      "Alumni have gone on to placements at large firms. We make the introductions our students have earned.",
+      "Students we have trained are now working. We make the introductions our students have earned.",
     icon: "Briefcase",
   },
   {
@@ -155,19 +155,14 @@ export const universityTestimonials: readonly UniversityTestimonial[] = [
 ];
 
 /**
- * Founder-attested company names, verbatim. Presented as placement outcomes,
- * never as an endorsement or logo wall.
+ * Students who trained at Elsheph and are now working. Named by Amma on
+ * 12 Nov 2026; no employers are stated, so none are shown. The earlier company
+ * list (L&T, TCS and others) was not confirmed and has been removed.
  */
-export const universityCompaniesHeading = "Where alumni work";
-export const universityCompanies: readonly string[] = [
-  "L&T",
-  "ServiceNow",
-  "Capgemini",
-  "Cognizant",
-  "Infosys",
-  "Accenture",
-  "Wipro",
-  "TCS",
+export const universityStudentsHeading = "Students now working";
+export const universityStudents: readonly { name: string; note: string }[] = [
+  { name: "David Maram", note: "Trained at Elsheph, now working" },
+  { name: "Emmanuel Gowri", note: "Trained at Elsheph, now working" },
 ];
 
 export const universityFormRoles: readonly string[] = [

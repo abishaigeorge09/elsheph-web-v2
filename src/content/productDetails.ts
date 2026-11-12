@@ -50,7 +50,28 @@ export const productDetails: Record<string, ProductDetail> = {
     linkLabel: "Open SRM Student Store",
     source: "studentstore.in; Elsheph Vision deck, Oct 2026",
   },
-  "elsheph-hymn": {
+  "gosula-store": {
+    tagline: "Home resale, listed and priced from one photo.",
+    about: [
+      "A home resale shop. Photograph an item and the listing is drafted, priced and published from that one picture.",
+    ],
+    audience: "People selling things from their homes, and the shoppers who buy them.",
+    statusNote: "Live now.",
+    linkLabel: "Open Gosula Store",
+    source: "gosulastore.vercel.app; Elsheph Vision deck, Oct 2026",
+  },
+  "founder-clock": {
+    tagline: "A shared timezone portal for a distributed team.",
+    about: [
+      "One glance shows who is awake. Each person's local time sits on one shared view, and the page finds the hours that work for everyone on a call.",
+      "The link is shared, so editing a timezone or booking a meeting updates it for everyone, with no login.",
+    ],
+    audience: "Distributed founding teams and anyone who schedules calls across timezones.",
+    statusNote: "Live now.",
+    linkLabel: "Open Founder Clock",
+    source: "founder-clock.vercel.app; Elsheph Vision deck, Oct 2026",
+  },
+  "global-hymns": {
     tagline: "A hymn book in three scripts, so a congregation sings from one page.",
     about: [
       "Every hymn appears in Telugu script, transliteration and English. A whole congregation can sing from the same page.",
@@ -58,7 +79,7 @@ export const productDetails: Record<string, ProductDetail> = {
       "Built by Elsheph as client work.",
     ],
     audience: "Telugu congregations and the people who sing with them.",
-    statusNote: "Live now. Client project.",
+    statusNote: "Live now. Launched 15 April 2026. Client project.",
     linkLabel: "Open the hymn book",
     source: "hymn.elsheph.com; Elsheph Vision deck, Oct 2026",
   },

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" role="img" aria-label="Abstract brand artwork">
+  <defs>
+    <linearGradient id="base-global-hymns" x1="64.6%" y1="97.8%" x2="35.4%" y2="2.2%"><stop offset="0%" stop-color="#211712" /><stop offset="34%" stop-color="#582008" /><stop offset="100%" stop-color="#a05838" /></linearGradient>
+    <radialGradient id="glow-global-hymns" cx="15%" cy="88%" r="75%">
+      <stop offset="0%" stop-color="#c08a4e" stop-opacity="0.55" />
+      <stop offset="60%" stop-color="#c08a4e" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#c08a4e" stop-opacity="0" />
+    </radialGradient>
+    <filter id="soft-global-hymns" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="91" /></filter>
+  </defs>
+  <rect width="1000" height="1250" fill="url(#base-global-hymns)" />
+  <rect width="1000" height="1250" fill="url(#glow-global-hymns)" />
+  <ellipse cx="536" cy="354" rx="332" ry="257" fill="#a05838" opacity="0.61" filter="url(#soft-global-hymns)" transform="rotate(171 536 354)" />
+  
+  <filter id="grain-global-hymns">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="384" stitchTiles="stitch" />
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.5 0.5 0.5 0 0" />
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain-global-hymns)" opacity="0.06" />
+</svg>
