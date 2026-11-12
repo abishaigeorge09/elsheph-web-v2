@@ -156,13 +156,14 @@ export const universityTestimonials: readonly UniversityTestimonial[] = [
 
 /**
  * Students who trained at Elsheph and are now working. Named by Amma on
- * 12 Nov 2026; no employers are stated, so none are shown. The earlier company
- * list (L&T, TCS and others) was not confirmed and has been removed.
+ * 12 Nov 2026, who also asked for their employers to be shown (Tech Mahindra,
+ * L&T). The earlier company list (TCS and the others) was not confirmed and
+ * stays removed.
  */
 export const universityStudentsHeading = "Students now working";
 export const universityStudents: readonly { name: string; note: string }[] = [
-  { name: "David Maram", note: "Trained at Elsheph, now working" },
-  { name: "Emmanuel Gowri", note: "Trained at Elsheph, now working" },
+  { name: "David Maram", note: "Development Lead, Tech Mahindra" },
+  { name: "Emmanuel Gowri", note: "Senior Software Engineer, L&T" },
 ];
 
 export const universityFormRoles: readonly string[] = [
