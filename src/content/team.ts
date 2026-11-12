@@ -21,8 +21,9 @@ export type TeamMember = {
   name: string;
   role: string;
   section: TeamSection;
-  /** Path under public/, e.g. "/team/firstname-lastname.jpg". 1:1 crop. */
-  photo: string;
+  /** Path under public/, e.g. "/team/firstname-lastname.jpg". 1:1 crop.
+   *  Omit when no photo exists; the card renders as text only. */
+  photo?: string;
 };
 
 export type Advisor = {
@@ -37,6 +38,11 @@ export const teamMembers: readonly TeamMember[] = [
     role: "Founder and CEO",
     section: "Leadership",
     photo: "/team/abishai-gosula.jpg",
+  },
+  {
+    name: "Debora Gosula",
+    role: "Product Owner",
+    section: "Leadership",
   },
 ];
 

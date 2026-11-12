@@ -49,7 +49,7 @@ function Card({ project, index }: { project: LabProject; index: number }) {
       <p className="mt-2 flex-1 text-sm text-ink-mid">{project.oneLiner}</p>
       <div className="mt-4 flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] uppercase">
         <span className="text-muted-foreground">
-          {open ? "Public" : "In the lab"}
+          {open ? "Public" : labCopy.status}
         </span>
         {project.note ? (
           <span className="text-muted-foreground">· {project.note}</span>

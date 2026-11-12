@@ -8,6 +8,7 @@ import {
   productImage,
   productsPage,
   statusLabel,
+  featuredIds,
   featuredProducts,
   visibleProducts,
   type Kind,
@@ -210,6 +211,7 @@ export default function ProductsView() {
     () =>
       visibleProducts.filter(
         (p) =>
+          !(featuredIds as readonly string[]).includes(p.id) &&
           (status === "all" || p.status === status) &&
           (kind === "all" || p.kind === kind),
       ),
@@ -241,7 +243,7 @@ export default function ProductsView() {
       <div className="border-t border-border bg-surface">
         <div className="shell pt-14 pb-24">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-            <h2 className="az-h3 text-ink">All products</h2>
+            <h2 className="az-h3 text-ink">More products</h2>
 
             {/* 390px: the filter row scrolls sideways rather than wrapping. */}
             <div className="flex gap-8 overflow-x-auto pb-1">

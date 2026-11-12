@@ -135,6 +135,8 @@ export const products: readonly Product[] = [
     status: "coming-soon",
     kind: "venture",
     url: "https://heypiko.co",
+    /* probed 2026-11-12: no X-Frame-Options or CSP frame-ancestors */
+    embeddable: true,
     icon: "Bot",
   },
   {

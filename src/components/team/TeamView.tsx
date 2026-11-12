@@ -25,6 +25,16 @@ import {
  */
 
 function MemberCard({ member }: { member: TeamMember }) {
+  if (!member.photo) {
+    return (
+      <div className="group border-t border-border pt-4">
+        <p className="font-display text-[19px] leading-snug text-ink transition-colors duration-150 group-hover:text-accent">
+          {member.name}
+        </p>
+        <p className="mt-1.5 text-xs text-ink-mid">{member.role}</p>
+      </div>
+    );
+  }
   return (
     <div className="group">
       <div className="relative aspect-square overflow-hidden">

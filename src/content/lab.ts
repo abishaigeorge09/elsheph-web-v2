@@ -1,16 +1,17 @@
 /**
- * The lab: side projects and experiments built by Elsheph engineers.
+ * More in development: the other projects Elsheph engineers are building.
+ * Every project on the Interns Kickoff deck's "Portfolio overview" and "More
+ * products we have built" slides appears here, apart from client work, the
+ * products already shown on the Products page, and Elsheph Scripture and
+ * Gosula Store, which the founder removed.
  *
  * Every one-liner is the wording of the Elsheph Interns Kickoff deck
  * (23 October 2026, "Portfolio overview" and "More products we have built"),
  * lightly completed into a sentence. A link is added only when the page was
  * opened and returned 200 on 12 November 2026. No status beyond that is
  * claimed: the deck calls several of these live and others in progress, so the
- * page says "In the lab" and lets a link speak for the public ones.
- *
- * Left out on purpose: client work (Elsheph Hymn, Jobsudarshan, Follow Me,
- * Scripture Truth, Sigmoid, AGO Berkeley), products already on the Products
- * page, and Founder Clock and Gosula Store, which the founder removed.
+ * page uses the founder's wording, "In development", for all of them and
+ * lets a link speak for the public ones.
  */
 
 export type LabProject = {
@@ -23,6 +24,7 @@ export type LabProject = {
 };
 
 export const labProjects: readonly LabProject[] = [
+  { name: "Founder Clock", oneLiner: "A shared timezone portal for teams.", url: "https://founder-clock.vercel.app" },
   { name: "Faith Animation", oneLiner: "Turns scripture or a sermon into an animated video.", url: "https://faith-animation.vercel.app" },
   { name: "AidByFaith", oneLiner: "A Christian resource finder.", url: "https://aidbyfaith.vercel.app", note: "Collaborative" },
   { name: "Callsheet", oneLiner: "A marketplace for film crews." },
@@ -45,7 +47,8 @@ export const labProjects: readonly LabProject[] = [
 ];
 
 export const labCopy = {
-  heading: "In the lab",
+  heading: "More in development",
   intro:
-    "Side projects and experiments from Elsheph engineers. A locked padlock means the project is not public yet. An open one links to a page you can visit.",
+    "What else Elsheph engineers are building. A locked padlock means the project is not public yet. An open one links to a page you can visit.",
+  status: "In development",
 } as const;
