@@ -64,6 +64,7 @@ export const productDetails: Record<string, ProductDetail> = {
     tagline: "The online home of a Telugu Christian author and Bible teacher.",
     about: [
       "Job Sudarshan's books and study resources, in one place.",
+      "The site was launched at T-Hub, Hyderabad, on 24 December 2025, built by Elsheph with Elbert Technology. Elbert announced the delivery of the first milestone on LinkedIn and thanked Elsheph for the opportunity.",
       "Built by Elsheph as client work.",
     ],
     audience: "Readers and students of Job Sudarshan's books and Bible teaching.",

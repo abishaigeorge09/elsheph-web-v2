@@ -41,6 +41,8 @@ export type UniversityTestimonial = {
   initial: string;
   attribution: string;
   detail: string;
+  /** The public post the quote was taken from. */
+  url?: string;
 };
 
 export const universityPage = {
@@ -129,22 +131,26 @@ export const universitySteps: readonly UniversityStep[] = [
 ];
 
 /**
- * Founder-attested testimonials, carried over verbatim from the legacy page.
+ * Two interns, in their own words, from their own public LinkedIn posts
+ * (collected 12 November 2026). Each quote is an exact excerpt, and each
+ * links its post. Both interns worked on synth.
  */
 export const universityTestimonials: readonly UniversityTestimonial[] = [
   {
     quote:
-      "The internship at Elsheph gave me real shipping experience before I ever stepped into a company. I was writing production code within two weeks.",
-    initial: "A",
-    attribution: "Program Alumni",
-    detail: "Now at Capgemini",
+      "…the code reviews that taught more than any course could, and for trusting me with real problems instead of toy ones.",
+    initial: "K",
+    attribution: "Khushhal Kumar Bansal",
+    detail: "Software Engineer Intern, worked on synth",
+    url: "https://www.linkedin.com/posts/khushhal-kumar-bansal-8b1756392_internship-softwareengineer-fullstackdeveloper-ugcPost-7491207085611933696-wagz",
   },
   {
     quote:
-      "The program structure is different. It's not just coding exercises. It's ownership. Students own a feature, from design to deployment.",
-    initial: "P",
-    attribution: "Department Head",
-    detail: "Faculty Partner",
+      "…for their mentorship, support, and for providing an environment where I can continuously learn and grow.",
+    initial: "K",
+    attribution: "Kartikeya Sorout",
+    detail: "Software Engineer Intern, worked on synth",
+    url: "https://www.linkedin.com/posts/kartikeya-sorout_internship-softwareengineer-fullstackdeveloper-ugcPost-7490800328536289280-0SX0",
   },
 ];
 

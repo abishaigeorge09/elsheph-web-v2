@@ -28,6 +28,15 @@ export const recognition: readonly RecognitionItem[] = [
     },
   },
   {
+    title: "Global Junicorn & AI Summit 2025, Texas State University",
+    body: "Elsheph's founder presented Atlitos at the Global Junicorn & AI Summit hosted by the McCoy College of Business at Texas State University, part of the International Startup Foundation's Junicorn programme, and met speakers and mentors there.",
+    when: "29 and 30 May 2025",
+    evidence: {
+      label: "Texas State McCoy College of Business: Global Junicorn & AI Summit 2025",
+      url: "https://www.mccoy.txst.edu/news/archive/2025/2025-06-06-junicorn.html",
+    },
+  },
+  {
     title: "DPIIT-recognised startup",
     body: "Elsheph Systems India Private Limited is recognised by the Department for Promotion of Industry and Internal Trade, Government of India, under the Startup India programme. Recognition number DIPP271424.",
     when: "Recognised 2026",

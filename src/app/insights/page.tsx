@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import NewsletterBand from "@/components/layout/NewsletterBand";
 import { articles, formatArticleDate } from "@/content/articles";
+import { linkedInCopy, linkedInMentions } from "@/content/linkedin";
 import { emails, site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -101,6 +102,44 @@ export default function InsightsPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="border-t border-border bg-surface">
+        <div className="shell py-16 sm:py-20">
+          <h2 className="az-h2 text-ink">{linkedInCopy.heading}</h2>
+          <p className="mt-4 max-w-xl text-[16px] text-ink-mid">
+            {linkedInCopy.intro}
+          </p>
+          <div className="mt-10 grid gap-px md:grid-cols-3">
+            {linkedInMentions.map((mention, index) => (
+              <figure
+                key={mention.url}
+                className={`py-6 md:py-0 ${
+                  index > 0
+                    ? "max-md:border-t max-md:border-border md:border-l md:border-border md:pl-8"
+                    : ""
+                } ${index < linkedInMentions.length - 1 ? "md:pr-8" : ""}`}
+              >
+                <blockquote className="font-display text-[19px] leading-[1.45] text-ink italic">
+                  &ldquo;{mention.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-5 text-[13px] text-ink-mid">
+                  <span className="font-semibold text-ink">{mention.who}</span>
+                  , {mention.role}. {mention.context}.{" "}
+                  <a
+                    href={mention.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-ink underline decoration-border-strong underline-offset-4 hover:text-accent"
+                  >
+                    LinkedIn post
+                    <ArrowUpRight className="size-3" aria-hidden />
+                  </a>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
       </section>
 
       <NewsletterBand />

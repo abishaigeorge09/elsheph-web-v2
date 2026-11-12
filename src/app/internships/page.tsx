@@ -101,6 +101,19 @@ export default function InternshipsPage() {
               </blockquote>
               <figcaption className="mt-4 text-sm text-ink-mid">
                 {studentQuote.attribution} · {studentQuote.detail}
+                {studentQuote.url ? (
+                  <>
+                    {" · "}
+                    <a
+                      href={studentQuote.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-4 hover:text-accent"
+                    >
+                      LinkedIn post
+                    </a>
+                  </>
+                ) : null}
               </figcaption>
             </figure>
           </div>

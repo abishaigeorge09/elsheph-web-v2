@@ -51,6 +51,19 @@ export default function UniversityOutcomes() {
                   </span>
                   <span className="text-[13px] text-muted-foreground">
                     {testimonial.attribution} · {testimonial.detail}
+                    {testimonial.url ? (
+                      <>
+                        {" · "}
+                        <a
+                          href={testimonial.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline underline-offset-4 hover:text-accent"
+                        >
+                          LinkedIn post
+                        </a>
+                      </>
+                    ) : null}
                   </span>
                 </figcaption>
               </figure>
