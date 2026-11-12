@@ -155,8 +155,8 @@ export const products: readonly Product[] = [
     status: "coming-soon",
     kind: "venture",
     url: "https://heypiko.co",
-    /* probed 2026-11-12: no X-Frame-Options or CSP frame-ancestors */
-    embeddable: true,
+    /* Not embedded: the landing page is a slideshow with transparent areas, so
+       the live frame ghosts over the screenshot. The screenshot is the image. */
     icon: "Bot",
   },
   {
