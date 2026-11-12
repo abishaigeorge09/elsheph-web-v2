@@ -55,7 +55,7 @@ export const products: readonly Product[] = [
     id: "elsheph-scripture",
     name: "Elsheph Scripture",
     description:
-      "A scripture reading tool from Elsheph, live at scripture.elsheph.com.",
+      "A library of daily devotionals. Each shelf belongs to one author, and each book is one devotional in their own words.",
     status: "live",
     kind: "own",
     url: "https://scripture.elsheph.com",
@@ -66,7 +66,8 @@ export const products: readonly Product[] = [
   {
     id: "gmv-live",
     name: "GMV.LIVE",
-    description: "A live host marketplace from Elsheph.",
+    description:
+      "A marketplace that matches live shopping hosts with the brands that need them.",
     status: "live",
     kind: "own",
     /* 2026-10-20: gmv.live renders blank; pointing at the working Vercel address for now. */
@@ -129,6 +130,7 @@ export const products: readonly Product[] = [
       "A voice-first training companion for athletes. Built, not launched.",
     status: "coming-soon",
     kind: "own",
+    url: "https://synthsports.co",
     icon: "Mic",
   },
   {
@@ -143,9 +145,11 @@ export const products: readonly Product[] = [
   {
     id: "atlitos",
     name: "Atlitos",
-    description: "Sports technology platform.",
-    status: "unconfirmed",
+    description:
+      "A sports super app for athletes, coaches and academies: academy management, AI coaching and performance analytics in one place.",
+    status: "coming-soon",
     kind: "own",
+    url: "https://atlitos.com",
     icon: "Trophy",
   },
   {

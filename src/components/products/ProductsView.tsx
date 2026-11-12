@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import ProductEmbed from "@/components/products/ProductEmbed";
 import {
@@ -84,18 +85,14 @@ function FeaturedCard({
   const className =
     "group snap-item relative flex aspect-[4/5] w-[240px] flex-col justify-end overflow-hidden sm:w-[280px] lg:w-[320px]";
 
-  return product.url ? (
-    <a
-      href={product.url}
-      target="_blank"
-      rel="noopener noreferrer"
+  return (
+    <Link
+      href={`/products/${product.id}`}
       className={className}
-      aria-label={`${product.name}, opens in a new tab`}
+      aria-label={`${product.name}, product page`}
     >
       {inner}
-    </a>
-  ) : (
-    <div className={className}>{inner}</div>
+    </Link>
   );
 }
 
@@ -179,27 +176,18 @@ function GridCard({
             {product.platforms.join(" · ")}
           </span>
         ) : null}
-        {product.url ? (
-          <span className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-ink-mid transition-colors group-hover:text-accent">
-            Visit
-            <ArrowUpRight className="size-3" aria-hidden />
-          </span>
-        ) : null}
+        <span className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-ink-mid transition-colors group-hover:text-accent">
+          Details
+          <ArrowUpRight className="size-3" aria-hidden />
+        </span>
       </div>
     </div>
   );
 
-  return product.url ? (
-    <a
-      href={product.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block h-full"
-    >
+  return (
+    <Link href={`/products/${product.id}`} className="block h-full">
       {card}
-    </a>
-  ) : (
-    card
+    </Link>
   );
 }
 
