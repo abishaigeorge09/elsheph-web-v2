@@ -40,6 +40,11 @@ export const teamMembers: readonly TeamMember[] = [
     photo: "/team/abishai-gosula.jpg",
   },
   {
+    name: "Aaron Gosula",
+    role: "Chief Operating Officer (COO)",
+    section: "Leadership",
+  },
+  {
     name: "Debora Gosula",
     role: "Product Owner",
     section: "Leadership",
