@@ -90,13 +90,13 @@ export default async function ProductPage({
       </div>
 
       <div className="shell pb-16">
-        <div className="relative aspect-[16/9] w-full overflow-hidden border border-border bg-raised-2 sm:aspect-[2/1]">
+        <div className="relative aspect-[8/5] w-full max-w-[1040px] overflow-hidden border border-border bg-raised-2">
           <Image
             src={productImage(product)}
             alt={`${product.name}`}
             fill
             sizes="(min-width: 1280px) 1200px, 100vw"
-            className="object-cover object-top"
+            className="object-cover"
             priority
           />
         </div>

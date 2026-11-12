@@ -61,7 +61,7 @@ export default function RelatedProductsStrip({
         const card = (
           <div className="group flex h-full flex-col rounded-[2px] border border-border bg-raised transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong">
             {/* Living thumbnail (or art) — ProductEmbed decides. */}
-            <div className="relative aspect-[5/2] overflow-hidden">
+            <div className="relative aspect-[8/5] overflow-hidden">
               <ProductEmbed
                 url={product.url}
                 embeddable={product.embeddable}

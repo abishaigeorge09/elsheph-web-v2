@@ -60,41 +60,29 @@ function FeaturedCard({
   product: Product;
   embedAllowed: boolean;
 }) {
-  const inner = (
-    <>
-      {/* Living thumbnail: the real live site for embeddable products, the
-          screenshot for everything else. ProductEmbed decides, and its
-          screenshot base doubles as skeleton and fallback. */}
-      <ProductEmbed
-        url={product.url}
-        embeddable={product.embeddable}
-        name={product.name}
-        artSrc={productImage(product)}
-        allow={embedAllowed}
-      />
-      {/* Text over art or a live page always needs the scrim. */}
-      <div className="art-scrim absolute inset-0" aria-hidden />
-      <div className="relative p-5">
-        <p className="over-art-title font-display text-[22px] leading-tight font-normal">
-          {product.name}
-        </p>
-        <p className="over-art-caption mt-1.5 text-[11px] font-medium tracking-[0.14em] uppercase">
-          {stripCaption(product)}
-        </p>
-      </div>
-    </>
-  );
-
-  const className =
-    "group snap-item relative flex aspect-[4/5] w-[240px] flex-col justify-end overflow-hidden sm:w-[280px] lg:w-[320px]";
-
   return (
     <Link
       href={`/products/${product.id}`}
-      className={className}
+      className="group snap-item block w-[280px] sm:w-[320px] lg:w-[316px]"
       aria-label={`${product.name}, product page`}
     >
-      {inner}
+      {/* The image slot is 8:5, the exact shape of every product image, so
+          nothing is ever cropped. */}
+      <div className="relative aspect-[8/5] w-full overflow-hidden border border-border bg-raised-2">
+        <ProductEmbed
+          url={product.url}
+          embeddable={product.embeddable}
+          name={product.name}
+          artSrc={productImage(product)}
+          allow={embedAllowed}
+        />
+      </div>
+      <p className="mt-4 font-display text-[22px] leading-tight font-normal text-ink transition-colors group-hover:text-accent">
+        {product.name}
+      </p>
+      <p className="mt-1.5 text-[11px] font-medium tracking-[0.14em] text-muted-foreground uppercase">
+        {stripCaption(product)}
+      </p>
     </Link>
   );
 }
@@ -146,7 +134,7 @@ function GridCard({
   const card = (
     <div className="group flex h-full flex-col rounded-[2px] border border-border bg-raised p-6 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong">
       {/* Living thumbnail (or art) — see ProductEmbed for the rules. */}
-      <div className="relative -mx-6 -mt-6 mb-5 aspect-[5/2] overflow-hidden">
+      <div className="relative -mx-6 -mt-6 mb-5 aspect-[8/5] overflow-hidden">
         <ProductEmbed
           url={product.url}
           embeddable={product.embeddable}
