@@ -63,9 +63,9 @@ export const universityStats: readonly UniversityStat[] = [
     sub: "For placement and exposure",
   },
   {
-    value: "3",
-    label: "Countries Active",
-    sub: "India, Netherlands and more",
+    value: "2",
+    label: "Regions With Clients",
+    sub: "India and Europe",
   },
   {
     value: "100%",

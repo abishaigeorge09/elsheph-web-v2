@@ -87,7 +87,6 @@ export const productDetails: Record<string, ProductDetail> = {
     about: [
       "synth is an AI that reads an athlete's training and says something true about it. It keeps one record, owned by the athlete, that pulls together erg data, Apple Health and Strava.",
       "Computer vision reads splits and the force curve from an ordinary phone photo of a rowing monitor. Answers are honest: a predicted race time with a stated confidence range, and a readiness call on test days.",
-      "synth belongs to Elsheph's sports technology work, which is part of Berkeley SkyDeck's Pad-13 programme.",
     ],
     audience: "Athletes who train with data, including rowers.",
     statusNote: "Built, not yet launched.",

@@ -122,13 +122,14 @@ export const sectionAnchors: NavLink[] = [
   { label: "Products", href: "/products" },
   { label: "Insights", href: "/insights" },
   { label: "Newsletters", href: "/newsletters" },
-  { label: "Showcase", href: "/showcase" },
+  { label: "Recognition", href: "/showcase" },
   { label: "Internships", href: "/internships" },
   { label: "Product Development", href: "/focus/product-development" },
   { label: "IT Services", href: "/focus/it-services" },
   { label: "IT Staffing", href: "/focus/it-staffing" },
   { label: "Corporate L&D", href: "/focus/corporate-ld" },
   { label: "How We Work", href: "/focus/product-development#process" },
+  { label: "Elsheph at a glance", href: "/overview" },
   { label: "About Elsheph", href: "/about#about" },
   { label: "Contact", href: "/about#contact" },
 ];
@@ -146,6 +147,7 @@ export const footerGroups: FooterGroup[] = [
   {
     heading: "Company",
     links: [
+      { label: "At a glance", href: "/overview" },
       { label: "About", href: "/about#about" },
       { label: "How We Work", href: "/focus/product-development#process" },
       { label: "University Collaboration", href: "/university" },

@@ -75,7 +75,7 @@ export default function MenuOverlay({
       links: [
         { label: "Field Notes", href: "/insights" },
         { label: "Newsletters", href: "/newsletters" },
-        { label: "Showcase", href: "/showcase" },
+        { label: "Recognition", href: "/showcase" },
       ],
     },
     {

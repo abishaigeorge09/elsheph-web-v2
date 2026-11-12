@@ -224,6 +224,9 @@ export default function CrookLine() {
             <Link href="/products" className={`${styles.quiet} link-arrow`}>
               See the products
             </Link>
+            <Link href="/overview" className={`${styles.quiet} link-arrow`}>
+              Elsheph at a glance
+            </Link>
           </div>
         </div>
       ) : null}
