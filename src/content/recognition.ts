@@ -3,8 +3,8 @@
  * ~/Documents/Ventures/Elsheph proves, or that a public page confirms.
  *
  * Held back until a source is opened and read (see the hand-off list):
- * the ISF Junicorn award, the Berkeley
- * SkyDeck programme, Chitkara CIIF (an application, not an incubation),
+ * an ISF Junicorn award (the summit is listed as a programme, not an award),
+ * Chitkara CIIF (an application, not an incubation),
  * the Symbiosis MoU (no signed copy on file), and the NUS workshop result.
  */
 
@@ -15,9 +15,20 @@ export type RecognitionItem = {
   when: string;
   /** What proves it. Linked when a public page exists. */
   evidence: { label: string; url?: string };
+  /** More public posts and pages that back the entry. */
+  more?: readonly { label: string; url: string }[];
 };
 
 export const recognition: readonly RecognitionItem[] = [
+  {
+    title: "Berkeley SkyDeck Pad-13",
+    body: "GMV.live and synth were admitted to Berkeley SkyDeck's Pad-13 incubator program.",
+    when: "May 2026",
+    evidence: {
+      label: "Berkeley SkyDeck on LinkedIn",
+      url: "https://www.linkedin.com/posts/skydeck-berkeleyskydeck-ucberkeley-share-7462259443926343680-E0Qu",
+    },
+  },
   {
     title: "Collider Cup XVIII, UC Berkeley SCET",
     body: "At the Sutardja Center for Entrepreneurship & Technology's Collider Cup XVIII, GMV.live took 2nd Place and People's Choice, and synth won Most Innovative Technology. Abishai Gosula, Elsheph's founder, is named on both teams.",
@@ -34,6 +45,21 @@ export const recognition: readonly RecognitionItem[] = [
     evidence: {
       label: "Texas State McCoy College of Business: Global Junicorn & AI Summit 2025",
       url: "https://www.mccoy.txst.edu/news/archive/2025/2025-06-06-junicorn.html",
+    },
+    more: [
+      {
+        label: "Founder's LinkedIn post on presenting Atlitos at the summit",
+        url: "https://www.linkedin.com/feed/update/urn:li:activity:7337528044045119489/",
+      },
+    ],
+  },
+  {
+    title: "International Accelerator, Austin, Texas",
+    body: "Elsheph's founder pitched Atlitos to the International Accelerator team in Austin, Texas.",
+    when: "May 2025",
+    evidence: {
+      label: "Founder's LinkedIn post on the pitch",
+      url: "https://www.linkedin.com/feed/update/urn:li:ugcPost:7334243818097057792/",
     },
   },
   {

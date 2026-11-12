@@ -125,6 +125,27 @@ export default async function ProductPage({
             </dt>
             <dd className="mt-2 text-[17px] text-ink">{detail.statusNote}</dd>
           </div>
+          {detail.links && detail.links.length > 0 ? (
+            <div>
+              <dt className="text-[11px] font-semibold tracking-[0.14em] text-muted-foreground uppercase">
+                On the record
+              </dt>
+              <dd className="mt-2 space-y-2 text-[15px]">
+                {detail.links.map((link) => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-1.5 text-ink underline decoration-border-strong underline-offset-4 hover:text-accent"
+                  >
+                    <span>{link.label}</span>
+                    <ArrowUpRight className="mt-1 size-3.5 shrink-0" aria-hidden />
+                  </a>
+                ))}
+              </dd>
+            </div>
+          ) : null}
           {product.url && detail.linkLabel ? (
             <div>
               <a

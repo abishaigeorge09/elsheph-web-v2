@@ -25,6 +25,8 @@ export type ProductDetail = {
   linkLabel?: string;
   /** Where these facts were read. */
   source: string;
+  /** Public posts and pages that back the copy. */
+  links?: readonly { label: string; url: string }[];
 };
 
 export const productDetails: Record<string, ProductDetail> = {
@@ -71,6 +73,12 @@ export const productDetails: Record<string, ProductDetail> = {
     statusNote:
       "Shipped for the client. The domain is temporarily not serving the site, so there is no link today.",
     source: "Elsheph Vision deck, Oct 2026; jobsudarshan.com checked 12 Nov 2026",
+    links: [
+      {
+        label: "Elbert Technology on LinkedIn: the launch at T-Hub, 24 December 2025",
+        url: "https://www.linkedin.com/feed/update/urn:li:ugcPost:7409979958690869250/",
+      },
+    ],
   },
   believersdiary: {
     tagline: "A daily diary and assembly for believers.",
@@ -127,5 +135,19 @@ export const productDetails: Record<string, ProductDetail> = {
     statusNote: "In development. The site is open at atlitos.com.",
     linkLabel: "Visit atlitos.com",
     source: "atlitos.com; Elsheph Vision deck, Oct 2026",
+    links: [
+      {
+        label: "Pitching Atlitos at the International Accelerator, Austin, Texas (LinkedIn, 30 May 2025)",
+        url: "https://www.linkedin.com/feed/update/urn:li:ugcPost:7334243818097057792/",
+      },
+      {
+        label: "Presenting Atlitos at the Junicorn Summit, Texas State University (LinkedIn, 8 June 2025)",
+        url: "https://www.linkedin.com/feed/update/urn:li:activity:7337528044045119489/",
+      },
+      {
+        label: "One Step Ahead with Atlitos, grassroots sports in schools (Elsheph on LinkedIn, 9 June 2025)",
+        url: "https://www.linkedin.com/feed/update/urn:li:ugcPost:7337727911203917824/",
+      },
+    ],
   },
 };

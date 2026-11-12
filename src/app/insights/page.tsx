@@ -110,35 +110,33 @@ export default function InsightsPage() {
           <p className="mt-4 max-w-xl text-[16px] text-ink-mid">
             {linkedInCopy.intro}
           </p>
-          <div className="mt-10 grid gap-px md:grid-cols-3">
+          <ul className="mt-10 max-w-[820px]">
             {linkedInMentions.map((mention, index) => (
-              <figure
+              <li
                 key={mention.url}
-                className={`py-6 md:py-0 ${
-                  index > 0
-                    ? "max-md:border-t max-md:border-border md:border-l md:border-border md:pl-8"
-                    : ""
-                } ${index < linkedInMentions.length - 1 ? "md:pr-8" : ""}`}
+                className={index > 0 ? "border-t border-border" : ""}
               >
-                <blockquote className="font-display text-[19px] leading-[1.45] text-ink italic">
-                  &ldquo;{mention.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-5 text-[13px] text-ink-mid">
-                  <span className="font-semibold text-ink">{mention.who}</span>
-                  , {mention.role}. {mention.context}.{" "}
-                  <a
-                    href={mention.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-ink underline decoration-border-strong underline-offset-4 hover:text-accent"
-                  >
-                    LinkedIn post
-                    <ArrowUpRight className="size-3" aria-hidden />
-                  </a>
-                </figcaption>
-              </figure>
+                <figure className="py-8">
+                  <blockquote className="font-display text-[21px] leading-[1.45] text-ink italic">
+                    &ldquo;{mention.quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-4 text-[14px] text-ink-mid">
+                    <span className="font-semibold text-ink">{mention.who}</span>
+                    , {mention.role}. {mention.context}.{" "}
+                    <a
+                      href={mention.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-ink underline decoration-border-strong underline-offset-4 hover:text-accent"
+                    >
+                      LinkedIn post
+                      <ArrowUpRight className="size-3" aria-hidden />
+                    </a>
+                  </figcaption>
+                </figure>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 

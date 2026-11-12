@@ -90,16 +90,28 @@ export default function CareersPage() {
                 ))}
               </div>
             ) : (
-              <div className="awaiting mt-8 flex-col gap-5">
-                <p className="awaiting-note">
-                  No open roles posted right now.
+              <div className="mt-8 max-w-[720px]">
+                <p className="font-display text-[26px] leading-snug text-ink">
+                  {careers.hiring.heading}
                 </p>
-                <p className="max-w-[480px] text-[15px]">{careers.cta.line}</p>
+                <ul className="mt-6 flex flex-wrap gap-2.5">
+                  {careers.hiring.areas.map((area) => (
+                    <li
+                      key={area}
+                      className="rounded-full border border-border-strong px-4 py-1.5 text-[14px] font-medium text-ink"
+                    >
+                      {area}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 max-w-[520px] text-[15px] text-ink-mid">
+                  {careers.hiring.line}
+                </p>
                 <a
-                  href={`mailto:${careers.cta.email}`}
-                  className="link-arrow text-[15px] text-ink transition-colors hover:text-accent"
+                  href={`mailto:${careers.hiring.email}`}
+                  className="link-arrow mt-4 text-[15px] text-ink transition-colors hover:text-accent"
                 >
-                  {careers.cta.label}
+                  {careers.hiring.email}
                 </a>
               </div>
             )}

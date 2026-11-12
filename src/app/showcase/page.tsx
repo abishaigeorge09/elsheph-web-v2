@@ -63,6 +63,20 @@ export default function RecognitionPage() {
                       item.evidence.label
                     )}
                   </p>
+                  {item.more?.map((link) => (
+                    <p key={link.url} className="mt-1 text-[13px] text-muted-foreground">
+                      Also:{" "}
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-ink underline decoration-border-strong underline-offset-4 hover:text-accent"
+                      >
+                        {link.label}
+                        <ArrowUpRight className="size-3" aria-hidden />
+                      </a>
+                    </p>
+                  ))}
                 </div>
               </li>
             ))}

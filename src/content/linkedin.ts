@@ -19,6 +19,21 @@ export type LinkedInMention = {
 
 export const linkedInMentions: readonly LinkedInMention[] = [
   {
+    quote: "\u2026officially launched at T-Hub on 24th December 2025",
+    who: "Elbert Technology",
+    role: "Technology partner",
+    context: "On delivering the first milestone of the Jobsudarshan site, built with Elsheph",
+    url: "https://www.linkedin.com/feed/update/urn:li:ugcPost:7409979958690869250/",
+  },
+  {
+    quote:
+      "We were delighted to host the Elsheph Internship Drive at Symbiosis Institute, Hyderabad!",
+    who: "Symbiosis Institute of Technology, Hyderabad",
+    role: "University partner",
+    context: "On hosting Elsheph's internship drive",
+    url: "https://www.linkedin.com/feed/update/urn:li:share:7453679681184366593/",
+  },
+  {
     quote:
       "Our team at Elsheph just wrapped up our Internship drive with students at Symbiosis.",
     who: "Abishai Gosula",

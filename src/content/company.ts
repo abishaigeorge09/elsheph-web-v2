@@ -48,6 +48,25 @@ export const careers = {
    * Empty is deliberate — the page renders an honest well, not fake listings.
    */
   openRoles: [] as readonly OpenRole[],
+  /**
+   * From Elsheph's "We need builders" post on LinkedIn (company page, read
+   * 12 Nov 2026): the areas Elsheph is hiring in, by the post's own names.
+   * Applications go to jobs@elsheph.com. No role descriptions, locations or
+   * salaries are stated, so none are shown.
+   */
+  hiring: {
+    heading: "We need builders in these areas",
+    areas: [
+      "Sports Analytics",
+      "AI Engineers",
+      "Content Creators",
+      "Sales & BD",
+      "Client Success",
+      "Interns",
+    ],
+    email: "jobs@elsheph.com",
+    line: "Write to us with what you have shipped and the area you want to work in.",
+  },
   cta: {
     label: "Write to us",
     email: emails.contact,
