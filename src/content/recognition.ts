@@ -3,7 +3,7 @@
  * ~/Documents/Ventures/Elsheph proves, or that a public page confirms.
  *
  * Held back until a source is opened and read (see the hand-off list):
- * UC Berkeley SCET Collider Cup XVIII, the ISF Junicorn award, the Berkeley
+ * the ISF Junicorn award, the Berkeley
  * SkyDeck programme, Chitkara CIIF (an application, not an incubation),
  * the Symbiosis MoU (no signed copy on file), and the NUS workshop result.
  */
@@ -18,6 +18,15 @@ export type RecognitionItem = {
 };
 
 export const recognition: readonly RecognitionItem[] = [
+  {
+    title: "Collider Cup XVIII, UC Berkeley SCET",
+    body: "At the Sutardja Center for Entrepreneurship & Technology's Collider Cup XVIII, GMV.live took 2nd Place and People's Choice, and synth won Most Innovative Technology. Abishai Gosula, Elsheph's founder, is named on both teams.",
+    when: "May 2026",
+    evidence: {
+      label: "SCET: Collider Cup XVIII winners announced",
+      url: "https://scet.berkeley.edu/connect/news/collider-cup-xviii-winners-announced-with-three-teams-advancing-to-pad-13",
+    },
+  },
   {
     title: "DPIIT-recognised startup",
     body: "Elsheph Systems India Private Limited is recognised by the Department for Promotion of Industry and Internal Trade, Government of India, under the Startup India programme. Recognition number DIPP271424.",

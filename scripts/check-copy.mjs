@@ -43,6 +43,10 @@ const BANNED = [
   "elevate",
 ];
 
+/* Proper names of real awards and programmes may contain a banned word. They
+   are blanked out before scanning, so the word is still caught anywhere else. */
+const PROPER_NAMES = ["Most Innovative Technology"];
+
 function walk(dir) {
   const out = [];
   for (const name of readdirSync(dir)) {
@@ -65,7 +69,9 @@ const violations = [];
 for (const file of files) {
   const lines = readFileSync(file, "utf8").split("\n");
   lines.forEach((line, i) => {
-    const lower = line.toLowerCase();
+    let scanned = line;
+    for (const name of PROPER_NAMES) scanned = scanned.split(name).join(" ".repeat(name.length));
+    const lower = scanned.toLowerCase();
     for (const word of BANNED) {
       const idx = lower.indexOf(word);
       if (idx === -1) continue;
