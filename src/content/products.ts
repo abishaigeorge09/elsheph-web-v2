@@ -74,24 +74,13 @@ export const products: readonly Product[] = [
     icon: "GraduationCap",
   },
   {
-    id: "gosula-store",
-    name: "Gosula Store",
+    id: "callsheet",
+    name: "Callsheet",
     description:
-      "A home resale shop. Photograph an item and the listing is drafted, priced and published from that one picture.",
-    status: "live",
+      "A marketplace connecting film crew with filmmakers: discovery, briefs, e-signed deal memos and escrow payment in one flow.",
+    status: "coming-soon",
     kind: "own",
-    url: "https://gosulastore.vercel.app",
-    icon: "ShoppingBag",
-  },
-  {
-    id: "founder-clock",
-    name: "Founder Clock",
-    description:
-      "A shared timezone portal for a distributed founding team. One glance shows who is awake.",
-    status: "live",
-    kind: "own",
-    url: "https://founder-clock.vercel.app",
-    icon: "Clock",
+    icon: "Clapperboard",
   },
   {
     id: "global-hymns",

@@ -29,7 +29,6 @@ export type LabProject = {
 export const labProjects: readonly LabProject[] = [
   { name: "Faith Animation", oneLiner: "Turns scripture or a sermon into an animated video.", url: "https://faith-animation.vercel.app" },
   { name: "AidByFaith", oneLiner: "A Christian resource finder.", url: "https://aidbyfaith.vercel.app", note: "Collaborative" },
-  { name: "Callsheet", oneLiner: "A marketplace for film crews." },
   { name: "SportScout", oneLiner: "Find sports gear fast." },
   { name: "FundMyGame", oneLiner: "Funding for student athletes." },
   { name: "RowIQ", oneLiner: "Rowing analytics." },

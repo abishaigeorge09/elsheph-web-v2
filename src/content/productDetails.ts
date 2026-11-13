@@ -52,26 +52,15 @@ export const productDetails: Record<string, ProductDetail> = {
     linkLabel: "Open SRM Student Store",
     source: "studentstore.in; Elsheph Vision deck, Oct 2026",
   },
-  "gosula-store": {
-    tagline: "Home resale, listed and priced from one photo.",
+  callsheet: {
+    tagline: "A marketplace for film crews.",
     about: [
-      "A home resale shop. Photograph an item and the listing is drafted, priced and published from that one picture.",
+      "Callsheet connects below-the-line film crew with filmmakers. Discovery, briefs, negotiation, e-signed deal memos, escrow payment and reputation sit in one flow.",
+      "Most hiring tools stop once the two sides have found each other. Callsheet also handles the deal memo and the payment.",
     ],
-    audience: "People selling things from their homes, and the shoppers who buy them.",
-    statusNote: "Live now.",
-    linkLabel: "Open Gosula Store",
-    source: "gosulastore.vercel.app; Elsheph Vision deck, Oct 2026",
-  },
-  "founder-clock": {
-    tagline: "A shared timezone portal for a distributed team.",
-    about: [
-      "One glance shows who is awake. Each person's local time sits on one shared view, and the page finds the hours that work for everyone on a call.",
-      "The link is shared, so editing a timezone or booking a meeting updates it for everyone, with no login.",
-    ],
-    audience: "Distributed founding teams and anyone who schedules calls across timezones.",
-    statusNote: "Live now.",
-    linkLabel: "Open Founder Clock",
-    source: "founder-clock.vercel.app; Elsheph Vision deck, Oct 2026",
+    audience: "Film crew looking for work, and filmmakers who hire them.",
+    statusNote: "Private preview. There is no public link yet.",
+    source: "Callsheet README; Elsheph Interns Kickoff, 23 Oct 2026",
   },
   "global-hymns": {
     tagline: "A hymn book in three scripts, so a congregation sings from one page.",
