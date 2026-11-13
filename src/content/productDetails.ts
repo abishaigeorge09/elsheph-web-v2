@@ -59,7 +59,8 @@ export const productDetails: Record<string, ProductDetail> = {
       "Most hiring tools stop once the two sides have found each other. Callsheet also handles the deal memo and the payment.",
     ],
     audience: "Film crew looking for work, and filmmakers who hire them.",
-    statusNote: "Private preview. There is no public link yet.",
+    statusNote:
+      "Private preview, behind a password. The image shows the app's own search screen with example profiles from its demo data.",
     source: "Callsheet README; Elsheph Interns Kickoff, 23 Oct 2026",
   },
   "global-hymns": {
