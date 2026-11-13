@@ -25,6 +25,8 @@ export type ProductDetail = {
   linkLabel?: string;
   /** Where these facts were read. */
   source: string;
+  /** App store listings, shown as buttons beside the main link. */
+  storeLinks?: readonly { label: string; url: string }[];
   /** Public posts and pages that back the copy. */
   links?: readonly { label: string; url: string }[];
 };
@@ -110,7 +112,13 @@ export const productDetails: Record<string, ProductDetail> = {
     audience: "Christians and their church families.",
     statusNote: "Live on Android. iPhone coming soon.",
     linkLabel: "Open the Croire page",
-    source: "croire-app.vercel.app; Elsheph, 12 Nov 2026",
+    storeLinks: [
+      {
+        label: "Get Croire on Google Play",
+        url: "https://play.google.com/store/apps/details?id=com.believersdiary.app",
+      },
+    ],
+    source: "croire-app.vercel.app; Google Play listing checked 12 Nov 2026",
   },
   synth: {
     tagline: "A voice-first training companion for athletes.",

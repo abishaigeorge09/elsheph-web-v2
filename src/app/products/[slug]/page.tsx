@@ -159,6 +159,22 @@ export default async function ProductPage({
               </a>
             </div>
           ) : null}
+          {detail.storeLinks && detail.storeLinks.length > 0 ? (
+            <div className="flex flex-wrap gap-3">
+              {detail.storeLinks.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn inline-flex items-center gap-2"
+                >
+                  {link.label}
+                  <ArrowUpRight className="size-4" aria-hidden />
+                </a>
+              ))}
+            </div>
+          ) : null}
         </dl>
       </section>
 

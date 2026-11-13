@@ -126,7 +126,7 @@ export const products: readonly Product[] = [
     /* The product's page (renamed from BelieversDiary on 12 Nov 2026).
        Android only for now; iPhone is coming soon, not live. */
     url: "https://croire-app.vercel.app",
-    platforms: ["Android"],
+    platforms: ["Android on Google Play"],
     icon: "NotebookPen",
   },
   {
