@@ -8,7 +8,7 @@
  * read, so the next editor can re-check it.
  *
  * The ledger rules in products.ts still apply: only `visibleProducts` reach
- * the page, client work is framed as client work, BelieversDiary is Android
+ * the page, client work is framed as client work, Croire is Android
  * only.
  */
 
@@ -101,16 +101,16 @@ export const productDetails: Record<string, ProductDetail> = {
       },
     ],
   },
-  believersdiary: {
-    tagline: "A daily diary and assembly for believers.",
+  croire: {
+    tagline: "Believe. Pray. Belong.",
     about: [
-      "A daily devotional journal for the phone. Reading, reflection and prayer are kept in one place.",
-      "BelieversDiary is available on Android. There is no iOS version.",
+      "Croire is a social journal for Christians. Write what God is doing, pray with your church family, and walk it out together.",
+      "Croire was called BelieversDiary until November 2026. It is on Android. iPhone: coming soon.",
     ],
-    audience: "Believers who keep a daily devotional habit.",
-    statusNote: "Live now, on Android.",
-    linkLabel: "Open the BelieversDiary page",
-    source: "believersdiary.vercel.app; Elsheph Vision deck, Oct 2026",
+    audience: "Christians and their church families.",
+    statusNote: "Live on Android. iPhone coming soon.",
+    linkLabel: "Open the Croire page",
+    source: "croire-app.vercel.app; Elsheph, 12 Nov 2026",
   },
   synth: {
     tagline: "A voice-first training companion for athletes.",

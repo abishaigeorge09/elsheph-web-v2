@@ -7,7 +7,7 @@
  *    An unconfirmed item must never reach the DOM.
  * 2. `kind: "client"` marks work delivered FOR a client. The UI must frame
  *    those as client projects, not as Elsheph-owned products.
- * 3. Platform claims are literal. BelieversDiary is Android only; nothing in
+ * 3. Platform claims are literal. Croire (formerly BelieversDiary) is Android only; nothing in
  *    its copy may imply an iOS release.
  * 4. Atlitos must never be attributed to a "Pvt Ltd" entity anywhere in src/.
  *    No such company is registered, and naming one would be a fabricated
@@ -117,14 +117,15 @@ export const products: readonly Product[] = [
     icon: "Library",
   },
   {
-    id: "believersdiary",
-    name: "BelieversDiary",
+    id: "croire",
+    name: "Croire",
     description:
-      "A daily devotional journal on Android. Reading, reflection and prayer, kept in one place.",
+      "A social journal for Christians. Write what God is doing, pray with your church family, and walk it out together.",
     status: "live",
     kind: "own",
-    /* The product's page, with the Play Store download. Android only. */
-    url: "https://believersdiary.vercel.app",
+    /* The product's page (renamed from BelieversDiary on 12 Nov 2026).
+       Android only for now; iPhone is coming soon, not live. */
+    url: "https://croire-app.vercel.app",
     platforms: ["Android"],
     icon: "NotebookPen",
   },
@@ -192,7 +193,7 @@ export const productsPage = {
 
 /**
  * The card image: a real screenshot of the product, captured 2026-10-17 into
- * public/products/. Products without a public web page (BelieversDiary,
+ * public/products/. Products without a public web page (Croire,
  * Jobsudarshan while offline) use their app icon; Follow Me uses its approved
  * mockup screens.
  */
@@ -212,7 +213,7 @@ export const featuredIds = [
   "synth",
   "heypiko",
   "atlitos",
-  "believersdiary",
+  "croire",
 ] as const;
 
 /** The only list a component may render. Unconfirmed items never reach the DOM. */

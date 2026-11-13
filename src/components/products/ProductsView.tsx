@@ -39,7 +39,7 @@ type KindFilter = "all" | Kind;
  *   reach this component, let alone the DOM.
  * - `kind: "client"` renders an explicit CLIENT WORK / CLIENT PROJECT tag so
  *   client work is never read as an Elsheph-owned product.
- * - Platform claims are literal: BelieversDiary captions LIVE · ANDROID and
+ * - Platform claims are literal: Croire captions LIVE · ANDROID and
  *   nothing implies iOS or web for it.
  */
 

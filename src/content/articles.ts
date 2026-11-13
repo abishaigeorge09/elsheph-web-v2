@@ -152,7 +152,7 @@ export const articles: readonly Article[] = [
     slug: "faith-and-publishing-tools-for-telugu-readers",
     title: "Faith and publishing tools: a hymn book, a diary and a publisher's shop",
     summary:
-      "Three products from Elsheph's faith and publishing work: Global Hymns, BelieversDiary and the Job Sudarshan online shop. What each was for and where each stands.",
+      "Three products from Elsheph's faith and publishing work: Global Hymns, Croire and the Job Sudarshan online shop. What each was for and where each stands.",
     tag: "Products",
     date: "2026-11-12",
     author: "Elsheph Systems",
@@ -171,10 +171,10 @@ export const articles: readonly Article[] = [
         type: "p",
         text: "The web app is live at hymn.elsheph.com. Android and iOS apps were scoped in the original proposal and are the next step.",
       },
-      { type: "h2", text: "BelieversDiary: a daily habit on Android" },
+      { type: "h2", text: "Croire: a social journal for Christians" },
       {
         type: "p",
-        text: "BelieversDiary is a daily devotional journal for believers, with a feed, a prayer wall, a journal and devotions in one app. It is on Android only. There is no iOS version.",
+        text: "Croire, called BelieversDiary until November 2026, is a social journal for Christians. Write what God is doing, pray with your church family, and walk it out together. It is on Android now, and the iPhone app is coming soon.",
       },
       { type: "h2", text: "Job Sudarshan: a publisher's online shop" },
       {
@@ -188,12 +188,12 @@ export const articles: readonly Article[] = [
       { type: "h2", text: "The common thread" },
       {
         type: "p",
-        text: "Each product starts from a concrete reader with a concrete obstacle: a congregation that cannot read the script, a believer who wants a daily habit, an author whose books need a shop. Each is also a live product that students and engineers at Elsheph can learn on.",
+        text: "Each product starts from a concrete reader with a concrete obstacle: a congregation that cannot read the script, a church family that wants to pray together, an author whose books need a shop. Each is also a live product that students and engineers at Elsheph can learn on.",
       },
     ],
     sources: [
       { label: "Global Hymns", url: "https://hymn.elsheph.com" },
-      { label: "BelieversDiary", url: "https://believersdiary.vercel.app" },
+      { label: "Croire", url: "https://croire-app.vercel.app" },
       { label: "International Hymn Book project proposal, February 2026 (company document)" },
       {
         label:
